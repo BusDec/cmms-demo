@@ -63,6 +63,7 @@ export function ExecutiveDashboard({
         type: "value",
         min: 84,
         max: 100,
+        interval: 4,
         ...axis,
         axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}%" },
       },
