@@ -1,0 +1,75 @@
+# cmms-demo
+
+Four plants. Four ERPs. One maintenance intelligence layer.
+
+A public, synthetic showcase of a CMMS wrapper over SAP S/4HANA, SAP ECC, IBM
+Maximo and Oracle EAM. It is intentionally independent of the Khurja/Nirmana
+product repository: no product code, client data, logos or database.
+
+## Stack
+
+- Next.js 15 (App Router, static export)
+- Tailwind CSS 3
+- Apache ECharts
+- Framer Motion
+- TypeScript
+
+## Run
+
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+Production build:
+
+```bash
+npm run build
+```
+
+The static site is written to `out/`.
+
+## Pages
+
+- `/` — showcase landing page
+- `/demo/[plant]` — executive command centre
+- `/demo/[plant]/maintenance` — PM, backlog and work orders
+- `/demo/[plant]/reliability` — MTBF/MTTR, pareto, bad actors, RCA
+- `/demo/[plant]/ptw` — permits, isolation and cycle time
+- `/demo/[plant]/cost` — cost / RAV, cost per MWh, cost mix
+- `/demo/[plant]/rca-qa` — RCA, findings, CAPA, checklists, data quality
+- `/data-model` — canonical entities, star schema, field ownership
+- `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
+- `/about` — scope and disclaimers
+
+Plants: `coal`, `thermal`, `wind`, `gas`.
+
+## Data
+
+All data is synthetic and deterministic. It is generated in `lib/data.ts` from
+a seeded PRNG; there is no client data and no live ERP call in this repository.
+Numbers are designed to be plausible, not to represent any real plant.
+
+## Decoupling
+
+```bash
+grep -R "Khurja\|THDC\|Steag\|powersoftbi" app components lib && exit 1
+```
+
+The demo must stay free of the product repository and client branding.
+
+## Deploy
+
+The site uses `output: "export"`, so it can be hosted on Vercel, Azure Static
+Web Apps, Netlify or any static host.
+
+- Vercel: import the repository and keep the default Next.js settings.
+- Azure Static Web Apps: app location `/`, output location `out`.
+
+## Status
+
+This is a demonstration, not a certified product. The SAP adapter is validated
+against a local simulator, not a customer sandbox. The other ERP adapters are
+shown as planned until their APIs are implemented and tested.

@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #f5f7fa;
+  --surface: #ffffff;
+  --ink: #0f172a;
+  --muted: #5b6472;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --good: #0f766e;
+  --warn: #b45309;
+  --bad: #b91c1c;
+  --info: #1d4ed8;
+  --graphite: #0f172a;
+  --graphite-soft: #1e293b;
+  --paper: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "tnum";
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+::selection {
+  background: #c7d2fe;
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--info);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.card-flat {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.hairline {
+  border-color: var(--line);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.measure {
+  max-width: 66ch;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.display {
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.stat-value {
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.table-row:hover {
+  background: #f8fafc;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+}
