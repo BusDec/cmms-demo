@@ -15,7 +15,6 @@ export function KpiCard({ kpi }: { kpi: Kpi }) {
         "card border-t-[3px] px-4 py-4",
         toneBorder(kpi.tone),
       )}
-      title={kpi.hint}
     >
       <p className="text-[12px] font-semibold text-muted">{kpi.label}</p>
       <p className="stat-value mt-2 text-[30px] font-semibold text-ink">
@@ -24,14 +23,12 @@ export function KpiCard({ kpi }: { kpi: Kpi }) {
           <span className="ml-1 text-[13px] font-medium text-muted">{kpi.unit}</span>
         ) : null}
       </p>
-      <div className="mt-3 flex items-center justify-between gap-2 text-[11px]">
-        <span className={cn("font-semibold tabular", toneClass(kpi.tone))}>
-          {kpi.delta}
-        </span>
-        <span className="text-muted" title={kpi.hint}>
-          definition
-        </span>
-      </div>
+      <p className={cn("mt-2 text-[11px] font-semibold tabular", toneClass(kpi.tone))}>
+        {kpi.delta}
+      </p>
+      <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-muted">
+        {kpi.hint}
+      </p>
     </article>
   );
 }

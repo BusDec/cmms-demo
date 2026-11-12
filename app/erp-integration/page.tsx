@@ -2,6 +2,12 @@ import Link from "next/link";
 import { Badge } from "@/components/badge";
 import { SimpleHeader } from "@/components/simple-header";
 
+export const metadata = {
+  title: "ERP integration · Nirmana demo",
+  description:
+    "How SAP S/4HANA, SAP ECC, IBM Maximo and Oracle EAM adapters map into one canonical maintenance model.",
+};
+
 const adapters = [
   {
     erp: "SAP S/4HANA Cloud",

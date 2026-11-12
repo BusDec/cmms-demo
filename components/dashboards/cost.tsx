@@ -174,7 +174,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
         <Reveal>
           <ChartCard
             title="Monthly maintenance cost"
-            subtitle="Actual spend, not budget. Budget variance is shown on the product cost page."
+            subtitle="Actual spend; the full product adds budget variance by cost centre."
           >
             <EChart option={costOption} ariaLabel={`Monthly maintenance cost for ${data.plant.name}`} />
           </ChartCard>
@@ -214,7 +214,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
                       {Math.round((item.value / annualCost) * 100)}%
                     </td>
                     <td className="px-4 py-2.5 text-muted">
-                      {item.label === "Spares" ? "MM / material documents" : "CO / confirmations"}
+                      {item.label === "Spares" ? "Inventory & material documents" : "Work orders & confirmations"}
                     </td>
                   </tr>
                 ))}

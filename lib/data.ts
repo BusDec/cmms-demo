@@ -247,7 +247,7 @@ function buildWorkOrders(plant: Plant, rand: () => number): WorkOrderRow[] {
     status: statuses[index],
     priority: priorities[index],
     age: Math.round(between(rand, 1, 34)),
-    owner: ["A. Sharma", "R. Patel", "M. Khan", "S. Iyer", "D. Rao", "P. Singh", "K. Mehta", "V. Joshi"][index],
+    owner: ["A. Al-Harbi", "M. Al-Qahtani", "S. Khan", "R. Nair", "F. Al-Dosari", "H. Al-Otaibi", "K. Sharma", "N. Al-Zahrani"][index],
   }));
 }
 
@@ -261,7 +261,7 @@ function buildPermits(plant: Plant, rand: () => number): PermitRow[] {
     type: types[index],
     status: statuses[index],
     age: Math.round(between(rand, 1, 16)),
-    owner: ["Operations", "Boiler", "Electrical", "Turbine", "C&I", "Operations"][index],
+    owner: ["Operations", ...departmentNames[plant.slug]][index],
   }));
 }
 
@@ -275,7 +275,7 @@ function buildRca(plant: Plant, rand: () => number): RcaRow[] {
     method: methods[index],
     status: statuses[index],
     age: Math.round(between(rand, 2, 46)),
-    owner: ["Reliability", "Boiler", "Turbine", "Electrical", "C&I"][index],
+    owner: ["Reliability", ...departmentNames[plant.slug]][index],
   }));
 }
 
@@ -288,7 +288,7 @@ function buildFindings(plant: Plant, rand: () => number): FindingRow[] {
     source,
     severity: severities[index],
     status: statuses[index],
-    owner: ["QA", "Operations", "Maintenance", "Plant Head", "C&I"][index],
+    owner: ["QA", "Operations", "Maintenance", "Plant Head", departmentNames[plant.slug][3]][index],
     due: ["12 Dec 2026", "18 Nov 2026", "05 Jan 2027", "30 Nov 2026", "22 Nov 2026"][index],
   }));
 }
@@ -321,9 +321,12 @@ export function getPlantData(slug: string): PlantData | undefined {
       label: "Maintenance cost / RAV",
       value: costPctRav,
       unit: "%",
-      delta: `${round(costPctRav - 2.4, 2)} pts`,
+      delta:
+        costPctRav <= 2.4
+          ? `${round(2.4 - costPctRav, 2)} pts under target`
+          : `${round(costPctRav - 2.4, 2)} pts over target`,
       tone: costPctRav <= 2.6 ? "good" : costPctRav <= 3.2 ? "warn" : "bad",
-      hint: "Rolling 12-month maintenance spend ÷ replacement asset value.",
+      hint: "12-month spend ÷ replacement asset value; target 2.4%.",
     },
     {
       id: "loss",
@@ -350,7 +353,7 @@ export function getPlantData(slug: string): PlantData | undefined {
       unit: "",
       delta: statutoryBacklog === 0 ? "clear" : "open",
       tone: statutoryBacklog === 0 ? "good" : statutoryBacklog > 4 ? "bad" : "warn",
-      hint: "Open statutory inspections or compliance actions past their due date.",
+      hint: "Overdue statutory inspections and compliance actions.",
     },
   ];
 
@@ -380,7 +383,7 @@ export function getPlantData(slug: string): PlantData | undefined {
     { label: "Services", value: Math.round(annualCost * 0.08) },
   ];
 
-  const crewLoad = ["Boiler", "Turbine", "Electrical", "C&I", "Operations"].map((label, index) => ({
+  const crewLoad = departmentNames[plant.slug].map((label, index) => ({
     label,
     value: [86, 78, 64, 71, 58][index],
   }));
@@ -392,7 +395,7 @@ export function getPlantData(slug: string): PlantData | undefined {
     { label: "Closure", value: 2.4 },
   ];
 
-  const checklistCompletion = ["Boiler", "Turbine", "Electrical", "C&I"].map((label, index) => ({
+  const checklistCompletion = departmentNames[plant.slug].slice(0, 4).map((label, index) => ({
     label,
     value: [92, 86, 78, 81][index],
   }));

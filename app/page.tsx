@@ -41,7 +41,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/demo/coal"
-                className="inline-flex items-center gap-1.5 rounded-md bg-white px-3.5 py-2 text-[12px] font-semibold text-ink"
+                className="hidden items-center gap-1.5 rounded-md bg-white px-3.5 py-2 text-[12px] font-semibold text-ink sm:inline-flex"
               >
                 Open the demo <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
@@ -75,7 +75,7 @@ export default function HomePage() {
                   See the canonical model
                 </Link>
               </div>
-              <p className="mt-4 text-[11px] text-white/40">
+              <p className="mt-4 text-[11px] text-white/55">
                 Synthetic data · no client data or logos · built for demonstration
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function HomePage() {
                       <p className="truncate text-[12px] font-semibold">
                         {plant.plant.shortName}
                       </p>
-                      <p className="text-[10px] text-white/45">{plant.plant.sourceErpShort}</p>
+                      <p className="text-[10px] text-white/60">{plant.plant.sourceErpShort}</p>
                     </div>
                     <div>
                       <svg viewBox="0 0 100 30" className="h-6 w-full" aria-hidden="true">
@@ -112,7 +112,7 @@ export default function HomePage() {
                           vectorEffect="non-scaling-stroke"
                         />
                       </svg>
-                      <p className="tabular mt-0.5 text-[10px] text-white/45">
+                      <p className="tabular mt-0.5 text-[10px] text-white/60">
                         {formatNumber(plant.kpis[0].value, 1)}% available
                       </p>
                     </div>
@@ -120,7 +120,7 @@ export default function HomePage() {
                       <p className="tabular text-[12px] font-semibold">
                         {formatCurrency(plant.kpis[2].value, true)}
                       </p>
-                      <p className="text-[10px] text-white/45">downtime loss</p>
+                      <p className="text-[10px] text-white/60">downtime loss</p>
                     </div>
                   </Link>
                 ))}
@@ -216,7 +216,7 @@ export default function HomePage() {
             <div className="mt-6 space-y-3 text-[13px]">
               {[
                 ["Canonical model", "Functional locations, equipment, notifications, orders, confirmations, meters and failure codes."],
-                ["ERP adapters", "SAP OData and RFC/BAPI, Oracle EAM REST, Maximo REST — one interface behind each adapter."],
+                ["ERP adapters", "SAP S/4HANA OData is implemented; ECC RFC/BAPI, Oracle EAM REST and Maximo REST sit behind the same interface next."],
                 ["Scope-based access", "Group, region, plant and work-centre roles; financial fields masked where the role requires it."],
                 ["Operational dashboards", "Command centre, maintenance, reliability, permits, cost, quality and corporate views."],
               ].map(([title, body]) => (

@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
 
+export const metadata = {
+  title: "About the demo · Nirmana",
+  description:
+    "What the four-plant CMMS demo implements, what is synthetic, and what is not claimed.",
+};
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-canvas">
@@ -22,7 +28,7 @@ export default function AboutPage() {
           {[
             {
               title: "Synthetic data",
-              body: "All plant names, assets, work orders, permits, costs and KPIs on this site are synthetic. They are generated deterministically for demonstration and do not represent any client, plant or contract.",
+              body: "All plant names, assets, work orders, permits, costs and KPIs on this site are synthetic. They are generated deterministically for demonstration and do not represent any client, plant or contract. The site is a static export; no ERP or connector is called while you browse it.",
             },
             {
               title: "No client branding",

@@ -3,8 +3,8 @@
 Four plants. Four ERPs. One maintenance intelligence layer.
 
 A public, synthetic showcase of a CMMS wrapper over SAP S/4HANA, SAP ECC, IBM
-Maximo and Oracle EAM. It is intentionally independent of the Khurja/Nirmana
-product repository: no product code, client data, logos or database.
+Maximo and Oracle EAM. It is intentionally independent of the private product
+repository: no product code, client data, logos or database.
 
 ## Stack
 
@@ -54,11 +54,8 @@ Numbers are designed to be plausible, not to represent any real plant.
 
 ## Decoupling
 
-```bash
-grep -R "Khurja\|THDC\|Steag\|powersoftbi" app components lib && exit 1
-```
-
-The demo must stay free of the product repository and client branding.
+The demo has no dependency on the private product repository, its database or
+its client branding. All content here is self-contained.
 
 ## Deploy
 

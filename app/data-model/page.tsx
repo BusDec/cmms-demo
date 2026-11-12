@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
 
+export const metadata = {
+  title: "Data model · Nirmana demo",
+  description:
+    "The canonical maintenance entities, reporting star schema and medallion flow behind the four-plant demo.",
+};
+
 const entities = [
   ["Functional location", "Where the work happens", "code, parent, plant, cost centre, criticality"],
   ["Equipment", "The asset", "asset tag, manufacturer, serial, linear/measure, replacement value"],

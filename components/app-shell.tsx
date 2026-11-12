@@ -58,7 +58,7 @@ export function AppShell({
         </Link>
 
         <div className="px-5 pb-4">
-          <p className="text-[10px] font-semibold text-white/45">
+          <p className="text-[10px] font-semibold text-white/60">
             Active plant
           </p>
           <label className="mt-2 block">
@@ -75,7 +75,7 @@ export function AppShell({
               ))}
             </select>
           </label>
-          <p className="mt-2 text-[11px] text-white/45">{plant.sourceErp}</p>
+          <p className="mt-2 text-[11px] text-white/60">{plant.sourceErp}</p>
         </div>
 
         <nav className="flex-1 space-y-0.5 px-2" aria-label="Workspace">
@@ -158,6 +158,41 @@ export function AppShell({
             </span>
           </div>
         </header>
+
+        <nav
+          className="no-scrollbar flex gap-1 overflow-x-auto border-b border-line bg-surface px-3 py-2 lg:hidden"
+          aria-label="Workspace"
+        >
+          {nav.map((item) => {
+            const href = `/demo/${plant.slug}${item.key ? `/${item.key}` : ""}`;
+            const active =
+              item.key === ""
+                ? pathname === `/demo/${plant.slug}` || pathname === `/demo/${plant.slug}/`
+                : pathname.startsWith(href);
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.key}
+                href={href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-2 text-[12px] font-semibold",
+                  active ? "bg-ink text-white" : "text-muted hover:bg-[#f1f5f9]",
+                )}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {item.label}
+              </Link>
+            );
+          })}
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-2 text-[12px] font-semibold text-muted hover:bg-[#f1f5f9]"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Showcase
+          </Link>
+        </nav>
 
         <div className="px-4 py-5 lg:px-6 lg:py-6">{children}</div>
       </div>

@@ -16,6 +16,14 @@ const axis = {
   splitLine: { lineStyle: { color: "#eef2f7" } },
 };
 
+const compactMoney = (value: number) => {
+  if (value === 0) return "0";
+  if (value >= 10_000_000) return `${Math.round(value / 1_000_000)}M`;
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+  if (value >= 1_000) return `${Math.round(value / 1_000)}k`;
+  return String(value);
+};
+
 const tooltip = {
   backgroundColor: "#0f172a",
   borderWidth: 0,
@@ -34,9 +42,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
   const [range, setRange] = useState(6);
   const monthly = useMemo(() => data.monthly.slice(-range), [data.monthly, range]);
   const latest = data.monthly[data.monthly.length - 1];
-  const repeatRate = Math.round(
-    (data.badActors.filter((actor) => actor.failures > 3).length / data.badActors.length) * 100,
-  );
+  const repeatAssets = data.badActors.filter((actor) => actor.failures > 3).length;
   const mtbf = mtbfBase[data.plant.slug] ?? 2000;
 
   const pareto = useMemo(
@@ -111,6 +117,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
       },
       yAxis: {
         type: "category",
+        inverse: true,
         data: pareto.map((actor) => actor.asset),
         ...axis,
         axisLabel: { color: "#5b6472", fontSize: 10, width: 150, overflow: "truncate" },
@@ -151,7 +158,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         axisLabel: {
           color: "#5b6472",
           fontSize: 11,
-          formatter: (value: number) => `${Math.round(value / 1_000_000)}M`,
+          formatter: compactMoney,
         },
       },
       series: [
@@ -187,7 +194,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         {[
           { label: "MTBF", value: `${formatNumber(mtbf)} h`, hint: "Operating hours ÷ failure events" },
           { label: "MTTR", value: `${formatNumber(latest.mttr, 1)} h`, hint: "Mean time to repair" },
-          { label: "Repeat failure rate", value: `${repeatRate}%`, hint: "Assets with more than three failures" },
+          { label: "Repeat-failure assets", value: `${repeatAssets}`, hint: "More than three failures this year" },
           { label: "Unplanned loss", value: formatCurrency(latest.downtime * data.plant.hourlyLoss, true), hint: "Last month" },
         ].map((item, index) => (
           <Reveal key={item.label} delay={index * 0.04}>
@@ -204,7 +211,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         <Reveal>
           <ChartCard
             title="MTBF and MTTR"
-            subtitle="Twelve-month trend; MTBF on the right axis."
+            subtitle="Selected period; MTBF on the right axis."
           >
             <EChart option={reliabilityOption} ariaLabel={`MTBF and MTTR for ${data.plant.name}`} />
           </ChartCard>
