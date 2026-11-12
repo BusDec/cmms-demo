@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
 
 export const metadata = {
-  title: "Data model · Nirmana demo",
+  title: "Data model · Gearbox demo",
   description:
     "The canonical maintenance entities, reporting star schema and medallion flow behind the four-plant demo.",
 };

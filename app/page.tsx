@@ -24,7 +24,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
           <nav className="flex flex-wrap items-center justify-between gap-4 py-5">
             <Link href="/" className="text-[15px] font-semibold tracking-[-0.01em]">
-              Nirmana
+              Gearbox
             </Link>
             <div className="flex flex-wrap items-center gap-5 text-[13px] text-white/65">
               <Link href="/demo/coal" className="hover:text-white">
@@ -344,7 +344,7 @@ export default function HomePage() {
 
       <footer className="border-t border-line bg-surface">
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-5 py-8 text-[11px] text-muted sm:px-8">
-          <p>Nirmana demo · synthetic data · no client logos or records</p>
+          <p>Gearbox demo · synthetic data · no client logos or records</p>
           <p>Four plants · four ERPs · one canonical maintenance model</p>
         </div>
       </footer>

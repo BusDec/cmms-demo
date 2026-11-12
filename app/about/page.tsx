@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
 
 export const metadata = {
-  title: "About the demo · Nirmana",
+  title: "About the demo · Gearbox",
   description:
     "What the four-plant CMMS demo implements, what is synthetic, and what is not claimed.",
 };

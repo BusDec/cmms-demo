@@ -1,14 +1,16 @@
-# cmms-demo
+# Gearbox
 
 Four plants. Four ERPs. One maintenance intelligence layer.
+
+**Demo repository:** `cmms-demo`
 
 **Live:** https://busdec.github.io/cmms-demo/
 
 ![Executive dashboard](docs/executive-dashboard.jpg)
 
-A public, synthetic showcase of a CMMS wrapper over SAP S/4HANA, SAP ECC, IBM
-Maximo and Oracle EAM. It is intentionally independent of the private product
-repository: no product code, client data, logos or database.
+Gearbox is a public, synthetic showcase of a CMMS wrapper over SAP S/4HANA, SAP
+ECC, IBM Maximo and Oracle EAM. It is intentionally independent of the private
+product repository: no product code, client data, logos or database.
 
 ## Stack
 
@@ -73,4 +75,5 @@ Web Apps, Netlify or any static host.
 
 This is a demonstration, not a certified product. The SAP adapter is validated
 against a local simulator, not a customer sandbox. The other ERP adapters are
-shown as planned until their APIs are implemented and tested.
+shown as planned until their APIs are implemented and tested. Gearbox is an
+interim demo name; no final naming decision has been made.
