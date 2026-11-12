@@ -98,6 +98,193 @@ input {
   line-height: 0.98;
 }
 
+/* Landing hero */
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  column-gap: 3rem;
+  align-items: center;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+  padding: 2.5rem 1.25rem 3rem;
+  background: var(--info);
+}
+
+.landing-hero-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.7rem, 5.8vw, 5rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.landing-hero-lede {
+  margin: 1.25rem 0 0;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.landing-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.6rem;
+}
+
+.landing-hero-primary,
+.landing-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.landing-hero-primary {
+  background: #fff;
+  color: var(--info);
+}
+
+.landing-hero-primary:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.landing-hero-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.landing-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.landing-hero a:focus-visible {
+  outline-color: #fff;
+}
+
+.landing-hero-note {
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.6875rem;
+}
+
+.landing-hero-board {
+  background: var(--graphite);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.landing-hero-board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.landing-hero-board-label {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.landing-hero-board-date {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.625rem;
+}
+
+.landing-hero-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto 1rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.landing-hero-row:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.landing-hero-row:hover .landing-hero-row-name {
+  color: #fff;
+}
+
+.landing-hero-row-plant {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.landing-hero-row-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.landing-hero-row-erp {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.625rem;
+}
+
+.landing-hero-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  text-align: right;
+}
+
+.landing-hero-value {
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.landing-hero-label {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.5625rem;
+}
+
+.landing-hero-row-arrow {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.landing-hero-board-foot {
+  padding-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.625rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .landing-hero {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .landing-hero {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+}
+
 .stat-value {
   letter-spacing: -0.03em;
   line-height: 1;

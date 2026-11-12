@@ -3,18 +3,6 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { getAllPlantData } from "@/lib/data";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
-function sparkline(values: number[]) {
-  const min = Math.min(...values) - 0.4;
-  const max = Math.max(...values) + 0.4;
-  return values
-    .map((value, index) => {
-      const x = (index / (values.length - 1)) * 100;
-      const y = 28 - ((value - min) / (max - min)) * 24;
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
-    })
-    .join(" ");
-}
-
 export default function HomePage() {
   const data = getAllPlantData();
 
@@ -48,86 +36,63 @@ export default function HomePage() {
             </div>
           </nav>
 
-          <div className="grid items-end gap-10 pb-14 pt-12 lg:grid-cols-[1.15fr_0.85fr] lg:pb-20 lg:pt-20">
-            <div>
-              <p className="text-[12px] font-semibold text-white/50">
-                A CMMS wrapper for SAP, Oracle and Maximo
-              </p>
-              <h1 className="display mt-4 max-w-[20ch] text-[clamp(2.8rem,5vw,5rem)] font-semibold">
-                Four plants. Four ERPs. One view.
+          <div className="landing-hero">
+            <div className="landing-hero-copy">
+              <h1 className="landing-hero-title">
+                Four plants. <br />
+                Four ERPs. <br />
+                One view.
               </h1>
-              <p className="mt-5 max-w-[58ch] text-[16px] leading-relaxed text-white/70">
+              <p className="landing-hero-lede">
                 One canonical maintenance model over SAP S/4HANA, SAP ECC, IBM
                 Maximo and Oracle EAM. The same KPIs, the same drill-through, the
                 same executive view — without replacing the system of record.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/demo/coal"
-                  className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2.5 text-[13px] font-semibold text-ink"
-                >
+              <div className="landing-hero-actions">
+                <Link href="/demo/coal" className="landing-hero-primary">
                   Explore the command centre <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link
-                  href="/data-model"
-                  className="inline-flex items-center gap-2 rounded-md border border-white/20 px-4 py-2.5 text-[13px] font-semibold text-white/85"
-                >
+                <Link href="/data-model" className="landing-hero-secondary">
                   See the canonical model
                 </Link>
               </div>
-              <p className="mt-4 text-[11px] text-white/55">
+              <p className="landing-hero-note">
                 Synthetic data · no client data or logos · built for demonstration
               </p>
             </div>
-
-            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-[12px] font-semibold text-white/70">
-                  Cross-plant snapshot
-                </p>
-                <span className="rounded-md bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-white/55">
-                  Nov 2026
-                </span>
+            <div className="landing-hero-board">
+              <div className="landing-hero-board-head">
+                <span className="landing-hero-board-label">One operating picture</span>
+                <span className="landing-hero-board-date">Nov 2026</span>
               </div>
-              <div className="mt-3 space-y-1">
-                {data.map((plant) => (
-                  <Link
-                    key={plant.plant.slug}
-                    href={`/demo/${plant.plant.slug}`}
-                    className="grid grid-cols-[1.2fr_0.7fr_0.7fr] items-center gap-3 rounded-lg px-2 py-3 hover:bg-white/[0.06]"
-                  >
-                    <div className="min-w-0">
-                      <p className="truncate text-[12px] font-semibold">
-                        {plant.plant.shortName}
-                      </p>
-                      <p className="text-[10px] text-white/60">{plant.plant.sourceErpShort}</p>
-                    </div>
-                    <div>
-                      <svg viewBox="0 0 100 30" className="h-6 w-full" aria-hidden="true">
-                        <polyline
-                          points={sparkline(plant.monthly.map((point) => point.availability))}
-                          fill="none"
-                          stroke="rgba(255,255,255,0.7)"
-                          strokeWidth="1.6"
-                          vectorEffect="non-scaling-stroke"
-                        />
-                      </svg>
-                      <p className="tabular mt-0.5 text-[10px] text-white/60">
-                        {formatNumber(plant.kpis[0].value, 1)}% available
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="tabular text-[12px] font-semibold">
-                        {formatCurrency(plant.kpis[2].value, true)}
-                      </p>
-                      <p className="text-[10px] text-white/60">downtime loss</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              <div className="mt-3 border-t border-white/10 pt-3 text-[10px] leading-relaxed text-white/40">
-                Availability, PM compliance, cost and downtime are normalised from
-                four different source systems into one canonical model.
+              {data.map((plant) => (
+                <Link
+                  key={plant.plant.slug}
+                  href={`/demo/${plant.plant.slug}`}
+                  className="landing-hero-row"
+                >
+                  <span className="landing-hero-row-plant">
+                    <span className="landing-hero-row-name">{plant.plant.shortName}</span>
+                    <span className="landing-hero-row-erp">{plant.plant.sourceErpShort}</span>
+                  </span>
+                  <span className="landing-hero-metric">
+                    <span className="landing-hero-value tabular">
+                      {formatNumber(plant.kpis[0].value, 1)}%
+                    </span>
+                    <span className="landing-hero-label">available</span>
+                  </span>
+                  <span className="landing-hero-metric">
+                    <span className="landing-hero-value tabular">
+                      {formatCurrency(plant.kpis[2].value, true)}
+                    </span>
+                    <span className="landing-hero-label">downtime</span>
+                  </span>
+                  <ArrowUpRight className="landing-hero-row-arrow h-3.5 w-3.5" />
+                </Link>
+              ))}
+              <div className="landing-hero-board-foot">
+                Availability and downtime loss normalised from four source systems.
+                The ERP stays the system of record.
               </div>
             </div>
           </div>
