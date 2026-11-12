@@ -89,8 +89,6 @@ export type PlantData = {
   permitCycle: NamedValue[];
   checklistCompletion: NamedValue[];
   dataQuality: number;
-  sapSyncHealth: string;
-  generatedAt: string;
 };
 
 const monthLabels = [
@@ -312,7 +310,7 @@ export function getPlantData(slug: string): PlantData | undefined {
       label: "Asset availability",
       value: latest.availability,
       unit: "%",
-      delta: `${round(latest.availability - monthly[monthly.length - 2].availability, 1)} pts`,
+      delta: `${round(latest.availability - 94, 1)} pts vs 94% target`,
       tone: latest.availability >= 94 ? "good" : latest.availability >= 91 ? "warn" : "bad",
       hint: "Operating hours ÷ available hours, weighted by unit capacity.",
     },
@@ -325,7 +323,7 @@ export function getPlantData(slug: string): PlantData | undefined {
         costPctRav <= 2.4
           ? `${round(2.4 - costPctRav, 2)} pts under target`
           : `${round(costPctRav - 2.4, 2)} pts over target`,
-      tone: costPctRav <= 2.6 ? "good" : costPctRav <= 3.2 ? "warn" : "bad",
+      tone: costPctRav <= 2.4 ? "good" : costPctRav <= 2.8 ? "warn" : "bad",
       hint: "12-month spend ÷ replacement asset value; target 2.4%.",
     },
     {
@@ -333,7 +331,7 @@ export function getPlantData(slug: string): PlantData | undefined {
       label: "Unplanned downtime loss",
       value: unplannedLoss,
       unit: "SAR",
-      delta: `${latest.downtime} hrs`,
+      delta: `${latest.downtime} hrs last month`,
       tone: unplannedLoss > 4_000_000 ? "bad" : unplannedLoss > 2_000_000 ? "warn" : "good",
       hint: "Unplanned downtime hours × plant-specific cost of lost generation.",
     },
@@ -342,7 +340,7 @@ export function getPlantData(slug: string): PlantData | undefined {
       label: "PM compliance",
       value: latest.pm,
       unit: "%",
-      delta: `${round(latest.pm - monthly[monthly.length - 2].pm, 1)} pts`,
+      delta: `${round(latest.pm - 85, 1)} pts vs 85% target`,
       tone: latest.pm >= 85 ? "good" : latest.pm >= 70 ? "warn" : "bad",
       hint: "PM items completed by due date ÷ PM items due in the period.",
     },
@@ -351,7 +349,7 @@ export function getPlantData(slug: string): PlantData | undefined {
       label: "Statutory backlog",
       value: statutoryBacklog,
       unit: "",
-      delta: statutoryBacklog === 0 ? "clear" : "open",
+      delta: statutoryBacklog === 0 ? "clear" : "action required",
       tone: statutoryBacklog === 0 ? "good" : statutoryBacklog > 4 ? "bad" : "warn",
       hint: "Overdue statutory inspections and compliance actions.",
     },
@@ -418,8 +416,6 @@ export function getPlantData(slug: string): PlantData | undefined {
     permitCycle,
     checklistCompletion,
     dataQuality,
-    sapSyncHealth: plant.slug === "thermal" ? "Last sync 14 min ago · 2 warnings" : "Last sync 4 min ago · healthy",
-    generatedAt: "12 Nov 2026, 16:40",
   };
 }
 

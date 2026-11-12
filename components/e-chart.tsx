@@ -11,6 +11,7 @@ import {
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 echarts.use([
   BarChart,
@@ -28,9 +29,11 @@ type Props = {
   option: Record<string, unknown>;
   height?: number;
   ariaLabel: string;
+  className?: string;
+  fill?: boolean;
 };
 
-export function EChart({ option, height = 280, ariaLabel }: Props) {
+export function EChart({ option, height, ariaLabel, className, fill }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -51,8 +54,10 @@ export function EChart({ option, height = 280, ariaLabel }: Props) {
     <div
       ref={ref}
       role="img"
+      tabIndex={0}
       aria-label={ariaLabel}
-      style={{ width: "100%", height }}
+      className={cn("echart", fill && "echart-fill", className)}
+      style={height ? { height } : undefined}
     />
   );
 }

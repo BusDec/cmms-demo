@@ -52,6 +52,16 @@ The static site is written to `out/`.
 
 Plants: `coal`, `thermal`, `wind`, `gas`.
 
+## Interactions
+
+- **Overview** — switch Source / Canonical / Variance, and model a PM compliance recovery.
+- **Maintenance** — change available crew hours to see crew load and the over-capacity count.
+- **Reliability** — remove a share of top-three bad-actor downtime to see loss avoided.
+- **Permits** — filter open permits by age.
+
+The scenario values are illustrative and run against the synthetic dataset. The
+Source / Canonical difference is modelled for the demo.
+
 ## Data
 
 All data is synthetic and deterministic. It is generated in `lib/data.ts` from

@@ -20,5 +20,7 @@ export default async function ExecutivePage({
     sourceErp: item.plant.sourceErp,
   }));
 
-  return <ExecutiveDashboard data={data} comparison={comparison} />;
+  return (
+    <ExecutiveDashboard key={data.plant.slug} data={data} comparison={comparison} />
+  );
 }

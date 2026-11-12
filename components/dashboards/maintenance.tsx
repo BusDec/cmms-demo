@@ -4,8 +4,12 @@ import { useMemo, useState } from "react";
 import { Badge } from "@/components/badge";
 import { ChartCard } from "@/components/chart-card";
 import { EChart } from "@/components/e-chart";
+import { MoreAnalysis } from "@/components/more-analysis";
 import { RangeTabs } from "@/components/range-tabs";
 import { Reveal } from "@/components/reveal";
+import { ScenarioSlider } from "@/components/scenario-slider";
+import { StatCard } from "@/components/kpi-card";
+import { TableScroller } from "@/components/table-scroller";
 import type { PlantData } from "@/lib/data";
 import { formatNumber, statusTone } from "@/lib/utils";
 
@@ -24,12 +28,43 @@ const tooltip = {
   padding: [8, 10],
 };
 
+const priorityRank: Record<string, number> = {
+  Critical: 0,
+  High: 1,
+  Medium: 2,
+  Low: 3,
+};
+
 export function MaintenanceDashboard({ data }: { data: PlantData }) {
   const [range, setRange] = useState(6);
+  const [crewCapacity, setCrewCapacity] = useState(100);
   const monthly = useMemo(() => data.monthly.slice(-range), [data.monthly, range]);
   const latest = data.monthly[data.monthly.length - 1];
   const backlogTotal = data.backlog.reduce((sum, item) => sum + item.value, 0);
   const overdue = data.backlog[2].value + data.backlog[3].value;
+
+  const crewRows = useMemo(
+    () =>
+      data.crewLoad.map((item) => ({
+        label: item.label,
+        value: Math.min(140, Math.round(item.value * (100 / crewCapacity))),
+      })),
+    [crewCapacity, data.crewLoad],
+  );
+  const overloaded = crewRows.filter((item) => item.value >= 100).length;
+  const watch = crewRows.filter(
+    (item) => item.value >= 85 && item.value < 100,
+  ).length;
+
+  const workOrders = useMemo(
+    () =>
+      [...data.workOrders].sort(
+        (a, b) =>
+          (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9) ||
+          b.age - a.age,
+      ),
+    [data.workOrders],
+  );
 
   const pmOption = useMemo(
     () => ({
@@ -63,7 +98,12 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
             silent: true,
             symbol: "none",
             lineStyle: { color: "#e8a33d", type: "dashed" },
-            label: { formatter: "target 85%", position: "insideStartTop", color: "#e8a33d", fontSize: 10 },
+            label: {
+              formatter: "target 85%",
+              position: "insideStartTop",
+              color: "#e8a33d",
+              fontSize: 10,
+            },
             data: [{ yAxis: 85 }],
           },
         },
@@ -81,6 +121,12 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
         data: data.backlog.map((item) => item.label),
         ...axis,
         splitLine: { show: false },
+        axisLabel: {
+          color: "#8fa9b7",
+          fontSize: 10,
+          interval: 0,
+          rotate: 20,
+        },
       },
       yAxis: { type: "value", ...axis },
       series: [
@@ -104,20 +150,25 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
     () => ({
       grid: { left: 56, right: 10, top: 16, bottom: 6, containLabel: true },
       tooltip: { ...tooltip, trigger: "axis" },
-      xAxis: { type: "value", min: 0, max: 100, ...axis },
+      xAxis: { type: "value", min: 0, max: 120, ...axis },
       yAxis: {
         type: "category",
-        data: data.crewLoad.map((item) => item.label),
+        data: crewRows.map((item) => item.label),
         ...axis,
         splitLine: { show: false },
       },
       series: [
         {
           type: "bar",
-          data: data.crewLoad.map((item) => ({
+          data: crewRows.map((item) => ({
             value: item.value,
             itemStyle: {
-              color: item.value >= 80 ? "#e8a33d" : "#7fb0ff",
+              color:
+                item.value >= 100
+                  ? "#f97066"
+                  : item.value >= 85
+                    ? "#e8a33d"
+                    : "#7fb0ff",
               borderRadius: [0, 4, 4, 0],
             },
           })),
@@ -132,7 +183,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
         },
       ],
     }),
-    [data.crewLoad],
+    [crewRows],
   );
 
   const pipeline = [
@@ -196,83 +247,105 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
   );
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="text-[11px] font-semibold text-muted">
-            Maintenance
-          </p>
-          <h2 className="mt-1 text-[24px] font-semibold tracking-[-0.03em]">
-            Planning and execution
-          </h2>
-          <p className="measure mt-1 text-[13px] text-muted">
-            PM due dates, backlog ageing and the work-order pipeline for this plant.
-          </p>
-        </div>
-        <RangeTabs value={range} onChange={setRange} />
+    <div className="space-y-4">
+      <div>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted">
+          Maintenance
+        </p>
+        <h2 className="mt-1 text-[20px] font-semibold tracking-[-0.03em] sm:text-[24px]">
+          Planning and execution
+        </h2>
+        <p className="measure mt-1 text-[12px] text-muted sm:text-[13px]">
+          PM due dates, backlog ageing and the work-order pipeline for this plant.
+        </p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 xl:grid-cols-4">
         {[
-          { label: "PM compliance", value: `${formatNumber(latest.pm, 1)}%`, hint: "Completed by due date" },
-          { label: "Backlog", value: `${backlogTotal}`, hint: "Open PM and corrective items" },
-          { label: "Overdue > 30 days", value: `${overdue}`, hint: "Needs a planner decision" },
-          { label: "Material readiness", value: `${data.materialReadiness}%`, hint: "WO material lines ready" },
+          {
+            label: "PM compliance",
+            value: `${formatNumber(latest.pm, 1)}%`,
+            hint: "Completed by due date · target 85%",
+            tone: latest.pm >= 85 ? ("good" as const) : latest.pm >= 70 ? ("warn" as const) : ("bad" as const),
+          },
+          {
+            label: "Backlog",
+            value: `${backlogTotal}`,
+            hint: "Open PM and corrective items",
+            tone: "warn" as const,
+          },
+          {
+            label: "Overdue > 30 days",
+            value: `${overdue}`,
+            hint: "Needs a planner decision",
+            tone: "bad" as const,
+          },
+          {
+            label: "Material readiness",
+            value: `${data.materialReadiness}%`,
+            hint: "WO material lines ready",
+            tone: data.materialReadiness >= 85 ? ("good" as const) : ("warn" as const),
+          },
         ].map((item, index) => (
-          <Reveal key={item.label} delay={index * 0.04}>
-            <div className="card px-4 py-4">
-              <p className="text-[12px] font-semibold text-muted">{item.label}</p>
-              <p className="stat-value mt-2 text-[30px] font-semibold">{item.value}</p>
-              <p className="mt-2 text-[11px] text-muted">{item.hint}</p>
-            </div>
+          <Reveal key={item.label} delay={index * 0.03} className="h-full">
+            <StatCard label={item.label} value={item.value} hint={item.hint} tone={item.tone} />
           </Reveal>
         ))}
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[1.45fr_1fr]">
-        <Reveal>
+      <div className="grid gap-3 xl:grid-cols-[1.45fr_1fr]">
+        <Reveal className="h-full">
           <ChartCard
             title="PM compliance trend"
             subtitle="Completed by due date; target 85%."
+            action={<RangeTabs value={range} onChange={setRange} />}
           >
-            <EChart option={pmOption} ariaLabel={`PM compliance trend for ${data.plant.name}`} />
+            <EChart
+              option={pmOption}
+              ariaLabel={`PM compliance trend for ${data.plant.name}`}
+              fill
+            />
           </ChartCard>
         </Reveal>
-        <Reveal delay={0.05}>
-          <ChartCard
-            title="Backlog ageing"
-            subtitle="Open items by age bucket."
-          >
-            <EChart option={backlogOption} ariaLabel={`Backlog ageing for ${data.plant.name}`} />
-          </ChartCard>
-        </Reveal>
-        <Reveal>
+        <Reveal delay={0.04} className="h-full">
           <ChartCard
             title="Crew load"
             subtitle="Planned hours as a share of available hours this week."
+            footer={
+              <ScenarioSlider
+                label="Available crew hours"
+                value={crewCapacity}
+                min={80}
+                max={120}
+                display={`${crewCapacity}%`}
+                minLabel="80%"
+                maxLabel="120%"
+                onChange={setCrewCapacity}
+                readout={
+                  <>
+                    <span className={cnTone(overloaded > 0)}>
+                      {overloaded} {overloaded === 1 ? "crew" : "crews"} at or above 100%
+                    </span>
+                    <span className="text-muted"> · {watch} more above 85%</span>
+                  </>
+                }
+              />
+            }
           >
-            <EChart option={crewOption} ariaLabel={`Crew load for ${data.plant.name}`} />
-          </ChartCard>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <ChartCard
-            title="Work-order pipeline"
-            subtitle="Current work orders by execution state."
-          >
-            <EChart option={pipelineOption} ariaLabel={`Work order pipeline for ${data.plant.name}`} />
+            <EChart option={crewOption} ariaLabel={`Crew load for ${data.plant.name} at ${crewCapacity} percent available hours`} />
           </ChartCard>
         </Reveal>
       </div>
 
       <Reveal>
         <section className="card overflow-hidden">
-          <div className="px-4 pt-4">
-            <h2 className="text-[15px] font-semibold">Work orders needing attention</h2>
-            <p className="mt-1 text-[12px] text-muted">
-              Highest priority and oldest open work.
+          <div className="px-4 pt-3.5">
+            <h2 className="text-[14px] font-semibold">Work orders needing attention</h2>
+            <p className="mt-0.5 text-[11px] text-muted">
+              Critical first, then oldest open work.
             </p>
           </div>
-          <div className="mt-3 overflow-x-auto">
+          <TableScroller label="Work orders needing attention" className="mt-2.5">
             <table className="w-full min-w-[760px] text-left text-[12px]">
               <thead>
                 <tr className="border-y border-line text-[11px] text-muted">
@@ -286,7 +359,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
                 </tr>
               </thead>
               <tbody>
-                {data.workOrders.map((wo) => (
+                {workOrders.map((wo) => (
                   <tr key={wo.id} className="table-row border-b border-line/70">
                     <td className="px-4 py-2.5 font-semibold">{wo.id}</td>
                     <td className="px-3 py-2.5">{wo.asset}</td>
@@ -295,7 +368,15 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
                       <Badge tone={statusTone(wo.status)}>{wo.status}</Badge>
                     </td>
                     <td className="px-3 py-2.5">
-                      <Badge tone={wo.priority === "Critical" ? "bad" : wo.priority === "High" ? "warn" : "neutral"}>
+                      <Badge
+                        tone={
+                          wo.priority === "Critical"
+                            ? "bad"
+                            : wo.priority === "High"
+                              ? "warn"
+                              : "neutral"
+                        }
+                      >
                         {wo.priority}
                       </Badge>
                     </td>
@@ -305,9 +386,33 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroller>
         </section>
       </Reveal>
+
+      <MoreAnalysis count={2} label="Backlog detail">
+        <div className="grid gap-3 xl:grid-cols-2">
+          <ChartCard
+            title="Backlog ageing"
+            subtitle="Current open items by age bucket."
+          >
+            <EChart option={backlogOption} ariaLabel={`Backlog ageing for ${data.plant.name}`} />
+          </ChartCard>
+          <ChartCard
+            title="Work-order pipeline"
+            subtitle="Current work orders by execution state."
+          >
+            <EChart
+              option={pipelineOption}
+              ariaLabel={`Work order pipeline for ${data.plant.name}`}
+            />
+          </ChartCard>
+        </div>
+      </MoreAnalysis>
     </div>
   );
+}
+
+function cnTone(bad: boolean) {
+  return bad ? "font-semibold text-bad" : "font-semibold text-good";
 }

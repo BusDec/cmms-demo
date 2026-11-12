@@ -3,6 +3,13 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { getAllPlantData } from "@/lib/data";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
+const adapterStatus: Record<string, "Implemented" | "Planned"> = {
+  coal: "Implemented",
+  thermal: "Planned",
+  wind: "Planned",
+  gas: "Planned",
+};
+
 export default function HomePage() {
   const data = getAllPlantData();
 
@@ -99,14 +106,14 @@ export default function HomePage() {
               </div>
               <div className="atlas-map-foot">
                 <span>ERP stays the system of record.</span>
-                <span>Four adapters · one model</span>
+                <span>S/4 implemented · three planned</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:py-24">
+      <section className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">The four scenarios</p>
@@ -138,8 +145,26 @@ export default function HomePage() {
                     {plant.plant.name}
                   </h3>
                 </div>
-                <span className="rounded-md bg-[rgba(234,242,246,0.08)] px-2 py-1 text-[10px] font-semibold text-muted">
-                  {plant.plant.sourceErpShort}
+                <span className="flex shrink-0 flex-col items-end gap-1">
+                  <span className="rounded-md bg-[rgba(234,242,246,0.08)] px-2 py-1 text-[10px] font-semibold text-muted">
+                    {plant.plant.sourceErpShort}
+                  </span>
+                  <span
+                    className={
+                      adapterStatus[plant.plant.slug] === "Implemented"
+                        ? "inline-flex items-center gap-1 text-[11px] font-semibold text-good"
+                        : "inline-flex items-center gap-1 text-[11px] font-semibold text-warn"
+                    }
+                  >
+                    <span
+                      className={
+                        adapterStatus[plant.plant.slug] === "Implemented"
+                          ? "h-1 w-1 rounded-full bg-good"
+                          : "h-1 w-1 rounded-full bg-warn"
+                      }
+                    />
+                    {adapterStatus[plant.plant.slug]}
+                  </span>
                 </span>
               </div>
               <div className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-2">
@@ -174,7 +199,7 @@ export default function HomePage() {
       </section>
 
       <section className="border-y border-line bg-surface">
-        <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:py-24">
+        <div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
           <div>
             <p className="eyebrow">What is shared</p>
             <h2 className="mt-2 max-w-[16ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
@@ -249,74 +274,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 lg:py-24">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="eyebrow">What the demo covers</p>
-            <h2 className="mt-2 max-w-[18ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-              A complete operating picture.
-            </h2>
-            <div className="mt-6 grid gap-x-8 gap-y-4 text-[13px] sm:grid-cols-2">
-              {[
-                "Executive command centre",
-                "PM compliance and backlog ageing",
-                "MTBF, MTTR and bad actors",
-                "Permit-to-work and isolation",
-                "Cost, spares and manpower",
-                "RCA, CAPA and checklist completion",
-                "Canonical data model",
-                "ERP integration and field ownership",
-              ].map((item) => (
-                <div key={item} className="border-t border-line pt-3 font-medium">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="space-y-3">
-            <Link
-              href="/data-model"
-              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-[var(--panel)]"
-            >
-              <div>
-                <p className="text-[14px] font-semibold">Data model</p>
-                <p className="mt-1 text-[12px] text-muted">
-                  Canonical entities, star schema and the medallion flow.
-                </p>
-              </div>
-              <ArrowUpRight className="h-4 w-4 text-muted" />
-            </Link>
-            <Link
-              href="/erp-integration"
-              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-[var(--panel)]"
-            >
-              <div>
-                <p className="text-[14px] font-semibold">ERP integration</p>
-                <p className="mt-1 text-[12px] text-muted">
-                  How SAP, Oracle and Maximo map into the same model.
-                </p>
-              </div>
-              <ArrowUpRight className="h-4 w-4 text-muted" />
-            </Link>
-            <Link
-              href="/about"
-              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-[var(--panel)]"
-            >
-              <div>
-                <p className="text-[14px] font-semibold">About the demo</p>
-                <p className="mt-1 text-[12px] text-muted">
-                  Synthetic data, scope and what is intentionally not shown.
-                </p>
-              </div>
-              <ArrowUpRight className="h-4 w-4 text-muted" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <footer className="border-t border-line bg-surface">
-        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-5 py-8 text-[11px] text-muted sm:px-8">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-5 py-6 text-[11px] text-muted sm:px-8">
           <p>Gearbox demo · synthetic data · no client logos or records</p>
+          <nav className="flex flex-wrap items-center gap-4" aria-label="Supporting pages">
+            <Link href="/data-model" className="hover:text-ink">
+              Data model
+            </Link>
+            <Link href="/erp-integration" className="hover:text-ink">
+              ERP integration
+            </Link>
+            <Link href="/about" className="hover:text-ink">
+              About
+            </Link>
+          </nav>
           <p>Four plants · four ERPs · one canonical maintenance model</p>
         </div>
       </footer>

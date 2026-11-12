@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
+import { TableScroller } from "@/components/table-scroller";
 
 export const metadata = {
   title: "Data model · Gearbox demo",
@@ -45,7 +46,10 @@ export default function DataModelPage() {
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">Canonical entities</h2>
             <span className="text-[11px] text-muted">11 core entities</span>
           </div>
-          <div className="mt-4 overflow-x-auto rounded-xl border border-line bg-surface">
+          <TableScroller
+            label="Canonical entities table"
+            className="mt-4 rounded-xl border border-line bg-surface"
+          >
             <table className="w-full min-w-[720px] text-left text-[12px]">
               <thead>
                 <tr className="border-b border-line text-[11px] text-muted">
@@ -64,11 +68,11 @@ export default function DataModelPage() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroller>
         </section>
 
         <section className="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <div>
+          <div className="min-w-0">
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">Reporting star</h2>
             <p className="mt-2 text-[13px] leading-relaxed text-muted">
               The analytical layer is a star schema. Facts carry the grain; dimensions
@@ -99,7 +103,7 @@ export default function DataModelPage() {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">Medallion flow</h2>
             <p className="mt-2 text-[13px] leading-relaxed text-muted">
               Raw ERP payloads are kept for replay. The silver layer conforms types,

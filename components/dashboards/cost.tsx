@@ -3,8 +3,10 @@
 import { useMemo, useState } from "react";
 import { ChartCard } from "@/components/chart-card";
 import { EChart } from "@/components/e-chart";
+import { StatCard } from "@/components/kpi-card";
 import { RangeTabs } from "@/components/range-tabs";
 import { Reveal } from "@/components/reveal";
+import { TableScroller } from "@/components/table-scroller";
 import type { PlantData } from "@/lib/data";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
@@ -45,8 +47,8 @@ export function CostDashboard({ data }: { data: PlantData }) {
   const costPctRav = (annualCost / data.plant.rav) * 100;
   const costPerMwh = annualCost / (generation[data.plant.slug] ?? 1);
   const sparesShare = Math.round(
-    (data.costBreakdown.find((item) => item.label === "Spares")?.value ?? 0) /
-      annualCost *
+    ((data.costBreakdown.find((item) => item.label === "Spares")?.value ?? 0) /
+      annualCost) *
       100,
   );
 
@@ -74,129 +76,91 @@ export function CostDashboard({ data }: { data: PlantData }) {
           type: "bar",
           data: monthly.map((point) => point.cost),
           itemStyle: { color: "#4fd1c5", borderRadius: [4, 4, 0, 0] },
-          barMaxWidth: 30,
+          barMaxWidth: 44,
+          label: {
+            show: true,
+            position: "top",
+            formatter: (params: { value: number }) => compactMoney(params.value),
+            color: "#8fa9b7",
+            fontSize: 10,
+          },
         },
       ],
     }),
     [monthly],
   );
 
-  const mixOption = useMemo(
-    () => ({
-      tooltip: { ...tooltip, trigger: "item" },
-      legend: {
-        bottom: 0,
-        icon: "circle",
-        itemWidth: 7,
-        itemHeight: 7,
-        textStyle: { color: "#8fa9b7", fontSize: 11 },
-      },
-      series: [
-        {
-          type: "pie",
-          radius: ["56%", "76%"],
-          center: ["50%", "44%"],
-          label: { show: false },
-          data: data.costBreakdown.map((item, index) => ({
-            name: item.label,
-            value: item.value,
-            itemStyle: {
-              color: ["#7fb0ff", "#4fd1c5", "#e8a33d", "#8fa9b7"][index],
-            },
-          })),
-        },
-      ],
-      graphic: [
-        {
-          type: "text",
-          left: "center",
-          top: "36%",
-          style: {
-            text: formatCurrency(annualCost, true),
-            fill: "#eaf2f6",
-            fontSize: 18,
-            fontWeight: 600,
-            textAlign: "center",
-          },
-        },
-        {
-          type: "text",
-          left: "center",
-          top: "46%",
-          style: {
-            text: "12 MONTHS",
-            fill: "#8fa9b7",
-            fontSize: 9,
-            fontWeight: 600,
-            textAlign: "center",
-          },
-        },
-      ],
-    }),
-    [data.costBreakdown, annualCost],
-  );
-
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="text-[11px] font-semibold text-muted">
-            Cost & resources
-          </p>
-          <h2 className="mt-1 text-[24px] font-semibold tracking-[-0.03em]">
-            Maintenance economics
-          </h2>
-          <p className="measure mt-1 text-[13px] text-muted">
-            Spend against replacement value, cost per work order and the manpower,
-            spares and contractor split.
-          </p>
-        </div>
-        <RangeTabs value={range} onChange={setRange} />
+    <div className="space-y-4">
+      <div>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted">
+          Cost & resources
+        </p>
+        <h2 className="mt-1 text-[20px] font-semibold tracking-[-0.03em] sm:text-[24px]">
+          Maintenance economics
+        </h2>
+        <p className="measure mt-1 text-[12px] text-muted sm:text-[13px]">
+          Spend against replacement value, cost per work order and the manpower,
+          spares and contractor split.
+        </p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 xl:grid-cols-4">
         {[
-          { label: "12-month cost", value: formatCurrency(annualCost, true), hint: "Manpower, spares and services" },
-          { label: "Cost / RAV", value: `${formatNumber(costPctRav, 2)}%`, hint: `RAV ${formatCurrency(data.plant.rav, true)}` },
-          { label: "Cost / MWh", value: `SAR ${formatNumber(costPerMwh, 1)}`, hint: "Estimated generation" },
-          { label: "Spares share", value: `${sparesShare}%`, hint: "Of total maintenance spend" },
+          {
+            label: "12-month cost",
+            value: formatCurrency(annualCost, true),
+            hint: "Manpower, spares and services",
+            tone: "info" as const,
+          },
+          {
+            label: "Cost / RAV",
+            value: `${formatNumber(costPctRav, 2)}%`,
+            hint: `RAV ${formatCurrency(data.plant.rav, true)}`,
+            tone: costPctRav <= 2.4 ? ("good" as const) : ("warn" as const),
+          },
+          {
+            label: "Cost / MWh",
+            value: `SAR ${formatNumber(costPerMwh, 1)}`,
+            hint: "Estimated generation",
+            tone: "neutral" as const,
+          },
+          {
+            label: "Spares share",
+            value: `${sparesShare}%`,
+            hint: "Of total maintenance spend",
+            tone: "info" as const,
+          },
         ].map((item, index) => (
-          <Reveal key={item.label} delay={index * 0.04}>
-            <div className="card px-4 py-4">
-              <p className="text-[12px] font-semibold text-muted">{item.label}</p>
-              <p className="stat-value mt-2 text-[28px] font-semibold">{item.value}</p>
-              <p className="mt-2 text-[11px] text-muted">{item.hint}</p>
-            </div>
+          <Reveal key={item.label} delay={index * 0.03} className="h-full">
+            <StatCard label={item.label} value={item.value} hint={item.hint} tone={item.tone} />
           </Reveal>
         ))}
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[1.45fr_1fr]">
-        <Reveal>
-          <ChartCard
-            title="Monthly maintenance cost"
-            subtitle="Actual spend; the full product adds budget variance by cost centre."
-          >
-            <EChart option={costOption} ariaLabel={`Monthly maintenance cost for ${data.plant.name}`} />
-          </ChartCard>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <ChartCard title="Cost mix" subtitle="12-month split by category.">
-            <EChart option={mixOption} ariaLabel={`Cost mix for ${data.plant.name}`} />
-          </ChartCard>
-        </Reveal>
-      </div>
+      <Reveal>
+        <ChartCard
+          title="Monthly maintenance cost"
+          subtitle="Actual spend; the full product adds budget variance by cost centre."
+          action={<RangeTabs value={range} onChange={setRange} />}
+        >
+          <EChart
+            option={costOption}
+            ariaLabel={`Monthly maintenance cost for ${data.plant.name}`}
+          />
+        </ChartCard>
+      </Reveal>
 
       <Reveal>
         <section className="card overflow-hidden">
-          <div className="px-4 pt-4">
-            <h2 className="text-[15px] font-semibold">Cost lines</h2>
-            <p className="mt-1 text-[12px] text-muted">
-              Synthetic values for the demo; the product reads the same fields from
-              ERP cost centres and confirmations.
+          <div className="px-4 pt-3.5">
+            <h2 className="text-[14px] font-semibold">Cost lines</h2>
+            <p className="mt-0.5 text-[11px] text-muted">
+              Synthetic values for the demo; the product reads the same fields from ERP
+              cost centres and confirmations.
             </p>
           </div>
-          <div className="mt-3 overflow-x-auto">
+          <TableScroller label="Cost lines table" className="mt-2.5">
             <table className="w-full min-w-[620px] text-left text-[12px]">
               <thead>
                 <tr className="border-y border-line text-[11px] text-muted">
@@ -210,18 +174,22 @@ export function CostDashboard({ data }: { data: PlantData }) {
                 {data.costBreakdown.map((item) => (
                   <tr key={item.label} className="table-row border-b border-line/70">
                     <td className="px-4 py-2.5 font-medium">{item.label}</td>
-                    <td className="tabular px-3 py-2.5 text-right">{formatCurrency(item.value, true)}</td>
+                    <td className="tabular px-3 py-2.5 text-right">
+                      {formatCurrency(item.value, true)}
+                    </td>
                     <td className="tabular px-3 py-2.5 text-right">
                       {Math.round((item.value / annualCost) * 100)}%
                     </td>
                     <td className="px-4 py-2.5 text-muted">
-                      {item.label === "Spares" ? "Inventory & material documents" : "Work orders & confirmations"}
+                      {item.label === "Spares"
+                        ? "Inventory & material documents"
+                        : "Work orders & confirmations"}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroller>
         </section>
       </Reveal>
     </div>

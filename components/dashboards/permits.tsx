@@ -1,10 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Badge } from "@/components/badge";
 import { ChartCard } from "@/components/chart-card";
 import { EChart } from "@/components/e-chart";
+import { StatCard } from "@/components/kpi-card";
+import { MoreAnalysis } from "@/components/more-analysis";
 import { Reveal } from "@/components/reveal";
+import { ScenarioSlider } from "@/components/scenario-slider";
+import { TableScroller } from "@/components/table-scroller";
 import type { PlantData } from "@/lib/data";
 import { statusTone } from "@/lib/utils";
 
@@ -16,74 +20,33 @@ const tooltip = {
   padding: [8, 10],
 };
 
+const permitRank: Record<string, number> = {
+  Overdue: 0,
+  Active: 1,
+  "Awaiting return": 2,
+};
+
 export function PermitsDashboard({ data }: { data: PlantData }) {
+  const [minAge, setMinAge] = useState(0);
   const active = data.permits.filter((permit) => permit.status === "Active").length;
   const overdue = data.permits.filter((permit) => permit.status === "Overdue").length;
-  const awaitingReturn = data.permits.filter((permit) => permit.status === "Awaiting return").length;
+  const awaitingReturn = data.permits.filter(
+    (permit) => permit.status === "Awaiting return",
+  ).length;
   const cycle = data.permitCycle.reduce((sum, item) => sum + item.value, 0);
 
-  const typeMix = useMemo(() => {
-    const counts = new Map<string, number>();
-    data.permits.forEach((permit) => {
-      counts.set(permit.type, (counts.get(permit.type) ?? 0) + 1);
-    });
-    return Array.from(counts.entries()).map(([label, value]) => ({ label, value }));
-  }, [data.permits]);
-
-  const typeOption = useMemo(
-    () => ({
-      tooltip: { ...tooltip, trigger: "item" },
-      legend: {
-        bottom: 0,
-        icon: "circle",
-        itemWidth: 7,
-        itemHeight: 7,
-        textStyle: { color: "#8fa9b7", fontSize: 11 },
-      },
-      series: [
-        {
-          type: "pie",
-          radius: ["56%", "76%"],
-          center: ["50%", "44%"],
-          label: { show: false },
-          data: typeMix.map((item, index) => ({
-            name: item.label,
-            value: item.value,
-            itemStyle: {
-              color: ["#e8a33d", "#7fb0ff", "#4fd1c5", "#f97066", "#8fa9b7", "#8fa9b7"][index],
-            },
-          })),
-        },
-      ],
-      graphic: [
-        {
-          type: "text",
-          left: "center",
-          top: "38%",
-          style: {
-            text: String(data.permits.length),
-            fill: "#eaf2f6",
-            fontSize: 24,
-            fontWeight: 600,
-            textAlign: "center",
-          },
-        },
-        {
-          type: "text",
-          left: "center",
-          top: "47%",
-          style: {
-            text: "PERMITS",
-            fill: "#8fa9b7",
-            fontSize: 9,
-            fontWeight: 600,
-            textAlign: "center",
-          },
-        },
-      ],
-    }),
-    [typeMix, data.permits.length],
+  const filtered = useMemo(
+    () =>
+      [...data.permits]
+        .filter((permit) => permit.age >= minAge)
+        .sort(
+          (a, b) =>
+            (permitRank[a.status] ?? 9) - (permitRank[b.status] ?? 9) ||
+            b.age - a.age,
+        ),
+    [data.permits, minAge],
   );
+  const oldest = filtered.reduce((max, permit) => Math.max(max, permit.age), 0);
 
   const cycleOption = useMemo(
     () => ({
@@ -128,58 +91,92 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
   );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <div>
-        <p className="text-[11px] font-semibold text-muted">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-muted">
           Permits & safety
         </p>
-        <h2 className="mt-1 text-[24px] font-semibold tracking-[-0.03em]">
+        <h2 className="mt-1 text-[20px] font-semibold tracking-[-0.03em] sm:text-[24px]">
           Permit to work
         </h2>
-        <p className="measure mt-1 text-[13px] text-muted">
-          Live permits, isolation status and the issue-to-closure cycle.
+        <p className="measure mt-1 text-[12px] text-muted sm:text-[13px]">
+          Open permits, status and the issue-to-closure cycle.
         </p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 xl:grid-cols-4">
         {[
-          { label: "Active permits", value: String(active), hint: "Issued and in the field" },
-          { label: "Overdue", value: String(overdue), hint: "Past the planned return time" },
-          { label: "Awaiting return", value: String(awaitingReturn), hint: "Work finished, permit open" },
-          { label: "Average cycle", value: `${cycle.toFixed(1)} h`, hint: "Issue to closure" },
+          {
+            label: "Active permits",
+            value: String(active),
+            hint: "Issued and in the field",
+            tone: "good" as const,
+          },
+          {
+            label: "Overdue",
+            value: String(overdue),
+            hint: "Past the planned return time",
+            tone: "bad" as const,
+          },
+          {
+            label: "Awaiting return",
+            value: String(awaitingReturn),
+            hint: "Work finished, permit open",
+            tone: "warn" as const,
+          },
+          {
+            label: "Average cycle",
+            value: `${cycle.toFixed(1)} h`,
+            hint: "Issue to closure",
+            tone: "info" as const,
+          },
         ].map((item, index) => (
-          <Reveal key={item.label} delay={index * 0.04}>
-            <div className="card px-4 py-4">
-              <p className="text-[12px] font-semibold text-muted">{item.label}</p>
-              <p className="stat-value mt-2 text-[30px] font-semibold">{item.value}</p>
-              <p className="mt-2 text-[11px] text-muted">{item.hint}</p>
-            </div>
+          <Reveal key={item.label} delay={index * 0.03} className="h-full">
+            <StatCard label={item.label} value={item.value} hint={item.hint} tone={item.tone} />
           </Reveal>
         ))}
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-2">
-        <Reveal>
-          <ChartCard title="Permit mix" subtitle="Open permits by type.">
-            <EChart option={typeOption} ariaLabel={`Permit mix for ${data.plant.name}`} />
-          </ChartCard>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <ChartCard title="Cycle time" subtitle="Average hours per stage.">
-            <EChart option={cycleOption} ariaLabel={`Permit cycle time for ${data.plant.name}`} />
-          </ChartCard>
-        </Reveal>
-      </div>
-
       <Reveal>
         <section className="card overflow-hidden">
-          <div className="px-4 pt-4">
-            <h2 className="text-[15px] font-semibold">Open permits</h2>
-            <p className="mt-1 text-[12px] text-muted">
-              Oldest and highest-risk permits first.
+          <div className="px-4 pt-3.5">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h2 className="text-[14px] font-semibold">Open permits</h2>
+              <span className="tabular text-[11px] text-muted">
+                {filtered.length} of {data.permits.length} permits
+              </span>
+            </div>
+            <p className="mt-0.5 text-[11px] text-muted">
+              Overdue first, then oldest open permits. Filter by age; swipe the table
+              for all columns.
             </p>
           </div>
-          <div className="mt-3 overflow-x-auto">
+          <div className="mt-2.5 px-4">
+            <ScenarioSlider
+              label="Open at least"
+              value={minAge}
+              min={0}
+              max={14}
+              display={`${minAge} days`}
+              minLabel="0 days"
+              maxLabel="14+ days"
+              onChange={setMinAge}
+              readout={
+                filtered.length > 0 ? (
+                  <>
+                    <span className="font-semibold text-ink">
+                      {filtered.length} {filtered.length === 1 ? "permit" : "permits"}
+                    </span>
+                    <span className="text-muted"> · oldest {oldest} days</span>
+                  </>
+                ) : (
+                  <span className="font-semibold text-ink">No permits at this age</span>
+                )
+              }
+              footnote="Filter · updates the table below"
+            />
+          </div>
+          <TableScroller label="Open permits table" className="mt-3">
             <table className="w-full min-w-[720px] text-left text-[12px]">
               <thead>
                 <tr className="border-y border-line text-[11px] text-muted">
@@ -192,7 +189,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
                 </tr>
               </thead>
               <tbody>
-                {data.permits.map((permit) => (
+                {filtered.map((permit) => (
                   <tr key={permit.id} className="table-row border-b border-line/70">
                     <td className="px-4 py-2.5 font-semibold">{permit.id}</td>
                     <td className="px-3 py-2.5">{permit.asset}</td>
@@ -204,11 +201,28 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
                     <td className="px-4 py-2.5 text-muted">{permit.owner}</td>
                   </tr>
                 ))}
+                {filtered.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="px-4 py-6 text-center text-[12px] text-muted">
+                      No permit has been open for {minAge} days. Lower the filter to see
+                      the rest of the queue.
+                    </td>
+                  </tr>
+                ) : null}
               </tbody>
             </table>
-          </div>
+          </TableScroller>
         </section>
       </Reveal>
+
+      <MoreAnalysis count={1} label="Cycle detail">
+        <ChartCard title="Cycle time" subtitle="Average hours per stage.">
+          <EChart
+            option={cycleOption}
+            ariaLabel={`Permit cycle time for ${data.plant.name}`}
+          />
+        </ChartCard>
+      </MoreAnalysis>
     </div>
   );
 }

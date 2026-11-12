@@ -27,7 +27,7 @@ export function RangeTabs({
           type="button"
           onClick={() => onChange(option.value)}
           className={cn(
-            "rounded-full px-3 py-1 text-[11px] font-semibold transition-colors",
+            "rounded-full px-3 py-1.5 text-[11px] font-semibold transition-colors",
             value === option.value
               ? "bg-[var(--warn)] text-[var(--graphite)]"
               : "text-muted hover:text-ink",

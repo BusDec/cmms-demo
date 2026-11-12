@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/badge";
 import { SimpleHeader } from "@/components/simple-header";
+import { TableScroller } from "@/components/table-scroller";
 
 export const metadata = {
   title: "ERP integration · Gearbox demo",
@@ -97,13 +98,16 @@ export default function ErpIntegrationPage() {
         </section>
 
         <section className="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <div>
+          <div className="min-w-0">
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">SAP API inventory</h2>
             <p className="mt-2 text-[13px] leading-relaxed text-muted">
               Released S/4HANA Cloud APIs. The exact API list and communication
               arrangement must be confirmed in the client sandbox before UAT.
             </p>
-            <div className="mt-4 overflow-x-auto rounded-xl border border-line bg-surface">
+            <TableScroller
+              label="SAP API inventory table"
+              className="mt-4 rounded-xl border border-line bg-surface"
+            >
               <table className="w-full min-w-[520px] text-left text-[12px]">
                 <thead>
                   <tr className="border-b border-line text-[11px] text-muted">
@@ -125,10 +129,10 @@ export default function ErpIntegrationPage() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </TableScroller>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">What is real here</h2>
             <div className="mt-4 space-y-3">
               {[
