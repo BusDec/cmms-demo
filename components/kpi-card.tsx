@@ -1,5 +1,5 @@
 import { Kpi } from "@/lib/data";
-import { cn, formatCurrency, formatNumber, toneBorder, toneClass } from "@/lib/utils";
+import { cn, formatCurrency, formatNumber, toneClass, toneDot } from "@/lib/utils";
 
 export function KpiCard({ kpi }: { kpi: Kpi }) {
   const value =
@@ -10,13 +10,13 @@ export function KpiCard({ kpi }: { kpi: Kpi }) {
         : formatNumber(kpi.value, 0);
 
   return (
-    <article
-      className={cn(
-        "card border-t-[3px] px-4 py-4",
-        toneBorder(kpi.tone),
-      )}
-    >
-      <p className="text-[12px] font-semibold text-muted">{kpi.label}</p>
+    <article className="card px-4 py-4">
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">
+          {kpi.label}
+        </p>
+        <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", toneDot(kpi.tone))} />
+      </div>
       <p className="stat-value mt-2 text-[30px] font-semibold text-ink">
         {value}
         {kpi.unit && kpi.unit !== "SAR" && kpi.unit !== "%" ? (

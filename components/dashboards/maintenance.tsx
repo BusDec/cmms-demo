@@ -10,16 +10,17 @@ import type { PlantData } from "@/lib/data";
 import { formatNumber, statusTone } from "@/lib/utils";
 
 const axis = {
-  axisLabel: { color: "#5b6472", fontSize: 11 },
+  axisLabel: { color: "#8fa9b7", fontSize: 11 },
   axisLine: { show: false },
   axisTick: { show: false },
-  splitLine: { lineStyle: { color: "#eef2f7" } },
+  splitLine: { lineStyle: { color: "rgba(234,242,246,0.08)" } },
 };
 
 const tooltip = {
-  backgroundColor: "#0f172a",
-  borderWidth: 0,
-  textStyle: { color: "#ffffff", fontSize: 12 },
+  backgroundColor: "#0d2638",
+  borderWidth: 1,
+  borderColor: "rgba(234,242,246,0.14)",
+  textStyle: { color: "#eaf2f6", fontSize: 12 },
   padding: [8, 10],
 };
 
@@ -45,7 +46,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
         min: 40,
         max: 100,
         ...axis,
-        axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}%" },
+        axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}%" },
       },
       series: [
         {
@@ -55,14 +56,14 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
           smooth: true,
           symbol: "circle",
           symbolSize: 6,
-          lineStyle: { color: "#0f766e", width: 2 },
-          itemStyle: { color: "#0f766e" },
-          areaStyle: { color: "rgba(15, 118, 110, 0.08)" },
+          lineStyle: { color: "#4fd1c5", width: 2 },
+          itemStyle: { color: "#4fd1c5" },
+          areaStyle: { color: "rgba(79,209,197,0.10)" },
           markLine: {
             silent: true,
             symbol: "none",
-            lineStyle: { color: "#b45309", type: "dashed" },
-            label: { formatter: "target 85%", position: "insideStartTop", color: "#b45309", fontSize: 10 },
+            lineStyle: { color: "#e8a33d", type: "dashed" },
+            label: { formatter: "target 85%", position: "insideStartTop", color: "#e8a33d", fontSize: 10 },
             data: [{ yAxis: 85 }],
           },
         },
@@ -88,7 +89,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
           data: data.backlog.map((item, index) => ({
             value: item.value,
             itemStyle: {
-              color: ["#0f766e", "#1d4ed8", "#b45309", "#b91c1c"][index],
+              color: ["#4fd1c5", "#7fb0ff", "#e8a33d", "#f97066"][index],
               borderRadius: [4, 4, 0, 0],
             },
           })),
@@ -116,7 +117,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
           data: data.crewLoad.map((item) => ({
             value: item.value,
             itemStyle: {
-              color: item.value >= 80 ? "#b45309" : "#1d4ed8",
+              color: item.value >= 80 ? "#e8a33d" : "#7fb0ff",
               borderRadius: [0, 4, 4, 0],
             },
           })),
@@ -125,7 +126,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
             show: true,
             position: "right",
             formatter: "{c}%",
-            color: "#5b6472",
+            color: "#8fa9b7",
             fontSize: 10,
           },
         },
@@ -149,7 +150,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       series: [
         {
@@ -160,7 +161,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
           data: pipeline.map((item, index) => ({
             name: item.label,
             value: item.value,
-            itemStyle: { color: ["#1d4ed8", "#b45309", "#0f766e", "#64748b"][index] },
+            itemStyle: { color: ["#7fb0ff", "#e8a33d", "#4fd1c5", "#8fa9b7"][index] },
           })),
         },
       ],
@@ -171,7 +172,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
           top: "38%",
           style: {
             text: String(data.workOrders.length),
-            fill: "#0f172a",
+            fill: "#eaf2f6",
             fontSize: 24,
             fontWeight: 600,
             textAlign: "center",
@@ -183,7 +184,7 @@ export function MaintenanceDashboard({ data }: { data: PlantData }) {
           top: "47%",
           style: {
             text: "WOs",
-            fill: "#5b6472",
+            fill: "#8fa9b7",
             fontSize: 10,
             fontWeight: 600,
             textAlign: "center",

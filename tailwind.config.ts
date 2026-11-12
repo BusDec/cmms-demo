@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         canvas: "var(--canvas)",
         surface: "var(--surface)",
+        panel: "var(--panel)",
+        "panel-strong": "var(--panel-strong)",
         ink: "var(--ink)",
         muted: "var(--muted)",
         line: "var(--line)",

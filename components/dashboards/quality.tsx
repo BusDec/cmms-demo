@@ -9,16 +9,17 @@ import type { PlantData } from "@/lib/data";
 import { statusTone } from "@/lib/utils";
 
 const axis = {
-  axisLabel: { color: "#5b6472", fontSize: 11 },
+  axisLabel: { color: "#8fa9b7", fontSize: 11 },
   axisLine: { show: false },
   axisTick: { show: false },
-  splitLine: { lineStyle: { color: "#eef2f7" } },
+  splitLine: { lineStyle: { color: "rgba(234,242,246,0.08)" } },
 };
 
 const tooltip = {
-  backgroundColor: "#0f172a",
-  borderWidth: 0,
-  textStyle: { color: "#ffffff", fontSize: 12 },
+  backgroundColor: "#0d2638",
+  borderWidth: 1,
+  borderColor: "rgba(234,242,246,0.14)",
+  textStyle: { color: "#eaf2f6", fontSize: 12 },
   padding: [8, 10],
 };
 
@@ -47,7 +48,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
           data: data.checklistCompletion.map((item) => ({
             value: item.value,
             itemStyle: {
-              color: item.value >= 85 ? "#0f766e" : item.value >= 75 ? "#b45309" : "#b91c1c",
+              color: item.value >= 85 ? "#4fd1c5" : item.value >= 75 ? "#e8a33d" : "#f97066",
               borderRadius: [0, 4, 4, 0],
             },
           })),
@@ -56,7 +57,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
             show: true,
             position: "right",
             formatter: "{c}%",
-            color: "#5b6472",
+            color: "#8fa9b7",
             fontSize: 10,
           },
         },
@@ -79,7 +80,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       series: [
         {
@@ -90,7 +91,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
           data: severityMix.map((item, index) => ({
             name: item.label,
             value: item.value,
-            itemStyle: { color: ["#b91c1c", "#b45309", "#1d4ed8"][index] },
+            itemStyle: { color: ["#f97066", "#e8a33d", "#7fb0ff"][index] },
           })),
         },
       ],
@@ -101,7 +102,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
           top: "38%",
           style: {
             text: String(data.findings.length),
-            fill: "#0f172a",
+            fill: "#eaf2f6",
             fontSize: 24,
             fontWeight: 600,
             textAlign: "center",
@@ -113,7 +114,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
           top: "47%",
           style: {
             text: "FINDINGS",
-            fill: "#5b6472",
+            fill: "#8fa9b7",
             fontSize: 9,
             fontWeight: 600,
             textAlign: "center",
@@ -181,7 +182,7 @@ export function QualityDashboard({ data }: { data: PlantData }) {
               {data.rca.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between gap-3 rounded-md px-2 py-2 hover:bg-[#f8fafc]"
+                  className="flex items-center justify-between gap-3 rounded-md px-2 py-2 hover:bg-[rgba(234,242,246,0.05)]"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-[12px] font-semibold">{item.asset}</p>

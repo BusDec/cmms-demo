@@ -142,7 +142,7 @@ export default function ErpIntegrationPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-4 rounded-lg bg-[var(--graphite)] px-4 py-4 text-[12px] leading-relaxed text-white/75">
+            <div className="mt-4 rounded-lg border border-line bg-[var(--panel-strong)] px-4 py-4 text-[12px] leading-relaxed text-white/75">
               The simulator is not SAP and is never described as certified. It exercises
               the same client code over HTTP so contract failures surface before a
               sandbox is available.
@@ -153,7 +153,7 @@ export default function ErpIntegrationPage() {
         <div className="mt-12 flex flex-wrap gap-3">
           <Link
             href="/data-model"
-            className="rounded-md bg-ink px-4 py-2.5 text-[13px] font-semibold text-white"
+            className="rounded-md bg-[var(--warn)] px-4 py-2.5 text-[13px] font-semibold text-[var(--graphite)]"
           >
             See the canonical model
           </Link>

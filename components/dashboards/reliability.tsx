@@ -10,10 +10,10 @@ import type { PlantData } from "@/lib/data";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
 const axis = {
-  axisLabel: { color: "#5b6472", fontSize: 11 },
+  axisLabel: { color: "#8fa9b7", fontSize: 11 },
   axisLine: { show: false },
   axisTick: { show: false },
-  splitLine: { lineStyle: { color: "#eef2f7" } },
+  splitLine: { lineStyle: { color: "rgba(234,242,246,0.08)" } },
 };
 
 const compactMoney = (value: number) => {
@@ -25,9 +25,10 @@ const compactMoney = (value: number) => {
 };
 
 const tooltip = {
-  backgroundColor: "#0f172a",
-  borderWidth: 0,
-  textStyle: { color: "#ffffff", fontSize: 12 },
+  backgroundColor: "#0d2638",
+  borderWidth: 1,
+  borderColor: "rgba(234,242,246,0.14)",
+  textStyle: { color: "#eaf2f6", fontSize: 12 },
   padding: [8, 10],
 };
 
@@ -59,7 +60,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       xAxis: {
         type: "category",
@@ -71,12 +72,12 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         {
           type: "value",
           ...axis,
-          axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}h" },
+          axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}h" },
         },
         {
           type: "value",
           ...axis,
-          axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}h" },
+          axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}h" },
           splitLine: { show: false },
         },
       ],
@@ -88,8 +89,8 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
           data: monthly.map((point) => point.mttr),
           symbol: "circle",
           symbolSize: 5,
-          lineStyle: { color: "#b45309", width: 2 },
-          itemStyle: { color: "#b45309" },
+          lineStyle: { color: "#e8a33d", width: 2 },
+          itemStyle: { color: "#e8a33d" },
         },
         {
           name: "MTBF",
@@ -99,8 +100,8 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
           data: monthly.map((point, index) => mtbf + (index - 5) * 40),
           symbol: "circle",
           symbolSize: 5,
-          lineStyle: { color: "#1d4ed8", width: 2 },
-          itemStyle: { color: "#1d4ed8" },
+          lineStyle: { color: "#7fb0ff", width: 2 },
+          itemStyle: { color: "#7fb0ff" },
         },
       ],
     }),
@@ -120,20 +121,20 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         inverse: true,
         data: pareto.map((actor) => actor.asset),
         ...axis,
-        axisLabel: { color: "#5b6472", fontSize: 10, width: 150, overflow: "truncate" },
+        axisLabel: { color: "#8fa9b7", fontSize: 10, width: 150, overflow: "truncate" },
         splitLine: { show: false },
       },
       series: [
         {
           type: "bar",
           data: pareto.map((actor) => actor.failures),
-          itemStyle: { color: "#1d4ed8", borderRadius: [0, 4, 4, 0] },
+          itemStyle: { color: "#7fb0ff", borderRadius: [0, 4, 4, 0] },
           barMaxWidth: 16,
           label: {
             show: true,
             position: "right",
             formatter: "{c}",
-            color: "#5b6472",
+            color: "#8fa9b7",
             fontSize: 10,
           },
         },
@@ -156,7 +157,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         type: "value",
         ...axis,
         axisLabel: {
-          color: "#5b6472",
+          color: "#8fa9b7",
           fontSize: 11,
           formatter: compactMoney,
         },
@@ -165,7 +166,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
         {
           type: "bar",
           data: monthly.map((point) => point.downtime * data.plant.hourlyLoss),
-          itemStyle: { color: "#b91c1c", borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: "#f97066", borderRadius: [4, 4, 0, 0] },
           barMaxWidth: 28,
         },
       ],
@@ -241,7 +242,7 @@ export function ReliabilityDashboard({ data }: { data: PlantData }) {
               {data.rca.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between gap-3 rounded-md px-2 py-2 hover:bg-[#f8fafc]"
+                  className="flex items-center justify-between gap-3 rounded-md px-2 py-2 hover:bg-[rgba(234,242,246,0.05)]"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-[12px] font-semibold">{item.asset}</p>

@@ -4,7 +4,11 @@ export function SimpleHeader() {
   return (
     <header className="border-b border-line bg-surface">
       <div className="mx-auto flex max-w-[1080px] flex-wrap items-center justify-between gap-4 px-5 py-4 sm:px-8">
-        <Link href="/" className="text-[15px] font-semibold tracking-[-0.01em]">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.01em]"
+        >
+          <span className="h-2 w-2 bg-[var(--warn)]" />
           Gearbox
         </Link>
         <nav className="flex flex-wrap items-center gap-5 text-[12px] text-muted">

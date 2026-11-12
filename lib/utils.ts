@@ -63,6 +63,21 @@ export function toneBorder(tone: string) {
   }
 }
 
+export function toneDot(tone: string) {
+  switch (tone) {
+    case "good":
+      return "bg-good";
+    case "warn":
+      return "bg-warn";
+    case "bad":
+      return "bg-bad";
+    case "info":
+      return "bg-info";
+    default:
+      return "bg-line-strong";
+  }
+}
+
 export function statusTone(status: string): "good" | "warn" | "bad" | "info" | "neutral" {
   const value = status.toLowerCase();
   if (value.includes("closed") || value.includes("complete") || value.includes("active")) return "good";

@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 type Tone = "good" | "warn" | "bad" | "info" | "neutral";
 
 const tones: Record<Tone, string> = {
-  good: "bg-[#e6f4f1] text-good",
-  warn: "bg-[#fdf1e3] text-warn",
-  bad: "bg-[#fbe9e9] text-bad",
-  info: "bg-[#e8eefc] text-info",
-  neutral: "bg-[#eef2f7] text-muted",
+  good: "bg-[rgba(79,209,197,0.12)] text-good",
+  warn: "bg-[rgba(232,163,61,0.12)] text-warn",
+  bad: "bg-[rgba(249,112,102,0.12)] text-bad",
+  info: "bg-[rgba(127,176,255,0.12)] text-info",
+  neutral: "bg-[rgba(234,242,246,0.08)] text-muted",
 };
 
 export function Badge({

@@ -29,7 +29,7 @@ export function RangeTabs({
           className={cn(
             "rounded-full px-3 py-1 text-[11px] font-semibold transition-colors",
             value === option.value
-              ? "bg-ink text-white"
+              ? "bg-[var(--warn)] text-[var(--graphite)]"
               : "text-muted hover:text-ink",
           )}
           aria-pressed={value === option.value}

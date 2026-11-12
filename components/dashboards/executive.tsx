@@ -22,10 +22,10 @@ type Comparison = {
 };
 
 const axis = {
-  axisLabel: { color: "#5b6472", fontSize: 11 },
+  axisLabel: { color: "#8fa9b7", fontSize: 11 },
   axisLine: { show: false },
   axisTick: { show: false },
-  splitLine: { lineStyle: { color: "#eef2f7" } },
+  splitLine: { lineStyle: { color: "rgba(234,242,246,0.08)" } },
 };
 
 const compactMoney = (value: number) => {
@@ -37,9 +37,10 @@ const compactMoney = (value: number) => {
 };
 
 const tooltip = {
-  backgroundColor: "#0f172a",
-  borderWidth: 0,
-  textStyle: { color: "#ffffff", fontSize: 12 },
+  backgroundColor: "#0d2638",
+  borderWidth: 1,
+  borderColor: "rgba(234,242,246,0.14)",
+  textStyle: { color: "#eaf2f6", fontSize: 12 },
   padding: [8, 10],
 };
 
@@ -51,6 +52,7 @@ export function ExecutiveDashboard({
   comparison: Comparison[];
 }) {
   const [range, setRange] = useState(6);
+  const [layer, setLayer] = useState<"source" | "canonical" | "variance">("canonical");
   const monthly = useMemo(() => data.monthly.slice(-range), [data.monthly, range]);
   const labels = monthly.map((point) => point.month);
 
@@ -65,7 +67,7 @@ export function ExecutiveDashboard({
         max: 100,
         interval: 4,
         ...axis,
-        axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}%" },
+        axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}%" },
       },
       series: [
         {
@@ -75,14 +77,14 @@ export function ExecutiveDashboard({
           data: monthly.map((point) => point.availability),
           symbol: "circle",
           symbolSize: 6,
-          lineStyle: { color: "#1d4ed8", width: 2 },
-          itemStyle: { color: "#1d4ed8" },
-          areaStyle: { color: "rgba(29, 78, 216, 0.08)" },
+          lineStyle: { color: "#4fd1c5", width: 2 },
+          itemStyle: { color: "#4fd1c5" },
+          areaStyle: { color: "rgba(79,209,197,0.10)" },
           markLine: {
             silent: true,
             symbol: "none",
-            lineStyle: { color: "#b45309", type: "dashed" },
-            label: { formatter: "target 94%", position: "insideStartTop", color: "#b45309", fontSize: 10 },
+            lineStyle: { color: "#e8a33d", type: "dashed" },
+            label: { formatter: "target 94%", position: "insideStartTop", color: "#e8a33d", fontSize: 10 },
             data: [{ yAxis: 94 }],
           },
         },
@@ -99,14 +101,14 @@ export function ExecutiveDashboard({
       yAxis: {
         type: "value",
         ...axis,
-        axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}h" },
+        axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}h" },
       },
       series: [
         {
           name: "Unplanned downtime",
           type: "bar",
           data: monthly.map((point) => point.downtime),
-          itemStyle: { color: "#b45309", borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: "#e8a33d", borderRadius: [4, 4, 0, 0] },
           barMaxWidth: 28,
         },
       ],
@@ -123,7 +125,7 @@ export function ExecutiveDashboard({
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       xAxis: { type: "category", data: labels, ...axis, splitLine: { show: false } },
       yAxis: [
@@ -131,7 +133,7 @@ export function ExecutiveDashboard({
           type: "value",
           ...axis,
           axisLabel: {
-            color: "#5b6472",
+            color: "#8fa9b7",
             fontSize: 11,
             formatter: compactMoney,
           },
@@ -141,7 +143,7 @@ export function ExecutiveDashboard({
           min: 50,
           max: 100,
           ...axis,
-          axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}%" },
+          axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}%" },
           splitLine: { show: false },
         },
       ],
@@ -150,7 +152,7 @@ export function ExecutiveDashboard({
           name: "Maintenance cost",
           type: "bar",
           data: monthly.map((point) => point.cost),
-          itemStyle: { color: "#0f766e", borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: "#4fd1c5", borderRadius: [4, 4, 0, 0] },
           barMaxWidth: 22,
         },
         {
@@ -161,8 +163,8 @@ export function ExecutiveDashboard({
           data: monthly.map((point) => point.pm),
           symbol: "circle",
           symbolSize: 5,
-          lineStyle: { color: "#1d4ed8", width: 2 },
-          itemStyle: { color: "#1d4ed8" },
+          lineStyle: { color: "#7fb0ff", width: 2 },
+          itemStyle: { color: "#7fb0ff" },
         },
       ],
     }),
@@ -177,7 +179,7 @@ export function ExecutiveDashboard({
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       series: [
         {
@@ -191,7 +193,7 @@ export function ExecutiveDashboard({
             name: item.label,
             value: item.value,
             itemStyle: {
-              color: ["#b91c1c", "#b45309", "#1d4ed8", "#0f766e"][index],
+              color: ["#f97066", "#e8a33d", "#7fb0ff", "#4fd1c5"][index],
             },
           })),
         },
@@ -203,7 +205,7 @@ export function ExecutiveDashboard({
           top: "38%",
           style: {
             text: String(data.priorityMix.reduce((sum, item) => sum + item.value, 0)),
-            fill: "#0f172a",
+            fill: "#eaf2f6",
             fontSize: 24,
             fontWeight: 600,
             textAlign: "center",
@@ -215,7 +217,7 @@ export function ExecutiveDashboard({
           top: "47%",
           style: {
             text: "OPEN",
-            fill: "#5b6472",
+            fill: "#8fa9b7",
             fontSize: 10,
             fontWeight: 600,
             textAlign: "center",
@@ -233,7 +235,7 @@ export function ExecutiveDashboard({
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-[11px] font-semibold text-muted">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--warn)]">
             Executive overview
           </p>
           <h2 className="mt-1 text-[24px] font-semibold tracking-[-0.03em]">
@@ -243,6 +245,90 @@ export function ExecutiveDashboard({
         </div>
         <RangeTabs value={range} onChange={setRange} />
       </div>
+
+      <section className="card overflow-hidden" aria-label="Operating picture">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-line px-4 py-3">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--warn)]">
+            Operating picture
+          </span>
+          <span className="text-[11px] text-muted">
+            Four sources · one canonical layer
+          </span>
+          <div
+            className="ml-auto inline-flex rounded-md border border-line bg-[var(--panel-strong)] p-0.5"
+            role="group"
+            aria-label="Operating layer"
+          >
+            {(["source", "canonical", "variance"] as const).map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => setLayer(option)}
+                aria-pressed={layer === option}
+                className={cn(
+                  "rounded px-2.5 py-1 text-[10px] font-semibold capitalize transition-colors",
+                  layer === option
+                    ? "bg-[var(--warn)] text-[var(--graphite)]"
+                    : "text-muted hover:text-ink",
+                )}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="grid gap-px bg-line sm:grid-cols-2 xl:grid-cols-4">
+          {comparison.map((plant) => {
+            const current = plant.slug === data.plant.slug;
+            const availabilityDelta = plant.availability - 94;
+            const pmDelta = plant.pm - 85;
+            return (
+              <Link
+                key={plant.slug}
+                href={`/demo/${plant.slug}`}
+                className={cn(
+                  "group bg-[var(--surface)] px-4 py-3 transition-colors hover:bg-[var(--panel)]",
+                  current && "bg-[var(--panel)] shadow-[inset_2px_0_0_0_var(--warn)]",
+                )}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[12px] font-semibold">{plant.name}</span>
+                  <span
+                    className={cn(
+                      "h-1.5 w-1.5 rounded-full",
+                      current ? "bg-[var(--warn)]" : "bg-[var(--line-strong)]",
+                    )}
+                  />
+                </div>
+                <div className="mt-2 flex items-baseline justify-between gap-2">
+                  <span className="min-w-0 truncate text-[10px] text-muted">
+                    {plant.sourceErp}
+                  </span>
+                  <span
+                    className={cn(
+                      "shrink-0 tabular text-[18px] font-semibold tracking-[-0.03em]",
+                      layer === "variance" && availabilityDelta < 0
+                        ? "text-[var(--warn)]"
+                        : "text-ink",
+                    )}
+                  >
+                    {layer === "variance"
+                      ? `${availabilityDelta > 0 ? "+" : ""}${formatNumber(availabilityDelta, 1)} pts`
+                      : `${formatNumber(plant.availability, 1)}%`}
+                  </span>
+                </div>
+                <p className="mt-1 text-[10px] text-muted">
+                  {layer === "source"
+                    ? "source-reported availability"
+                    : layer === "canonical"
+                      ? `canonical availability · ${formatNumber(plant.pm, 0)}% PM`
+                      : `vs 94% target · PM ${pmDelta > 0 ? "+" : ""}${formatNumber(pmDelta, 0)} pts`}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
         {data.kpis.map((kpi, index) => (
@@ -367,8 +453,8 @@ export function ExecutiveDashboard({
                   key={plant.slug}
                   href={`/demo/${plant.slug}`}
                   className={cn(
-                    "flex items-center justify-between gap-3 rounded-md px-2 py-2 transition-colors hover:bg-[#f8fafc]",
-                    plant.slug === data.plant.slug && "bg-[#f1f5f9]",
+                    "flex items-center justify-between gap-3 rounded-md px-2 py-2 transition-colors hover:bg-[rgba(234,242,246,0.05)]",
+                    plant.slug === data.plant.slug && "bg-[rgba(232,163,61,0.10)]",
                   )}
                 >
                   <div className="min-w-0">

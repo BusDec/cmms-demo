@@ -9,9 +9,10 @@ import type { PlantData } from "@/lib/data";
 import { statusTone } from "@/lib/utils";
 
 const tooltip = {
-  backgroundColor: "#0f172a",
-  borderWidth: 0,
-  textStyle: { color: "#ffffff", fontSize: 12 },
+  backgroundColor: "#0d2638",
+  borderWidth: 1,
+  borderColor: "rgba(234,242,246,0.14)",
+  textStyle: { color: "#eaf2f6", fontSize: 12 },
   padding: [8, 10],
 };
 
@@ -37,7 +38,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       series: [
         {
@@ -49,7 +50,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
             name: item.label,
             value: item.value,
             itemStyle: {
-              color: ["#b45309", "#1d4ed8", "#0f766e", "#b91c1c", "#64748b", "#7c3aed"][index],
+              color: ["#e8a33d", "#7fb0ff", "#4fd1c5", "#f97066", "#8fa9b7", "#8fa9b7"][index],
             },
           })),
         },
@@ -61,7 +62,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
           top: "38%",
           style: {
             text: String(data.permits.length),
-            fill: "#0f172a",
+            fill: "#eaf2f6",
             fontSize: 24,
             fontWeight: 600,
             textAlign: "center",
@@ -73,7 +74,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
           top: "47%",
           style: {
             text: "PERMITS",
-            fill: "#5b6472",
+            fill: "#8fa9b7",
             fontSize: 9,
             fontWeight: 600,
             textAlign: "center",
@@ -91,16 +92,16 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
       xAxis: {
         type: "category",
         data: data.permitCycle.map((item) => item.label),
-        axisLabel: { color: "#5b6472", fontSize: 11 },
+        axisLabel: { color: "#8fa9b7", fontSize: 11 },
         axisLine: { show: false },
         axisTick: { show: false },
       },
       yAxis: {
         type: "value",
-        axisLabel: { color: "#5b6472", fontSize: 11, formatter: "{value}h" },
+        axisLabel: { color: "#8fa9b7", fontSize: 11, formatter: "{value}h" },
         axisLine: { show: false },
         axisTick: { show: false },
-        splitLine: { lineStyle: { color: "#eef2f7" } },
+        splitLine: { lineStyle: { color: "rgba(234,242,246,0.08)" } },
       },
       series: [
         {
@@ -108,7 +109,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
           data: data.permitCycle.map((item, index) => ({
             value: item.value,
             itemStyle: {
-              color: ["#1d4ed8", "#0f766e", "#b45309", "#64748b"][index],
+              color: ["#7fb0ff", "#4fd1c5", "#e8a33d", "#8fa9b7"][index],
               borderRadius: [4, 4, 0, 0],
             },
           })),
@@ -117,7 +118,7 @@ export function PermitsDashboard({ data }: { data: PlantData }) {
             show: true,
             position: "top",
             formatter: "{c}h",
-            color: "#5b6472",
+            color: "#8fa9b7",
             fontSize: 10,
           },
         },

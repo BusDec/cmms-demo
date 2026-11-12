@@ -48,10 +48,17 @@ export function AppShell({
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-canvas lg:flex">
-      <aside className="hidden w-[248px] shrink-0 border-r border-line bg-[var(--graphite)] text-white lg:flex lg:flex-col">
+      <aside className="hidden w-[248px] shrink-0 border-r border-line bg-[var(--panel-strong)] text-white lg:flex lg:flex-col">
         <Link
           href="/"
-          className="flex items-center gap-2 px-5 py-5 text-[13px] font-semibold tracking-[-0.01em] text-white/80 hover:text-white"
+          className="flex items-center gap-2 px-5 pt-5 text-[15px] font-semibold tracking-[-0.01em] text-white"
+        >
+          <span className="h-2 w-2 bg-[var(--warn)]" />
+          Gearbox
+        </Link>
+        <Link
+          href="/"
+          className="flex items-center gap-2 px-5 pb-4 pt-3 text-[12px] text-white/50 hover:text-white"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to showcase
@@ -69,7 +76,7 @@ export function AppShell({
               className="w-full rounded-md border border-white/15 bg-white/5 px-3 py-2 text-[13px] font-medium text-white outline-none"
             >
               {plants.map((option) => (
-                <option key={option.slug} value={option.slug} className="text-ink">
+                <option key={option.slug} value={option.slug} className="text-[#0f172a]">
                   {option.shortName}
                 </option>
               ))}
@@ -93,8 +100,8 @@ export function AppShell({
                 className={cn(
                   "flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium transition-colors",
                   active
-                    ? "bg-white/10 text-white"
-                    : "text-white/60 hover:bg-white/5 hover:text-white",
+                    ? "bg-[rgba(232,163,61,0.12)] text-white shadow-[inset_2px_0_0_0_var(--warn)]"
+                    : "text-white/55 hover:bg-white/5 hover:text-white",
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -104,7 +111,13 @@ export function AppShell({
           })}
         </nav>
 
-        <div className="mt-auto space-y-0.5 border-t border-white/10 px-2 py-4">
+        <div className="border-t border-white/10 px-3 py-3 text-[10px] text-white/45">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--good)]" />
+            4 source systems online
+          </span>
+        </div>
+        <div className="space-y-0.5 border-t border-white/10 px-2 py-4">
           <Link
             href="/data-model"
             className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
@@ -177,7 +190,9 @@ export function AppShell({
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-2 text-[12px] font-semibold",
-                  active ? "bg-ink text-white" : "text-muted hover:bg-[#f1f5f9]",
+                  active
+                    ? "bg-[var(--warn)] text-[var(--graphite)]"
+                    : "text-muted hover:bg-white/5",
                 )}
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -187,7 +202,7 @@ export function AppShell({
           })}
           <Link
             href="/"
-            className="flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-2 text-[12px] font-semibold text-muted hover:bg-[#f1f5f9]"
+            className="flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-2 text-[12px] font-semibold text-muted hover:bg-white/5"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Showcase

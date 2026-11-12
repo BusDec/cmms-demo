@@ -15,7 +15,7 @@ export default function NotFound() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
-            className="rounded-md bg-ink px-4 py-2.5 text-[13px] font-semibold text-white"
+            className="rounded-md bg-[var(--warn)] px-4 py-2.5 text-[13px] font-semibold text-[var(--graphite)]"
           >
             Back to showcase
           </Link>

@@ -8,91 +8,98 @@ export default function HomePage() {
 
   return (
     <main className="overflow-x-hidden">
-      <section className="bg-[var(--graphite)] text-white">
+      <section className="bg-[var(--canvas)] text-ink">
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
           <nav className="flex flex-wrap items-center justify-between gap-4 py-5">
             <Link href="/" className="text-[15px] font-semibold tracking-[-0.01em]">
               Gearbox
             </Link>
-            <div className="flex flex-wrap items-center gap-5 text-[13px] text-white/65">
-              <Link href="/demo/coal" className="hover:text-white">
+            <div className="flex flex-wrap items-center gap-5 text-[13px] text-muted">
+              <Link href="/demo/coal" className="hover:text-ink">
                 Demo
               </Link>
-              <Link href="/data-model" className="hover:text-white">
+              <Link href="/data-model" className="hover:text-ink">
                 Data model
               </Link>
-              <Link href="/erp-integration" className="hover:text-white">
+              <Link href="/erp-integration" className="hover:text-ink">
                 ERP integration
               </Link>
-              <Link href="/about" className="hover:text-white">
+              <Link href="/about" className="hover:text-ink">
                 About
               </Link>
               <Link
                 href="/demo/coal"
-                className="hidden items-center gap-1.5 rounded-md bg-white px-3.5 py-2 text-[12px] font-semibold text-ink sm:inline-flex"
+                className="hidden items-center gap-1.5 rounded-md bg-[var(--warn)] px-3.5 py-2 text-[12px] font-semibold text-[var(--graphite)] sm:inline-flex"
               >
                 Open the demo <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </nav>
 
-          <div className="landing-hero">
-            <div className="landing-hero-copy">
-              <h1 className="landing-hero-title">
+          <div className="atlas-hero">
+            <div>
+              <p className="atlas-kicker">Four sources · one operating picture</p>
+              <h1 className="display atlas-title">
                 Four plants. <br />
                 Four ERPs. <br />
                 One view.
               </h1>
-              <p className="landing-hero-lede">
+              <p className="atlas-lede">
                 One canonical maintenance model over SAP S/4HANA, SAP ECC, IBM
                 Maximo and Oracle EAM. The same KPIs, the same drill-through, the
                 same executive view — without replacing the system of record.
               </p>
-              <div className="landing-hero-actions">
-                <Link href="/demo/coal" className="landing-hero-primary">
+              <div className="atlas-actions">
+                <Link href="/demo/coal" className="atlas-primary">
                   Explore the command centre <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/data-model" className="landing-hero-secondary">
+                <Link href="/data-model" className="atlas-secondary">
                   See the canonical model
                 </Link>
               </div>
-              <p className="landing-hero-note">
+              <p className="atlas-note">
                 Synthetic data · no client data or logos · built for demonstration
               </p>
             </div>
-            <div className="landing-hero-board">
-              <div className="landing-hero-board-head">
-                <span className="landing-hero-board-label">One operating picture</span>
-                <span className="landing-hero-board-date">Nov 2026</span>
+
+            <div
+              className="atlas-map"
+              aria-label="Four ERP sources converging into one canonical operating picture"
+            >
+              <div className="atlas-map-head">
+                <span>Source systems</span>
+                <span>Canonical layer</span>
+                <span>Nov 2026</span>
               </div>
-              {data.map((plant) => (
-                <Link
-                  key={plant.plant.slug}
-                  href={`/demo/${plant.plant.slug}`}
-                  className="landing-hero-row"
-                >
-                  <span className="landing-hero-row-plant">
-                    <span className="landing-hero-row-name">{plant.plant.shortName}</span>
-                    <span className="landing-hero-row-erp">{plant.plant.sourceErpShort}</span>
-                  </span>
-                  <span className="landing-hero-metric">
-                    <span className="landing-hero-value tabular">
+              <div className="atlas-map-body">
+                <svg viewBox="0 0 400 320" preserveAspectRatio="none" aria-hidden="true">
+                  <line x1="145" y1="55" x2="200" y2="160" stroke="rgba(232,163,61,.55)" />
+                  <line x1="145" y1="265" x2="200" y2="160" stroke="rgba(79,209,197,.55)" />
+                  <line x1="255" y1="55" x2="200" y2="160" stroke="rgba(127,176,255,.55)" />
+                  <line x1="255" y1="265" x2="200" y2="160" stroke="rgba(234,242,246,.25)" />
+                  <circle cx="200" cy="160" r="34" fill="rgba(232,163,61,.08)" stroke="rgba(232,163,61,.4)" />
+                </svg>
+                {data.map((plant, index) => (
+                  <div
+                    key={plant.plant.slug}
+                    className={"atlas-source atlas-source-" + (index + 1)}
+                  >
+                    <span className="atlas-source-erp">{plant.plant.sourceErpShort}</span>
+                    <span className="atlas-source-plant">{plant.plant.shortName}</span>
+                    <span className="atlas-source-metric">
                       {formatNumber(plant.kpis[0].value, 1)}%
                     </span>
-                    <span className="landing-hero-label">available</span>
-                  </span>
-                  <span className="landing-hero-metric">
-                    <span className="landing-hero-value tabular">
-                      {formatCurrency(plant.kpis[2].value, true)}
-                    </span>
-                    <span className="landing-hero-label">downtime</span>
-                  </span>
-                  <ArrowUpRight className="landing-hero-row-arrow h-3.5 w-3.5" />
-                </Link>
-              ))}
-              <div className="landing-hero-board-foot">
-                Availability and downtime loss normalised from four source systems.
-                The ERP stays the system of record.
+                  </div>
+                ))}
+                <div className="atlas-core">
+                  <span className="atlas-core-kicker">Canonical model</span>
+                  <span className="atlas-core-title">One operating picture</span>
+                  <span className="atlas-core-meta">4 plants · 4 ERPs · one language</span>
+                </div>
+              </div>
+              <div className="atlas-map-foot">
+                <span>ERP stays the system of record.</span>
+                <span>Four adapters · one model</span>
               </div>
             </div>
           </div>
@@ -120,7 +127,7 @@ export default function HomePage() {
             <Link
               key={plant.plant.slug}
               href={`/demo/${plant.plant.slug}`}
-              className="group card p-5 transition-colors hover:bg-white"
+              className="group card p-5 transition-colors hover:bg-[var(--panel)]"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -131,7 +138,7 @@ export default function HomePage() {
                     {plant.plant.name}
                   </h3>
                 </div>
-                <span className="rounded-md bg-[#eef2f7] px-2 py-1 text-[10px] font-semibold text-muted">
+                <span className="rounded-md bg-[rgba(234,242,246,0.08)] px-2 py-1 text-[10px] font-semibold text-muted">
                   {plant.plant.sourceErpShort}
                 </span>
               </div>
@@ -205,7 +212,7 @@ export default function HomePage() {
                 {["SAP S/4", "SAP ECC", "Maximo", "Oracle EAM"].map((erp) => (
                   <div
                     key={erp}
-                    className="rounded-md border border-line bg-[#f8fafc] px-3 py-3 text-center text-[11px] font-semibold"
+                    className="rounded-md border border-line bg-[var(--panel)] px-3 py-3 text-center text-[11px] font-semibold"
                   >
                     {erp}
                   </div>
@@ -214,7 +221,7 @@ export default function HomePage() {
               <div className="text-center text-[11px] text-muted">
                 OData · RFC/BAPI · REST · IDoc
               </div>
-              <div className="rounded-md bg-[var(--graphite)] px-4 py-4 text-center text-[12px] font-semibold text-white">
+              <div className="rounded-md border border-[var(--warn)] bg-[var(--panel-strong)] px-4 py-4 text-center text-[12px] font-semibold text-ink">
                 Canonical maintenance model
               </div>
               <div className="grid gap-2 sm:grid-cols-3">
@@ -269,7 +276,7 @@ export default function HomePage() {
           <div className="space-y-3">
             <Link
               href="/data-model"
-              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-white"
+              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-[var(--panel)]"
             >
               <div>
                 <p className="text-[14px] font-semibold">Data model</p>
@@ -281,7 +288,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/erp-integration"
-              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-white"
+              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-[var(--panel)]"
             >
               <div>
                 <p className="text-[14px] font-semibold">ERP integration</p>
@@ -293,7 +300,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/about"
-              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-white"
+              className="flex items-center justify-between gap-4 rounded-xl border border-line bg-surface px-5 py-5 hover:bg-[var(--panel)]"
             >
               <div>
                 <p className="text-[14px] font-semibold">About the demo</p>

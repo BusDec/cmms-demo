@@ -9,10 +9,10 @@ import type { PlantData } from "@/lib/data";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
 const axis = {
-  axisLabel: { color: "#5b6472", fontSize: 11 },
+  axisLabel: { color: "#8fa9b7", fontSize: 11 },
   axisLine: { show: false },
   axisTick: { show: false },
-  splitLine: { lineStyle: { color: "#eef2f7" } },
+  splitLine: { lineStyle: { color: "rgba(234,242,246,0.08)" } },
 };
 
 const compactMoney = (value: number) => {
@@ -24,9 +24,10 @@ const compactMoney = (value: number) => {
 };
 
 const tooltip = {
-  backgroundColor: "#0f172a",
-  borderWidth: 0,
-  textStyle: { color: "#ffffff", fontSize: 12 },
+  backgroundColor: "#0d2638",
+  borderWidth: 1,
+  borderColor: "rgba(234,242,246,0.14)",
+  textStyle: { color: "#eaf2f6", fontSize: 12 },
   padding: [8, 10],
 };
 
@@ -63,7 +64,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
         type: "value",
         ...axis,
         axisLabel: {
-          color: "#5b6472",
+          color: "#8fa9b7",
           fontSize: 11,
           formatter: compactMoney,
         },
@@ -72,7 +73,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
         {
           type: "bar",
           data: monthly.map((point) => point.cost),
-          itemStyle: { color: "#0f766e", borderRadius: [4, 4, 0, 0] },
+          itemStyle: { color: "#4fd1c5", borderRadius: [4, 4, 0, 0] },
           barMaxWidth: 30,
         },
       ],
@@ -88,7 +89,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
         icon: "circle",
         itemWidth: 7,
         itemHeight: 7,
-        textStyle: { color: "#5b6472", fontSize: 11 },
+        textStyle: { color: "#8fa9b7", fontSize: 11 },
       },
       series: [
         {
@@ -100,7 +101,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
             name: item.label,
             value: item.value,
             itemStyle: {
-              color: ["#1d4ed8", "#0f766e", "#b45309", "#64748b"][index],
+              color: ["#7fb0ff", "#4fd1c5", "#e8a33d", "#8fa9b7"][index],
             },
           })),
         },
@@ -112,7 +113,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
           top: "36%",
           style: {
             text: formatCurrency(annualCost, true),
-            fill: "#0f172a",
+            fill: "#eaf2f6",
             fontSize: 18,
             fontWeight: 600,
             textAlign: "center",
@@ -124,7 +125,7 @@ export function CostDashboard({ data }: { data: PlantData }) {
           top: "46%",
           style: {
             text: "12 MONTHS",
-            fill: "#5b6472",
+            fill: "#8fa9b7",
             fontSize: 9,
             fontWeight: 600,
             textAlign: "center",
