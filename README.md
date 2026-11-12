@@ -2,6 +2,10 @@
 
 Four plants. Four ERPs. One maintenance intelligence layer.
 
+**Live:** https://busdec.github.io/cmms-demo/
+
+![Executive dashboard](docs/executive-dashboard.jpg)
+
 A public, synthetic showcase of a CMMS wrapper over SAP S/4HANA, SAP ECC, IBM
 Maximo and Oracle EAM. It is intentionally independent of the private product
 repository: no product code, client data, logos or database.
