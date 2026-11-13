@@ -6,6 +6,8 @@ Four plants. Four ERPs. One maintenance intelligence layer.
 
 **Live:** https://gearbox.nirmanaerp.com/ (the `github.io` project URL redirects here)
 
+**Integration guide:** [Connecting Django to SAP S/4HANA](docs/Gearbox-SAP-Django-Integration-Guide.pdf)
+
 ![Executive dashboard](docs/executive-dashboard.jpg)
 
 Gearbox is a public, synthetic showcase of a CMMS wrapper over SAP S/4HANA, SAP
