@@ -70,7 +70,7 @@ used in sales conversations and on mobile.
 
 ## Evidence on Hand
 
-- Public demo: https://busdec.github.io/cmms-demo/
+- Public demo: https://gearbox.nirmanaerp.com/ (the `github.io` project URL redirects here)
 - Source: `BusDec/cmms-demo`; the repository is self-contained and has no
   dependency on the private product repository.
 - Screenshot: `docs/executive-dashboard.jpg`.

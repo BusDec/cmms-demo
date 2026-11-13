@@ -4,7 +4,7 @@ Four plants. Four ERPs. One maintenance intelligence layer.
 
 **Demo repository:** `cmms-demo`
 
-**Live:** https://busdec.github.io/cmms-demo/
+**Live:** https://gearbox.nirmanaerp.com/ (the `github.io` project URL redirects here)
 
 ![Executive dashboard](docs/executive-dashboard.jpg)
 
@@ -80,6 +80,10 @@ Web Apps, Netlify or any static host.
 
 - Vercel: import the repository and keep the default Next.js settings.
 - Azure Static Web Apps: app location `/`, output location `out`.
+- GitHub Pages: the workflow builds for the custom domain root. If you deploy
+  to a project subpath instead (for example
+  `https://<user>.github.io/cmms-demo/`), set
+  `NEXT_PUBLIC_BASE_PATH=/cmms-demo` for the build.
 
 ## Status
 
