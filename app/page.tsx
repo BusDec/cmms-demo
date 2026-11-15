@@ -31,6 +31,9 @@ export default function HomePage() {
               <Link href="/erp-integration" className="hover:text-ink">
                 ERP integration
               </Link>
+              <Link href="/audit" className="hover:text-ink">
+                PM audit
+              </Link>
               <Link href="/about" className="hover:text-ink">
                 About
               </Link>
@@ -283,6 +286,9 @@ export default function HomePage() {
             </Link>
             <Link href="/erp-integration" className="hover:text-ink">
               ERP integration
+            </Link>
+            <Link href="/audit" className="hover:text-ink">
+              PM audit
             </Link>
             <Link href="/about" className="hover:text-ink">
               About

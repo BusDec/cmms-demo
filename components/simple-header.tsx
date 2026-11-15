@@ -21,6 +21,9 @@ export function SimpleHeader() {
           <Link href="/erp-integration" className="hover:text-ink">
             ERP integration
           </Link>
+          <Link href="/audit" className="hover:text-ink">
+            PM audit
+          </Link>
           <Link href="/about" className="hover:text-ink">
             About
           </Link>

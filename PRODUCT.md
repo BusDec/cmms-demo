@@ -44,7 +44,10 @@ used in sales conversations and on mobile.
 
 - Six workspaces: executive, maintenance, reliability, permits and safety, cost
   and resources, RCA and quality.
-- Supporting pages: data model, ERP integration, about and 404.
+- Supporting pages: data model, ERP integration, SAP PM audit, about and 404.
+- The SAP PM audit runs 20 checks across 13 domains against a deterministic
+  synthetic dataset. The rule engine and scores are computed; no SAP system is
+  called. It is not an SAP-certified audit.
 - Plant switcher, range tabs, charts and tables; responsive down to mobile;
   reduced-motion support.
 - No authentication, persistence, admin area or live ERP call.

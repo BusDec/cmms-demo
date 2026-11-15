@@ -50,6 +50,7 @@ The static site is written to `out/`.
 - `/demo/[plant]/rca-qa` — RCA, findings, CAPA, checklists, data quality
 - `/data-model` — canonical entities, star schema, field ownership
 - `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
+- `/audit` — 20-check SAP PM audit: scorecard, evidence, findings and remediation
 - `/about` — scope and disclaimers
 
 Plants: `coal`, `thermal`, `wind`, `gas`.
