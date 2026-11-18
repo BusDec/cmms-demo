@@ -73,7 +73,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     name: "Benchmark",
     role: "Efficiency benchmarking",
     description:
-      "Data envelopment analysis for plants and operating units: efficiency scores, peer benchmarks, scale efficiency and the input/output targets that close the gap.",
+      "Data envelopment analysis for operating units: efficiency scores, peer benchmarks, scale efficiency and the input/output targets that close the gap.",
     status: "Live",
     href: "https://benchmark.nirmanaerp.com",
     domain: "benchmark.nirmanaerp.com",
