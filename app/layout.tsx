@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gearbox · Nirmana enterprise command",
+  title: "Gearbox · Nirmana integrated ERP dashboards",
   description:
-    "Gearbox gives Meridian Energy directors one enterprise view across Generation, Grid, Services and Retail — revenue, cost, people, data confidence and the exception register — with the SAP landscape and maintenance workspaces underneath.",
+    "Integrated dashboards across ERP practices and business processes: enterprise command, SAP landscape and maintenance, with data confidence and a closed-loop exception register.",
 };
 
 export const viewport: Viewport = {

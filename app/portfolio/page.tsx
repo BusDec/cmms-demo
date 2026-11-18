@@ -7,7 +7,7 @@ import { PARENT, PORTFOLIO } from "@/lib/portfolio";
 export const metadata = {
   title: "Portfolio · Nirmana ERP",
   description:
-    "Nirmana ERP and its sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan. Gearbox is the SAP enterprise dashboard for Meridian Energy.",
+    "Nirmana ERP and its sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Kavach and Pramaan. Gearbox is the integrated dashboard portfolio for Meridian Energy.",
 };
 
 export default function PortfolioPage() {
@@ -20,14 +20,15 @@ export default function PortfolioPage() {
           <div>
             <p className="eyebrow">Nirmana ERP portfolio</p>
             <h1 className="mt-2 max-w-[18ch] text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
-              One parent. Six sibling portfolios.
+              One parent. Seven sibling portfolios.
             </h1>
             <p className="measure mt-4 text-[14px] leading-relaxed text-muted">
               Nirmana ERP is the parent. Promonitor, Yamuna, Xirra, LedgeFlow,
-              CoreSight and Pramaan are separate business portfolios. Pramaan
-              currently runs its audit pack inside Gearbox; its subdomain is planned.
-              Gearbox — the SAP enterprise dashboard for Meridian Energy — is not one
-              of these portfolios. It sits on the ERP side of the group.
+              CoreSight, Kavach and Pramaan are separate business portfolios. Pramaan
+              currently runs its audit pack as a preview inside Gearbox; its subdomain
+              is planned. Kavach is the cybersecurity portfolio. Gearbox — the
+              integrated dashboard portfolio for Meridian Energy — is not one of
+              these portfolios.
             </p>
           </div>
           <div className="rounded-xl border border-line bg-[var(--panel-strong)] p-5 text-white">
@@ -54,7 +55,7 @@ export default function PortfolioPage() {
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">
               Sibling portfolios
             </h2>
-            <p className="text-[11px] text-muted">Six portfolios · one parent</p>
+            <p className="text-[11px] text-muted">Seven portfolios · one parent</p>
           </div>
           <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {PORTFOLIO.map((item) => {
@@ -67,14 +68,26 @@ export default function PortfolioPage() {
                         {item.name}
                       </h3>
                     </div>
-                    <Badge tone={item.status === "Live" ? "good" : "info"}>
+                    <Badge
+                      tone={
+                        item.status === "Live"
+                          ? "good"
+                          : item.status === "Audit live"
+                            ? "info"
+                            : "neutral"
+                      }
+                    >
                       {item.status}
                     </Badge>
                   </div>
                   <p className="mt-3 max-w-[54ch] text-[13px] leading-relaxed text-muted">
                     {item.description}
                   </p>
-                  {item.external ? (
+                  {item.planned ? (
+                    <span className="mt-4 inline-flex items-center gap-1 text-[12px] font-medium text-muted">
+                      {item.domain} · planned
+                    </span>
+                  ) : item.external ? (
                     <span className="mt-4 inline-flex items-center gap-1 text-[12px] font-semibold text-info">
                       {item.domain} <ArrowUpRight className="h-3.5 w-3.5" />
                     </span>
@@ -90,6 +103,14 @@ export default function PortfolioPage() {
                   )}
                 </>
               );
+
+              if (item.planned) {
+                return (
+                  <div key={item.name} className="card p-5">
+                    {content}
+                  </div>
+                );
+              }
 
               return item.external ? (
                 <a
@@ -125,7 +146,8 @@ export default function PortfolioPage() {
                 Gearbox is the command layer for Meridian Energy: enterprise structure,
                 data confidence and maintenance across Generation, Grid, Services and
                 Retail. The sibling portfolios above serve other business domains and
-                other users; Pramaan currently runs its audit pack inside Gearbox.
+                other users; Pramaan currently runs its audit pack as a preview inside
+                Gearbox, and Kavach is planned.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">

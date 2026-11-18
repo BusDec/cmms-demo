@@ -5,7 +5,7 @@ export const PARENT = {
   tagline: "Enterprise systems, delivered.",
 } as const;
 
-export type PortfolioStatus = "Live" | "Audit live";
+export type PortfolioStatus = "Live" | "Audit live" | "Planned";
 
 export type PortfolioItem = {
   name: string;
@@ -15,6 +15,7 @@ export type PortfolioItem = {
   href: string;
   domain: string;
   external: boolean;
+  planned?: boolean;
 };
 
 export const PORTFOLIO: PortfolioItem[] = [
@@ -69,10 +70,21 @@ export const PORTFOLIO: PortfolioItem[] = [
     external: true,
   },
   {
-    name: "Pramaan",
-    role: "ERP audit and implementation",
+    name: "Kavach",
+    role: "Cybersecurity",
     description:
-      "The assurance-led ERP portfolio: SAP PM audit pack live, finance and HR packs next, and partner-light S/4HANA delivery. The audit pack currently runs inside Gearbox.",
+      "SAP security and controls, OT/IT convergence, cloud identity and incident readiness for asset-intensive enterprises.",
+    status: "Planned",
+    href: "https://kavach.nirmanaerp.com",
+    domain: "kavach.nirmanaerp.com",
+    external: true,
+    planned: true,
+  },
+  {
+    name: "Pramaan",
+    role: "SAP audit and implementation",
+    description:
+      "The SAP audit and implementation portfolio: SAP PM audit pack live, finance and HR packs next, and partner-light S/4HANA delivery. The audit pack currently runs as a preview inside Gearbox while the subdomain is prepared.",
     status: "Audit live",
     href: "/audit",
     domain: "pramaan.nirmanaerp.com",

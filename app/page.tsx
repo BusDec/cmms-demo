@@ -52,9 +52,6 @@ export default function HomePage() {
               <Link href="/erp-integration" className="hover:text-ink">
                 ERP integration
               </Link>
-              <Link href="/audit" className="hover:text-ink">
-                ERP audit
-              </Link>
               <Link href="/about" className="hover:text-ink">
                 About
               </Link>
@@ -76,10 +73,11 @@ export default function HomePage() {
                 One command view.
               </h1>
               <p className="atlas-lede">
-                Gearbox gives Meridian Energy directors one enterprise view across
-                Generation, Grid, Services and Retail: revenue, cost, people and data
-                confidence. Every inconsistency is visible, owned and on a path to
-                closure.
+                Gearbox is the integrated dashboard portfolio across ERP practices and
+                business processes. For Meridian Energy, it gives directors one
+                enterprise view across Generation, Grid, Services and Retail — revenue,
+                cost, people and data confidence. Every inconsistency is visible,
+                owned and on a path to closure.
               </p>
               <div className="atlas-actions">
                 <Link href="/enterprise" className="atlas-primary">
@@ -323,7 +321,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow">Nirmana ERP</p>
               <h2 className="mt-2 max-w-[20ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-                One parent. Six sibling portfolios.
+                One parent. Seven sibling portfolios.
               </h2>
             </div>
             <Link
@@ -333,7 +331,7 @@ export default function HomePage() {
               See the portfolio <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {PORTFOLIO.map((item) => {
               const body = (
                 <>
@@ -346,6 +344,14 @@ export default function HomePage() {
                   <p className="mt-1 text-[11px] leading-snug text-muted">{item.role}</p>
                 </>
               );
+
+              if (item.planned) {
+                return (
+                  <div key={item.name} className="card p-4">
+                    {body}
+                  </div>
+                );
+              }
 
               return item.external ? (
                 <a
@@ -387,9 +393,6 @@ export default function HomePage() {
             </Link>
             <Link href="/portfolio" className="hover:text-ink">
               Portfolio
-            </Link>
-            <Link href="/audit" className="hover:text-ink">
-              ERP audit
             </Link>
             <Link href="/about" className="hover:text-ink">
               About

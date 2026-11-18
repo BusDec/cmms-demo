@@ -2,13 +2,13 @@
 
 ### A Nirmana ERP product
 
-SAP enterprise dashboards for Meridian Energy.
+Integrated dashboards across ERP practices and business processes.
 
-A top-down command view across Generation, Grid, Services and Retail, with the SAP landscape and a four-plant maintenance command centre underneath.
+A top-down command view across Generation, Grid, Services and Retail, with the SAP landscape, a closed-loop exception register and a four-plant maintenance command centre underneath.
 
 **Parent:** [Nirmana ERP](https://nirmanaerp.com)
 
-**Sibling portfolios:** Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan — separate business domains, linked from the portfolio page. Pramaan currently runs its audit pack inside Gearbox.
+**Sibling portfolios:** Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Kavach and Pramaan — separate business domains, linked from the portfolio page. Pramaan is being separated into its own repo/subdomain; Kavach is planned.
 
 **Demo repository:** `cmms-demo`
 
@@ -18,17 +18,18 @@ A top-down command view across Generation, Grid, Services and Retail, with the S
 
 ![Executive dashboard](docs/executive-dashboard.jpg)
 
-Gearbox is the SAP enterprise dashboard for Meridian Energy inside Nirmana ERP.
-It gives directors one command view across four verticals, surfaces inconsistent
-records with owners and due dates, and then drops into the SAP enterprise
-structure and maintenance workspaces. This repository is a public, synthetic
-showcase of that stack. It is intentionally independent of the private product
-repository: no product code, client data, logos or database.
+Gearbox is the integrated dashboard portfolio inside Nirmana ERP. It gives
+directors one command view across ERP practices and business processes, surfaces
+inconsistent records with owners and due dates, and then drops into the SAP
+enterprise structure and maintenance workspaces. This repository is a public,
+synthetic showcase of that stack. It is intentionally independent of the private
+product repository: no product code, client data, logos or database.
 
-**Pramaan** is the ERP audit and S/4HANA implementation portfolio. Its audit
-pack currently runs inside Gearbox at `/audit`; `pramaan.nirmanaerp.com` is
-planned. The other sibling portfolios are **Promonitor**, **Yamuna**, **Xirra**,
-**LedgeFlow** and **CoreSight**; Gearbox is separate from them.
+**Pramaan** is a separate SAP audit and implementation portfolio. Its audit pack
+is temporarily previewed at `/audit` while the new `pramaan` repository and
+`pramaan.nirmanaerp.com` subdomain are prepared. **Kavach** is the planned
+cybersecurity portfolio. Promonitor, Yamuna, Xirra, LedgeFlow and CoreSight are
+the other sibling portfolios; Gearbox is separate from them.
 
 ## Stack
 
@@ -68,8 +69,8 @@ The static site is written to `out/`.
 - `/demo/[plant]/rca-qa` — RCA, findings, CAPA, checklists, data quality
 - `/data-model` — canonical entities, star schema, field ownership
 - `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
-- `/audit` — Pramaan ERP audit, SAP PM pack: 20 checks, scorecard, evidence, findings and remediation
-- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan
+- `/audit` — temporary Pramaan preview: SAP PM audit pack, 20 checks, scorecard, evidence, findings and remediation
+- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Kavach and Pramaan
 - `/about` — scope and disclaimers
 
 Plants: `coal`, `thermal`, `wind`, `gas`.
@@ -111,8 +112,15 @@ closed-loop view tracks detection, correction, review and certification.
 
 The sibling portfolios are not part of this landscape. They are linked from the
 dashboard footer and the `/portfolio` page as separate Nirmana ERP business
-domains. Pramaan currently opens its audit pack inside Gearbox; its subdomain is
-planned.
+domains. Pramaan currently opens its audit pack as a preview inside Gearbox; its
+subdomain is planned. Kavach is the planned cybersecurity portfolio.
+
+## Portfolio separation
+
+- **Gearbox** — integrated dashboards across ERP practices and business processes.
+- **Pramaan** — SAP audit and implementation. New private repository `BusDec/pramaan`; subdomain `pramaan.nirmanaerp.com` planned.
+- **Kavach** — cybersecurity. New private repository `BusDec/kavach`; subdomain `kavach.nirmanaerp.com` planned.
+- **Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight** — existing sibling portfolios, unchanged.
 
 ## SAP landscape
 
@@ -148,6 +156,7 @@ Web Apps, Netlify or any static host.
 This is a demonstration, not a certified product. The SAP landscape configuration
 is synthetic; the SAP adapter is validated against a local simulator, not a
 customer sandbox. The other ERP adapters are shown as planned until their APIs
-are implemented and tested. Gearbox is the dashboard product; Pramaan is the ERP
-audit and implementation vertical. Both names require trademark screening before
-commercial use.
+are implemented and tested. Gearbox is the integrated dashboard product; Pramaan
+is the separate SAP audit and implementation portfolio; Kavach is the planned
+cybersecurity portfolio. All names require trademark screening before commercial
+use.

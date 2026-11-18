@@ -167,13 +167,6 @@ export function AppShell({
             ERP integration
           </Link>
           <Link
-            href="/audit"
-            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
-          >
-            <ClipboardCheck className="h-4 w-4" />
-            Pramaan ERP audit
-          </Link>
-          <Link
             href="/about"
             className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
           >

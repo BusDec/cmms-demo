@@ -720,19 +720,19 @@ export function LandscapeDashboard() {
 
       <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-line bg-[var(--panel-strong)] px-5 py-5 text-white">
         <div>
-          <p className="text-[15px] font-semibold">Audit the structure, then the module.</p>
+          <p className="text-[15px] font-semibold">Start with the enterprise, then the structure.</p>
           <p className="mt-1 max-w-[62ch] text-[12px] leading-relaxed text-white/65">
-            Pramaan&apos;s SAP PM pack starts with the maintenance data. The enterprise
-            structure is the layer above it: every company code, plant and business area
-            resolved before a single work order is counted.
+            The enterprise command shows the exceptions and the route to closure. The
+            SAP landscape shows the company codes, plants and business areas behind
+            every number. The maintenance module shows the execution layer.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link
-            href="/audit"
+            href="/enterprise"
             className="rounded-md bg-[var(--warn)] px-4 py-2.5 text-[12px] font-semibold text-[var(--graphite)]"
           >
-            Open Pramaan audit
+            Open enterprise command
           </Link>
           <Link
             href="/data-model"

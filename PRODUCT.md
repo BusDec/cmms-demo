@@ -17,24 +17,25 @@ or conversation with the team.
 
 ## Product Purpose
 
-Gearbox is the SAP enterprise dashboard for Meridian Energy inside Nirmana ERP: a
-public, synthetic showcase of a top-down command view across Generation, Grid,
-Services and Retail. Directors see revenue, cost, people and data confidence,
-then drop into the inconsistent records behind the score. Below the command
-layer sit the SAP enterprise structure across S/4HANA and ECC R/3 and a
-four-plant CMMS wrapper over SAP, IBM Maximo and Oracle EAM. Success is a
-qualified prospective client asking for the walkthrough.
+Gearbox is the integrated dashboard portfolio inside Nirmana ERP: a public,
+synthetic showcase of a top-down command view across ERP practices and business
+processes. For Meridian Energy, directors see revenue, cost, people and data
+confidence across Generation, Grid, Services and Retail, then drop into the
+inconsistent records behind the score. Below the command layer sit the SAP
+enterprise structure across S/4HANA and ECC R/3 and a four-plant CMMS wrapper
+over SAP, IBM Maximo and Oracle EAM. Success is a qualified prospective client
+asking for the walkthrough.
 
 ## Positioning
 
-A top-down enterprise command layer over Meridian Energy's four verticals, two
-SAP landscapes and four maintenance scenarios. The product owns the command view,
-the exception register, the SAP structure view, the canonical model and the
-operating picture; the ERP remains the system of record for org units, master
-data, status, cost and confirmations. The command layer deliberately shows the
-inconsistent records instead of hiding them behind an average. SAP S/4HANA is
-the implemented reference adapter; SAP ECC, IBM Maximo and Oracle EAM are planned
-scenarios and are labelled as such.
+An integrated dashboard layer across ERP practices and business processes, shown
+through Meridian Energy's four verticals, two SAP landscapes and four maintenance
+scenarios. The product owns the command view, the exception register, the SAP
+structure view, the canonical model and the operating picture; the ERP remains
+the system of record for org units, master data, status, cost and confirmations.
+The command layer deliberately shows the inconsistent records instead of hiding
+them behind an average. SAP audit and implementation sit in the separate
+Pramaan portfolio; cybersecurity sits in the planned Kavach portfolio.
 
 ## Operating Context
 
@@ -58,11 +59,12 @@ It is used in sales conversations and on mobile.
   organisations, storage locations and a configuration matrix.
 - Six maintenance workspaces: executive, maintenance, reliability, permits and
   safety, cost and resources, RCA and quality.
-- Supporting pages: data model, ERP integration, Pramaan ERP audit, Nirmana ERP
-  sibling portfolio links, about and 404.
-- The Pramaan ERP audit runs the SAP PM pack: 20 checks across 13 domains against
-  a deterministic synthetic dataset. The rule engine and scores are computed; no
-  SAP system is called. It is not an SAP-certified audit.
+- Supporting pages: data model, ERP integration, a temporary Pramaan audit
+  preview, Nirmana ERP sibling portfolio links, about and 404.
+- The temporary Pramaan preview runs the SAP PM pack: 20 checks across 13 domains
+  against a deterministic synthetic dataset. The rule engine and scores are
+  computed; no SAP system is called. It is not an SAP-certified audit. Pramaan is
+  a separate portfolio with its own repository and planned subdomain.
 - Audit filters: domain, section (master data / transactional), result
   (failing / passing / N/A) and severity (critical / high / medium).
 - Plant switcher, enterprise vertical switcher, landscape switcher, severity
@@ -84,13 +86,14 @@ It is used in sales conversations and on mobile.
 - Parent brand: **Nirmana ERP** at [nirmanaerp.com](https://nirmanaerp.com).
 - SAP enterprise dashboard: **Gearbox**, for Meridian Energy.
 - Sibling portfolios: **Promonitor**, **Yamuna**, **Xirra**, **LedgeFlow**,
-  **CoreSight** and **Pramaan** — separate Nirmana ERP business domains with
-  their own users. They are linked for navigation only and are not part of the
-  Meridian SAP landscape.
-- **Pramaan** is the ERP audit and implementation portfolio. Its audit pack
-  currently runs inside Gearbox at `/audit`; `pramaan.nirmanaerp.com` is planned.
-  The SAP PM pack is live; finance and HR packs follow. The name is subject to
-  trademark screening.
+  **CoreSight**, **Kavach** and **Pramaan** — separate Nirmana ERP business
+  domains with their own users. They are linked for navigation only and are not
+  part of the Meridian SAP landscape.
+- **Pramaan** is the separate SAP audit and implementation portfolio. Its new
+  private repository is `BusDec/pramaan`; `pramaan.nirmanaerp.com` is planned.
+  The audit pack is temporarily previewed inside Gearbox at `/audit`.
+- **Kavach** is the planned cybersecurity portfolio. Its new private repository
+  is `BusDec/kavach`; `kavach.nirmanaerp.com` is planned.
 - Use the parent lockup (Nirmana above Gearbox) in the wordmark, page titles and
   metadata. Keep the sibling portfolios clearly separate from the SAP dashboard.
 - Neutral demo branding only. No client logos or client-specific colours.
@@ -101,8 +104,9 @@ It is used in sales conversations and on mobile.
 
 - Public demo: https://gearbox.nirmanaerp.com/ (the `github.io` project URL redirects here)
 - Parent: Nirmana ERP at https://nirmanaerp.com
-- Source: `BusDec/cmms-demo`; the repository is self-contained and has no
-  dependency on the private product repository.
+- Gearbox source: `BusDec/cmms-demo`
+- Pramaan source: `BusDec/pramaan` (private)
+- Kavach source: `BusDec/kavach` (private)
 - Screenshot: `docs/executive-dashboard.jpg`.
 - Maintenance datasets are generated in `lib/data.ts`; the SAP landscape
   configuration is in `lib/landscape.ts`; the enterprise command metrics and
@@ -121,12 +125,15 @@ It is used in sales conversations and on mobile.
    by ERP.
 3. Start top-down: directors see the enterprise, the exceptions and the route to
    closure before the module detail.
-4. Show the structure before the transaction: resolve company code, plant and
+4. Keep portfolio boundaries explicit: Gearbox is dashboards, Pramaan is SAP
+   audit and implementation, Kavach is cybersecurity. Do not blur them inside one
+   product surface.
+5. Show the structure before the transaction: resolve company code, plant and
    business area before a work order is counted.
-5. Show the operating picture, not a chart gallery: every number should answer a
+6. Show the operating picture, not a chart gallery: every number should answer a
    decision.
-6. Be explicit about what is synthetic, implemented, planned or unproven.
-7. Earn the walkthrough on a phone as well as on a desktop.
+7. Be explicit about what is synthetic, implemented, planned or unproven.
+8. Earn the walkthrough on a phone as well as on a desktop.
 
 ## Accessibility & Inclusion
 
