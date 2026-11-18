@@ -83,9 +83,10 @@ It is used in sales conversations and on mobile.
 
 - Parent brand: **Nirmana ERP**, wordmark **nirmNa**, at [nirmanaerp.com](https://nirmanaerp.com).
 - SAP enterprise dashboard: **Gearbox**, for Meridian Energy.
-- Sibling portfolios: **Promonitor**, **Yamuna**, **Xirra**, **Ledgflow** and
-  **Pramaan** — separate Nirmana ERP business domains with their own users. They
-  are linked for navigation only and are not part of the Meridian SAP landscape.
+- Sibling portfolios: **Promonitor**, **Yamuna**, **Xirra**, **LedgeFlow**,
+  **CoreSight** and **Pramaan** — separate Nirmana ERP business domains with
+  their own users. They are linked for navigation only and are not part of the
+  Meridian SAP landscape.
 - **Pramaan** is the ERP audit and implementation portfolio. Its audit pack
   currently runs inside Gearbox at `/audit`; `pramaan.nirmanaerp.com` is planned.
   The SAP PM pack is live; finance and HR packs follow. The name is subject to

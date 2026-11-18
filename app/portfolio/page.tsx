@@ -7,7 +7,7 @@ import { PARENT, PORTFOLIO } from "@/lib/portfolio";
 export const metadata = {
   title: "Portfolio · Nirmana ERP",
   description:
-    "Nirmana ERP and its sibling portfolios: Promonitor, Yamuna, Xirra, Ledgflow and Pramaan. Gearbox is the SAP enterprise dashboard for Meridian Energy.",
+    "Nirmana ERP and its sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan. Gearbox is the SAP enterprise dashboard for Meridian Energy.",
 };
 
 export default function PortfolioPage() {
@@ -20,14 +20,14 @@ export default function PortfolioPage() {
           <div>
             <p className="eyebrow">Nirmana ERP portfolio</p>
             <h1 className="mt-2 max-w-[18ch] text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
-              One parent. Five sibling portfolios.
+              One parent. Six sibling portfolios.
             </h1>
             <p className="measure mt-4 text-[14px] leading-relaxed text-muted">
-              Nirmana ERP is the parent. Promonitor, Yamuna, Xirra, Ledgflow and
-              Pramaan are separate business portfolios. Pramaan currently runs its
-              audit pack inside Gearbox; its subdomain is planned. Gearbox — the SAP
-              enterprise dashboard for Meridian Energy — is not one of these
-              portfolios. It sits on the ERP side of the group.
+              Nirmana ERP is the parent. Promonitor, Yamuna, Xirra, LedgeFlow,
+              CoreSight and Pramaan are separate business portfolios. Pramaan
+              currently runs its audit pack inside Gearbox; its subdomain is planned.
+              Gearbox — the SAP enterprise dashboard for Meridian Energy — is not one
+              of these portfolios. It sits on the ERP side of the group.
             </p>
           </div>
           <div className="rounded-xl border border-line bg-[var(--panel-strong)] p-5 text-white">
@@ -54,7 +54,7 @@ export default function PortfolioPage() {
             <h2 className="text-[20px] font-semibold tracking-[-0.02em]">
               Sibling portfolios
             </h2>
-            <p className="text-[11px] text-muted">Five portfolios · one parent</p>
+            <p className="text-[11px] text-muted">Six portfolios · one parent</p>
           </div>
           <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {PORTFOLIO.map((item) => {

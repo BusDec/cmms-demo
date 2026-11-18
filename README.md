@@ -8,7 +8,7 @@ A top-down command view across Generation, Grid, Services and Retail, with the S
 
 **Parent:** [Nirmana ERP](https://nirmanaerp.com)
 
-**Sibling portfolios:** Promonitor, Yamuna, Xirra, Ledgflow and Pramaan — separate business domains, linked from the portfolio page. Pramaan currently runs its audit pack inside Gearbox.
+**Sibling portfolios:** Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan — separate business domains, linked from the portfolio page. Pramaan currently runs its audit pack inside Gearbox.
 
 **Demo repository:** `cmms-demo`
 
@@ -27,8 +27,8 @@ repository: no product code, client data, logos or database.
 
 **Pramaan** is the ERP audit and S/4HANA implementation portfolio. Its audit
 pack currently runs inside Gearbox at `/audit`; `pramaan.nirmanaerp.com` is
-planned. The other sibling portfolios are **Promonitor**, **Yamuna**, **Xirra**
-and **Ledgflow**; Gearbox is separate from them.
+planned. The other sibling portfolios are **Promonitor**, **Yamuna**, **Xirra**,
+**LedgeFlow** and **CoreSight**; Gearbox is separate from them.
 
 ## Stack
 
@@ -69,7 +69,7 @@ The static site is written to `out/`.
 - `/data-model` — canonical entities, star schema, field ownership
 - `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
 - `/audit` — Pramaan ERP audit, SAP PM pack: 20 checks, scorecard, evidence, findings and remediation
-- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, Ledgflow and Pramaan
+- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan
 - `/about` — scope and disclaimers
 
 Plants: `coal`, `thermal`, `wind`, `gas`.

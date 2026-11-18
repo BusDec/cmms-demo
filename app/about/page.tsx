@@ -34,7 +34,7 @@ export default function AboutPage() {
             },
             {
               title: "No client branding",
-              body: "No client logos, names, records or screenshots are used. Gearbox is the SAP enterprise dashboard for Meridian Energy. Nirmana ERP's sibling portfolios — Promonitor, Yamuna, Xirra, Ledgflow and Pramaan — are separate business domains and are linked only for navigation. Pramaan's audit pack currently runs inside Gearbox.",
+              body: "No client logos, names, records or screenshots are used. Gearbox is the SAP enterprise dashboard for Meridian Energy. Nirmana ERP's sibling portfolios — Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight and Pramaan — are separate business domains and are linked only for navigation. Pramaan's audit pack currently runs inside Gearbox.",
             },
             {
               title: "What is implemented",

@@ -20,9 +20,9 @@ export type PortfolioItem = {
 export const PORTFOLIO: PortfolioItem[] = [
   {
     name: "Promonitor",
-    role: "Industrial monitoring",
+    role: "Construction execution intelligence",
     description:
-      "Operational visibility for asset-intensive sites: condition, availability and the operating picture above the plant systems.",
+      "Connects meetings, commitments, schedules, risks and project evidence into one execution layer for capital projects.",
     status: "Live",
     href: "https://promonitor.nirmanaerp.com",
     domain: "promonitor.nirmanaerp.com",
@@ -30,9 +30,9 @@ export const PORTFOLIO: PortfolioItem[] = [
   },
   {
     name: "Yamuna",
-    role: "Integration and data",
+    role: "Project planning and decision simulations",
     description:
-      "The data and integration layer that connects plant, enterprise and analytics systems into one usable operating model.",
+      "Eight simulations for energy and infrastructure — upstream, refining, thermal, distribution, O&M, plant performance, hydro and linear corridors. Plan the project, feel the decision.",
     status: "Live",
     href: "https://yamuna.nirmanaerp.com",
     domain: "yamuna.nirmanaerp.com",
@@ -40,22 +40,32 @@ export const PORTFOLIO: PortfolioItem[] = [
   },
   {
     name: "Xirra",
-    role: "Sibling portfolio",
+    role: "Wealth intelligence and portfolio operations",
     description:
-      "A separate Nirmana ERP business portfolio, with its own users and domain. Linked here for navigation only.",
+      "Portfolio analytics, buyback lifecycle management, fundamental research, tax-aware accounting and role-aware compliance in one institutional wealth platform.",
     status: "Live",
     href: "https://xirra.nirmanaerp.com",
     domain: "xirra.nirmanaerp.com",
     external: true,
   },
   {
-    name: "Ledgflow",
-    role: "Sibling portfolio",
+    name: "LedgeFlow",
+    role: "Cloud accounting for LLPs and MSMEs",
     description:
-      "A separate Nirmana ERP business portfolio, with its own users and domain. Linked here for navigation only.",
+      "Smart cloud accounting for Indian LLPs and MSMEs, with automated GST/TDS compliance, AI receipt scanning and professional financial reports.",
     status: "Live",
-    href: "https://ledgflow.nirmanaerp.com",
-    domain: "ledgflow.nirmanaerp.com",
+    href: "https://ledgeflow.nirmanaerp.com",
+    domain: "ledgeflow.nirmanaerp.com",
+    external: true,
+  },
+  {
+    name: "CoreSight",
+    role: "Simulation-based learning",
+    description:
+      "High-stakes simulation scenarios in project management, cyber security and industrial AI, built for modern leaders and organisational partners.",
+    status: "Live",
+    href: "https://coresight.nirmanaerp.com",
+    domain: "coresight.nirmanaerp.com",
     external: true,
   },
   {

@@ -323,7 +323,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow">Nirmana ERP</p>
               <h2 className="mt-2 max-w-[20ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-                One parent. Five sibling portfolios.
+                One parent. Six sibling portfolios.
               </h2>
             </div>
             <Link
@@ -333,7 +333,7 @@ export default function HomePage() {
               See the portfolio <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             {PORTFOLIO.map((item) => {
               const body = (
                 <>
