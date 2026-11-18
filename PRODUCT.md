@@ -81,7 +81,7 @@ It is used in sales conversations and on mobile.
 
 ## Brand Commitments
 
-- Parent brand: **Nirmana ERP**, wordmark **nirmNa**, at [nirmanaerp.com](https://nirmanaerp.com).
+- Parent brand: **Nirmana ERP** at [nirmanaerp.com](https://nirmanaerp.com).
 - SAP enterprise dashboard: **Gearbox**, for Meridian Energy.
 - Sibling portfolios: **Promonitor**, **Yamuna**, **Xirra**, **LedgeFlow**,
   **CoreSight** and **Pramaan** — separate Nirmana ERP business domains with
@@ -91,7 +91,7 @@ It is used in sales conversations and on mobile.
   currently runs inside Gearbox at `/audit`; `pramaan.nirmanaerp.com` is planned.
   The SAP PM pack is live; finance and HR packs follow. The name is subject to
   trademark screening.
-- Use the parent lockup (nirmNa above Gearbox) in the wordmark, page titles and
+- Use the parent lockup (Nirmana above Gearbox) in the wordmark, page titles and
   metadata. Keep the sibling portfolios clearly separate from the SAP dashboard.
 - Neutral demo branding only. No client logos or client-specific colours.
 - "Gearbox" overlaps with an established game studio; trademark screening is

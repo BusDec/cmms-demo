@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gearbox · nirmNa enterprise command",
+  title: "Gearbox · Nirmana enterprise command",
   description:
     "Gearbox gives Meridian Energy directors one enterprise view across Generation, Grid, Services and Retail — revenue, cost, people, data confidence and the exception register — with the SAP landscape and maintenance workspaces underneath.",
 };

@@ -1,6 +1,6 @@
 export const PARENT = {
   name: "Nirmana ERP",
-  wordmark: "nirmNa",
+  wordmark: "Nirmana",
   url: "https://nirmanaerp.com",
   tagline: "Enterprise systems, delivered.",
 } as const;

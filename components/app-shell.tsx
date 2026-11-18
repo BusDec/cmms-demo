@@ -60,7 +60,7 @@ export function AppShell({
           <span className="h-2 w-2 bg-[var(--warn)]" />
           <span className="flex flex-col leading-none">
             <span className="text-[10px] font-semibold tracking-[0.08em] text-white/50">
-              nirmNa
+              Nirmana
             </span>
             <span className="mt-1">Gearbox</span>
           </span>
@@ -150,7 +150,7 @@ export function AppShell({
             className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
           >
             <Layers className="h-4 w-4" />
-            nirmNa portfolio
+            Nirmana portfolio
           </Link>
           <Link
             href="/data-model"

@@ -4,7 +4,7 @@ import { TableScroller } from "@/components/table-scroller";
 import { ENTERPRISE_OBJECTS } from "@/lib/landscape";
 
 export const metadata = {
-  title: "Data model · Gearbox by nirmNa",
+  title: "Data model · Gearbox by Nirmana",
   description:
     "The SAP enterprise structure and canonical maintenance model behind the Gearbox landscape and four-plant demo.",
 };

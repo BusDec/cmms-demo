@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
 
 export const metadata = {
-  title: "About Gearbox · nirmNa",
+  title: "About Gearbox · Nirmana",
   description:
     "What the Gearbox enterprise command, SAP landscape and four-plant maintenance demo implement, what is synthetic, and how Gearbox fits Nirmana ERP.",
 };

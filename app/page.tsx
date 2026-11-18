@@ -28,7 +28,7 @@ export default function HomePage() {
               <span className="h-2 w-2 bg-[var(--warn)]" />
               <span className="flex flex-col leading-none">
                 <span className="text-[10px] font-semibold tracking-[0.08em] text-muted">
-                  nirmNa
+                  Nirmana
                 </span>
                 <span className="mt-1">Gearbox</span>
               </span>

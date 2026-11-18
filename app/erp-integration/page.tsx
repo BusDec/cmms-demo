@@ -4,7 +4,7 @@ import { SimpleHeader } from "@/components/simple-header";
 import { TableScroller } from "@/components/table-scroller";
 
 export const metadata = {
-  title: "ERP integration · Gearbox by nirmNa",
+  title: "ERP integration · Gearbox by Nirmana",
   description:
     "How SAP S/4HANA, SAP ECC, IBM Maximo and Oracle EAM adapters map enterprise structure and maintenance data into one canonical model.",
 };
