@@ -26,6 +26,9 @@ export function SimpleHeader({
           <Link href="/portfolio" className="hover:text-ink">
             Portfolio
           </Link>
+          <Link href="/enterprise" className="hover:text-ink">
+            Enterprise
+          </Link>
           <Link href="/landscape" className="hover:text-ink">
             SAP landscape
           </Link>

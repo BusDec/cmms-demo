@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Activity,
   ArrowLeft,
+  Building2,
   ClipboardCheck,
   Database,
   Gauge,
@@ -131,6 +132,13 @@ export function AppShell({
         </div>
         <div className="space-y-0.5 border-t border-white/10 px-2 py-4">
           <Link
+            href="/enterprise"
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
+          >
+            <Building2 className="h-4 w-4" />
+            Enterprise command
+          </Link>
+          <Link
             href="/landscape"
             className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
           >
@@ -245,6 +253,14 @@ export function AppShell({
                 </Link>
               );
             })}
+            <Link
+              href="/enterprise"
+              className="flex items-center gap-1.5 rounded-md px-2 py-2 text-[11px] font-semibold text-muted hover:bg-white/5 sm:text-[12px]"
+            >
+              <Building2 className="h-3.5 w-3.5" />
+              <span className="sm:hidden">Enterprise</span>
+              <span className="hidden sm:inline">Enterprise command</span>
+            </Link>
             <Link
               href="/landscape"
               className="flex items-center gap-1.5 rounded-md px-2 py-2 text-[11px] font-semibold text-muted hover:bg-white/5 sm:text-[12px]"

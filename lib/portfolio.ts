@@ -1,11 +1,11 @@
 export const PARENT = {
-  name: "Nirmana",
+  name: "Nirmana ERP",
   wordmark: "nirmNa",
   url: "https://nirmanaerp.com",
-  tagline: "Industrial intelligence, delivered.",
+  tagline: "Enterprise systems, delivered.",
 } as const;
 
-export type PortfolioStatus = "Live" | "Audit pack live" | "Practice" | "Portfolio";
+export type PortfolioStatus = "Live" | "Audit live";
 
 export type PortfolioItem = {
   name: string;
@@ -13,33 +13,19 @@ export type PortfolioItem = {
   description: string;
   status: PortfolioStatus;
   href: string;
-  external?: boolean;
+  domain: string;
+  external: boolean;
 };
 
 export const PORTFOLIO: PortfolioItem[] = [
   {
-    name: "Gearbox",
-    role: "SAP landscape and maintenance intelligence",
-    description:
-      "Enterprise structure across S/4HANA and ECC R/3 — company codes, plants, business areas and controlling areas — with a four-plant maintenance command centre on top.",
-    status: "Live",
-    href: "/",
-  },
-  {
-    name: "Pramaan",
-    role: "ERP audit and S/4HANA implementation",
-    description:
-      "The assurance-led ERP practice: SAP PM audit pack live, finance and HR packs next, and partner-light S/4HANA delivery for FI, CO, personnel administration, organisational management, time and payroll.",
-    status: "Audit pack live",
-    href: "/audit",
-  },
-  {
     name: "Promonitor",
     role: "Industrial monitoring",
     description:
-      "Operational visibility for asset-intensive sites: condition, availability and the operating picture that sits above the plant systems.",
-    status: "Portfolio",
-    href: PARENT.url,
+      "Operational visibility for asset-intensive sites: condition, availability and the operating picture above the plant systems.",
+    status: "Live",
+    href: "https://promonitor.nirmanaerp.com",
+    domain: "promonitor.nirmanaerp.com",
     external: true,
   },
   {
@@ -47,26 +33,39 @@ export const PORTFOLIO: PortfolioItem[] = [
     role: "Integration and data",
     description:
       "The data and integration layer that connects plant, enterprise and analytics systems into one usable operating model.",
-    status: "Portfolio",
-    href: PARENT.url,
+    status: "Live",
+    href: "https://yamuna.nirmanaerp.com",
+    domain: "yamuna.nirmanaerp.com",
     external: true,
   },
-];
-
-export const PORTFOLIO_STORY = [
   {
-    step: "01",
-    title: "Assure",
-    body: "Pramaan audits the ERP estate: master data, process controls, statutory readiness and the gaps that block a clean implementation.",
+    name: "Xirra",
+    role: "Sibling portfolio",
+    description:
+      "A separate Nirmana ERP business portfolio, with its own users and domain. Linked here for navigation only.",
+    status: "Live",
+    href: "https://xirra.nirmanaerp.com",
+    domain: "xirra.nirmanaerp.com",
+    external: true,
   },
   {
-    step: "02",
-    title: "Implement",
-    body: "Pramaan’s S/4HANA implementation takes the audit into a working finance and HR core, with payroll parallel runs before cutover.",
+    name: "Ledgflow",
+    role: "Sibling portfolio",
+    description:
+      "A separate Nirmana ERP business portfolio, with its own users and domain. Linked here for navigation only.",
+    status: "Live",
+    href: "https://ledgflow.nirmanaerp.com",
+    domain: "ledgflow.nirmanaerp.com",
+    external: true,
   },
   {
-    step: "03",
-    title: "Operate",
-    body: "Gearbox, Promonitor and Yamuna keep the enterprise structure and operating picture visible after go-live: companies, plants, assets, cost and the data that connects them.",
+    name: "Pramaan",
+    role: "ERP audit and implementation",
+    description:
+      "The assurance-led ERP portfolio: SAP PM audit pack live, finance and HR packs next, and partner-light S/4HANA delivery. The audit pack currently runs inside Gearbox.",
+    status: "Audit live",
+    href: "/audit",
+    domain: "pramaan.nirmanaerp.com",
+    external: false,
   },
 ];

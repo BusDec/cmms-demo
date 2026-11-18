@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { getAllPlantData } from "@/lib/data";
-import { COMPANY_CODES, PLANTS, getSystem } from "@/lib/landscape";
+import { VERTICALS } from "@/lib/enterprise";
+import { getSystem } from "@/lib/landscape";
 import { PORTFOLIO } from "@/lib/portfolio";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
@@ -36,6 +37,9 @@ export default function HomePage() {
               <Link href="/portfolio" className="hover:text-ink">
                 Portfolio
               </Link>
+              <Link href="/enterprise" className="hover:text-ink">
+                Enterprise
+              </Link>
               <Link href="/landscape" className="hover:text-ink">
                 SAP landscape
               </Link>
@@ -55,48 +59,49 @@ export default function HomePage() {
                 About
               </Link>
               <Link
-                href="/landscape"
+                href="/enterprise"
                 className="hidden items-center gap-1.5 rounded-md bg-[var(--warn)] px-3.5 py-2 text-[12px] font-semibold text-[var(--graphite)] sm:inline-flex"
               >
-                Open SAP landscape <ArrowUpRight className="h-3.5 w-3.5" />
+                Open enterprise command <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </nav>
 
           <div className="atlas-hero">
             <div>
-              <p className="atlas-kicker">Nirmana portfolio · Gearbox</p>
+              <p className="atlas-kicker">Nirmana ERP · Gearbox</p>
               <h1 className="display atlas-title">
-                One SAP landscape. <br />
-                Every company. <br />
-                Every plant.
+                Every vertical. <br />
+                Every exception. <br />
+                One command view.
               </h1>
               <p className="atlas-lede">
-                Gearbox reads the enterprise structure across S/4HANA and ECC R/3,
-                then runs the maintenance command centre over SAP, Maximo and Oracle
-                EAM — one model, one operating picture.
+                Gearbox gives Meridian Energy directors one enterprise view across
+                Generation, Grid, Services and Retail: revenue, cost, people and data
+                confidence. Every inconsistency is visible, owned and on a path to
+                closure.
               </p>
               <div className="atlas-actions">
-                <Link href="/landscape" className="atlas-primary">
-                  Open SAP landscape <ArrowRight className="h-4 w-4" />
+                <Link href="/enterprise" className="atlas-primary">
+                  Open enterprise command <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/demo/coal" className="atlas-secondary">
-                  Explore the maintenance demo
+                <Link href="/landscape" className="atlas-secondary">
+                  Open SAP landscape
                 </Link>
               </div>
               <p className="atlas-note">
-                Synthetic configuration · Client 100 · no client data or logos
+                Synthetic data · Meridian Energy Group · Client 100
               </p>
             </div>
 
             <div
               className="atlas-map"
-              aria-label="Four company codes across SAP S/4HANA and ECC R/3 converging into one enterprise structure"
+              aria-label="Four Meridian Energy verticals converging into one enterprise command view"
             >
               <div className="atlas-map-head">
-                <span>SAP landscape</span>
-                <span>Structure model</span>
-                <span>Nov 2026</span>
+                <span>Verticals</span>
+                <span>Command layer</span>
+                <span>FY26</span>
               </div>
               <div className="atlas-map-body">
                 <svg viewBox="0 0 400 320" preserveAspectRatio="none" aria-hidden="true">
@@ -106,34 +111,32 @@ export default function HomePage() {
                   <line x1="255" y1="265" x2="200" y2="160" stroke="rgba(234,242,246,.25)" />
                   <circle cx="200" cy="160" r="34" fill="rgba(232,163,61,.08)" stroke="rgba(232,163,61,.4)" />
                 </svg>
-                {COMPANY_CODES.map((company, index) => {
-                  const system = getSystem(company.system);
-                  const plantCount = PLANTS.filter(
-                    (plant) =>
-                      plant.system === company.system && plant.companyCode === company.code,
-                  ).length;
+                {VERTICALS.map((vertical, index) => {
+                  const system = getSystem(vertical.system);
                   return (
                     <div
-                      key={`${company.system}-${company.code}`}
+                      key={vertical.id}
                       className={"atlas-source atlas-source-" + (index + 1)}
                     >
-                      <span className="atlas-source-erp">
-                        {system?.shortName} · {company.code}
+                      <span className="atlas-source-erp">{vertical.name}</span>
+                      <span className="atlas-source-plant">
+                        {system?.shortName} · {vertical.companyCode}
                       </span>
-                      <span className="atlas-source-plant">{company.shortName}</span>
-                      <span className="atlas-source-metric">{plantCount} plants</span>
+                      <span className="atlas-source-metric">
+                        {vertical.dataConfidence}% confidence
+                      </span>
                     </div>
                   );
                 })}
                 <div className="atlas-core">
-                  <span className="atlas-core-kicker">Structure model</span>
-                  <span className="atlas-core-title">One enterprise structure</span>
-                  <span className="atlas-core-meta">4 company codes · 7 plants</span>
+                  <span className="atlas-core-kicker">Enterprise command</span>
+                  <span className="atlas-core-title">Meridian Energy Group</span>
+                  <span className="atlas-core-meta">4 verticals · 2 SAP systems</span>
                 </div>
               </div>
               <div className="atlas-map-foot">
-                <span>Two SAP systems. One client view.</span>
-                <span>S/4HANA strategic · ECC R/3 legacy</span>
+                <span>Directors see the exceptions.</span>
+                <span>81% data confidence · 8 open issues</span>
               </div>
             </div>
           </div>
@@ -318,9 +321,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:py-16">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow">The Nirmana portfolio</p>
+              <p className="eyebrow">Nirmana ERP</p>
               <h2 className="mt-2 max-w-[20ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-                One parent. Four specialist practices.
+                One parent. Five sibling portfolios.
               </h2>
             </div>
             <Link
@@ -330,7 +333,7 @@ export default function HomePage() {
               See the portfolio <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
             {PORTFOLIO.map((item) => {
               const body = (
                 <>
@@ -368,8 +371,11 @@ export default function HomePage() {
 
       <footer className="border-t border-line bg-surface">
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-5 py-6 text-[11px] text-muted sm:px-8">
-          <p>Gearbox · a nirmNa product · synthetic data · no client records</p>
+          <p>Gearbox · a Nirmana ERP product · synthetic data · no client records</p>
           <nav className="flex flex-wrap items-center gap-4" aria-label="Supporting pages">
+            <Link href="/enterprise" className="hover:text-ink">
+              Enterprise
+            </Link>
             <Link href="/landscape" className="hover:text-ink">
               SAP landscape
             </Link>
@@ -389,7 +395,7 @@ export default function HomePage() {
               About
             </Link>
           </nav>
-          <p>Two SAP systems · four company codes · seven plants · one structure model</p>
+          <p>Four verticals · two SAP systems · one enterprise command</p>
         </div>
       </footer>
     </main>

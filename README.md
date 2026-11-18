@@ -1,12 +1,14 @@
 # Gearbox
 
-### A Nirmana product
+### A Nirmana ERP product
 
-SAP landscape and maintenance intelligence.
+SAP enterprise dashboards for Meridian Energy.
 
-Company codes, plants and business areas across S/4HANA and ECC R/3, with a four-plant maintenance command centre on top.
+A top-down command view across Generation, Grid, Services and Retail, with the SAP landscape and a four-plant maintenance command centre underneath.
 
-**Parent portfolio:** [nirmanaerp.com](https://nirmanaerp.com) — Gearbox, Pramaan, Promonitor and Yamuna
+**Parent:** [Nirmana ERP](https://nirmanaerp.com)
+
+**Sibling portfolios:** Promonitor, Yamuna, Xirra, Ledgflow and Pramaan — separate business domains, linked from the portfolio page. Pramaan currently runs its audit pack inside Gearbox.
 
 **Demo repository:** `cmms-demo`
 
@@ -16,14 +18,17 @@ Company codes, plants and business areas across S/4HANA and ECC R/3, with a four
 
 ![Executive dashboard](docs/executive-dashboard.jpg)
 
-Gearbox is the SAP landscape and maintenance intelligence product in the Nirmana
-portfolio. This repository is a public, synthetic showcase of the SAP enterprise
-structure across S/4HANA and ECC R/3, plus a CMMS wrapper over SAP, IBM Maximo
-and Oracle EAM. It is intentionally independent of the private product
+Gearbox is the SAP enterprise dashboard for Meridian Energy inside Nirmana ERP.
+It gives directors one command view across four verticals, surfaces inconsistent
+records with owners and due dates, and then drops into the SAP enterprise
+structure and maintenance workspaces. This repository is a public, synthetic
+showcase of that stack. It is intentionally independent of the private product
 repository: no product code, client data, logos or database.
 
-The ERP audit and S/4HANA implementation practice is **Pramaan**. **Promonitor**
-and **Yamuna** complete the portfolio.
+**Pramaan** is the ERP audit and S/4HANA implementation portfolio. Its audit
+pack currently runs inside Gearbox at `/audit`; `pramaan.nirmanaerp.com` is
+planned. The other sibling portfolios are **Promonitor**, **Yamuna**, **Xirra**
+and **Ledgflow**; Gearbox is separate from them.
 
 ## Stack
 
@@ -53,8 +58,9 @@ The static site is written to `out/`.
 ## Pages
 
 - `/` — showcase landing page
+- `/enterprise` — director command view across Generation, Grid, Services and Retail, with data confidence and the closed-loop exception register
 - `/landscape` — SAP enterprise structure: company, company codes, plants, business areas and org units across S/4HANA and ECC R/3
-- `/demo/[plant]` — executive command centre
+- `/demo/[plant]` — maintenance command centre
 - `/demo/[plant]/maintenance` — PM, backlog and work orders
 - `/demo/[plant]/reliability` — MTBF/MTTR, pareto, bad actors, RCA
 - `/demo/[plant]/ptw` — permits, isolation and cycle time
@@ -63,13 +69,14 @@ The static site is written to `out/`.
 - `/data-model` — canonical entities, star schema, field ownership
 - `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
 - `/audit` — Pramaan ERP audit, SAP PM pack: 20 checks, scorecard, evidence, findings and remediation
-- `/portfolio` — the Nirmana portfolio: Gearbox, Pramaan, Promonitor and Yamuna
+- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, Ledgflow and Pramaan
 - `/about` — scope and disclaimers
 
 Plants: `coal`, `thermal`, `wind`, `gas`.
 
 ## Interactions
 
+- **Enterprise** — switch Group / Generation / Grid / Services / Retail; the command posture, KPI strip, attention list and exception register follow the selected vertical.
 - **SAP landscape** — switch Combined / S/4HANA / ECC R/3; every KPI, table and configuration column follows the selected landscape.
 - **Overview** — switch Source / Canonical / Variance, and model a PM compliance recovery.
 - **Maintenance** — change available crew hours to see crew load and the over-capacity count.
@@ -83,9 +90,29 @@ Source / Canonical difference is modelled for the demo.
 
 All data is synthetic and deterministic. Plant and maintenance data is generated
 in `lib/data.ts` from a seeded PRNG. The SAP landscape configuration lives in
-`lib/landscape.ts` and is hand-authored for demonstration. There is no client
+`lib/landscape.ts`; the enterprise command metrics and exception register live in
+`lib/enterprise.ts`. Both are hand-authored for demonstration. There is no client
 data and no live ERP call in this repository. Numbers are designed to be
 plausible, not to represent any real company or plant.
+
+## Enterprise command
+
+Meridian Energy is shown as four verticals:
+
+- **Generation** — S/4HANA, company code 1000.
+- **Grid** — ECC R/3, company code 2000.
+- **Services** — S/4HANA, company code 3000.
+- **Retail** — ECC R/3, company code 4000.
+
+Directors see revenue, EBITDA, headcount, payroll cost, attrition, open roles and
+data confidence for the group or any vertical. The exception register shows the
+records behind the score: severity, owner, status, due date and remedy. The
+closed-loop view tracks detection, correction, review and certification.
+
+The sibling portfolios are not part of this landscape. They are linked from the
+dashboard footer and the `/portfolio` page as separate Nirmana ERP business
+domains. Pramaan currently opens its audit pack inside Gearbox; its subdomain is
+planned.
 
 ## SAP landscape
 
@@ -97,7 +124,7 @@ Two synthetic SAP systems are configured:
 The dashboard reads the company, company codes, plants, business areas,
 controlling areas, sales organisations, purchasing organisations and storage
 locations from both systems. A configuration matrix shows the source table and key for each object
-(`T001`, `T001W`, `TGSB`, `TKA01`, `TVKO`, `T024E`, `T001L`).
+(`T880`, `T001`, `T001W`, `TGSB`, `TKA01`, `TVKO`, `T024E`, `T001L`).
 
 ## Decoupling
 

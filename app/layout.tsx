@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gearbox · nirmNa SAP landscape intelligence",
+  title: "Gearbox · nirmNa enterprise command",
   description:
-    "Gearbox reads the SAP enterprise structure across S/4HANA and ECC R/3 — company codes, plants, business areas and controlling areas — with a four-plant maintenance command centre on top.",
+    "Gearbox gives Meridian Energy directors one enterprise view across Generation, Grid, Services and Retail — revenue, cost, people, data confidence and the exception register — with the SAP landscape and maintenance workspaces underneath.",
 };
 
 export const viewport: Viewport = {
