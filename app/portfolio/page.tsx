@@ -35,7 +35,7 @@ export default function PortfolioPage() {
               Its flagship, Nirmana ERP, is a reliability-first, AI-native ERP for
               industrial enterprises: Gen AI and agentic workflows on top of Weibull life
               analysis, failure modes, asset health and maintenance strategy. The
-              portfolio takes that core into nine focused jobs.
+              portfolio takes that core into nine focused portfolios.
             </p>
           </div>
           <div className="rounded-xl border border-line bg-[var(--panel-strong)] p-5 text-white">
