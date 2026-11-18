@@ -34,11 +34,11 @@ export default function AboutPage() {
             },
             {
               title: "No client branding",
-              body: "No client logos, names, records or screenshots are used. Gearbox is the integrated dashboard portfolio for Meridian Energy. Nirmana ERP's sibling portfolios — Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Kavach and Pramaan — are separate business domains and are linked only for navigation. Pramaan is moving to its own repository and subdomain; Kavach is planned.",
+              body: "No client logos, names, records or screenshots are used. Gearbox is the integrated dashboard portfolio for Meridian Energy. Nirmana ERP's sibling portfolios — Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Benchmark, Kavach and Pramaan — are separate business domains, each live on its own subdomain and linked only for navigation.",
             },
             {
               title: "What is implemented",
-              body: "The enterprise command dashboard with a closed-loop exception register; the SAP landscape dashboard with separate S/4HANA and ECC R/3 configurations; the executive, maintenance, reliability, permit, cost and RCA/quality workspaces; the canonical data-model page; the ERP integration page; a temporary Pramaan audit preview; responsive layouts and reduced-motion support.",
+              body: "The enterprise command dashboard with a closed-loop exception register; the SAP landscape dashboard with separate S/4HANA and ECC R/3 configurations; the executive, maintenance, reliability, permit, cost and RCA/quality workspaces; the canonical data-model page; the ERP integration page; a handoff to the live Pramaan portfolio; responsive layouts and reduced-motion support.",
             },
             {
               title: "What is not claimed",
@@ -57,13 +57,11 @@ export default function AboutPage() {
           <ul className="mt-4 space-y-2 text-[13px] text-muted">
             <li className="border-t border-line pt-3">Wire the demo to the standalone connector package and a public simulator.</li>
             <li className="border-t border-line pt-3">Validate the SAP adapter against a client sandbox.</li>
-            <li className="border-t border-line pt-3">Stand up the Pramaan and Kavach subdomains from their new repositories.</li>
             <li className="border-t border-line pt-3">Connect the exception register to a real workflow: owner assignment, evidence and certification.</li>
             <li className="border-t border-line pt-3">Add role-based cascades for portfolio, company and plant HR.</li>
             <li className="border-t border-line pt-3">Add profit-centre and segment reporting to the SAP landscape view.</li>
             <li className="border-t border-line pt-3">Add videos, a guided tour and a compare-plants mode.</li>
             <li className="border-t border-line pt-3">Publish the data-model and integration pages as a reusable sales asset.</li>
-            <li className="border-t border-line pt-3">Add the Pramaan finance and HR audit packs to the same evidence model.</li>
           </ul>
         </section>
 

@@ -3,9 +3,9 @@ import Link from "next/link";
 export function SimpleHeader({
   product = "Gearbox",
 }: {
-  product?: "Gearbox" | "Pramaan" | "Portfolio";
+  product?: "Gearbox" | "Portfolio";
 }) {
-  const home = product === "Pramaan" ? "/audit" : product === "Portfolio" ? "/portfolio" : "/";
+  const home = product === "Portfolio" ? "/portfolio" : "/";
 
   return (
     <header className="border-b border-line bg-surface">

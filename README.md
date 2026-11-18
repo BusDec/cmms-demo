@@ -8,7 +8,7 @@ A top-down command view across Generation, Grid, Services and Retail, with the S
 
 **Parent:** [Nirmana ERP](https://nirmanaerp.com)
 
-**Sibling portfolios:** Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Kavach and Pramaan — separate business domains, linked from the portfolio page. Pramaan is being separated into its own repo/subdomain; Kavach is planned.
+**Sibling portfolios:** Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Benchmark, Kavach and Pramaan — separate business domains, each live on its own subdomain and linked from the portfolio page.
 
 **Demo repository:** `cmms-demo`
 
@@ -25,11 +25,12 @@ enterprise structure and maintenance workspaces. This repository is a public,
 synthetic showcase of that stack. It is intentionally independent of the private
 product repository: no product code, client data, logos or database.
 
-**Pramaan** is a separate SAP audit and implementation portfolio. Its audit pack
-is temporarily previewed at `/audit` while the new `pramaan` repository and
-`pramaan.nirmanaerp.com` subdomain are prepared. **Kavach** is the planned
-cybersecurity portfolio. Promonitor, Yamuna, Xirra, LedgeFlow and CoreSight are
-the other sibling portfolios; Gearbox is separate from them.
+**Pramaan** is the separate SAP audit and implementation portfolio at
+`pramaan.nirmanaerp.com`; Gearbox keeps only a handoff at `/audit`. **Kavach**
+is the cybersecurity portfolio at `kavach.nirmanaerp.com`, and **Benchmark** is
+the efficiency-benchmarking portfolio at `benchmark.nirmanaerp.com`. Promonitor,
+Yamuna, Xirra, LedgeFlow and CoreSight are the other sibling portfolios; Gearbox
+is separate from all of them.
 
 ## Stack
 
@@ -69,8 +70,8 @@ The static site is written to `out/`.
 - `/demo/[plant]/rca-qa` — RCA, findings, CAPA, checklists, data quality
 - `/data-model` — canonical entities, star schema, field ownership
 - `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
-- `/audit` — temporary Pramaan preview: SAP PM audit pack, 20 checks, scorecard, evidence, findings and remediation
-- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Kavach and Pramaan
+- `/audit` — handoff to the live Pramaan SAP audit and implementation portfolio
+- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Benchmark, Kavach and Pramaan
 - `/about` — scope and disclaimers
 
 Plants: `coal`, `thermal`, `wind`, `gas`.
@@ -112,14 +113,15 @@ closed-loop view tracks detection, correction, review and certification.
 
 The sibling portfolios are not part of this landscape. They are linked from the
 dashboard footer and the `/portfolio` page as separate Nirmana ERP business
-domains. Pramaan currently opens its audit pack as a preview inside Gearbox; its
-subdomain is planned. Kavach is the planned cybersecurity portfolio.
+domains. Each runs on its own subdomain; Pramaan keeps only a handoff at
+`/audit`.
 
 ## Portfolio separation
 
 - **Gearbox** — integrated dashboards across ERP practices and business processes.
-- **Pramaan** — SAP audit and implementation. New private repository `BusDec/pramaan`; subdomain `pramaan.nirmanaerp.com` planned.
-- **Kavach** — cybersecurity. New private repository `BusDec/kavach`; subdomain `kavach.nirmanaerp.com` planned.
+- **Pramaan** — SAP audit and implementation. Repository `BusDec/pramaan`; live at `pramaan.nirmanaerp.com`.
+- **Kavach** — cybersecurity. Repository `BusDec/kavach`; live at `kavach.nirmanaerp.com`.
+- **Benchmark** — efficiency benchmarking. Live at `benchmark.nirmanaerp.com`.
 - **Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight** — existing sibling portfolios, unchanged.
 
 ## SAP landscape
@@ -157,6 +159,6 @@ This is a demonstration, not a certified product. The SAP landscape configuratio
 is synthetic; the SAP adapter is validated against a local simulator, not a
 customer sandbox. The other ERP adapters are shown as planned until their APIs
 are implemented and tested. Gearbox is the integrated dashboard product; Pramaan
-is the separate SAP audit and implementation portfolio; Kavach is the planned
-cybersecurity portfolio. All names require trademark screening before commercial
-use.
+is the separate SAP audit and implementation portfolio; Kavach is the
+cybersecurity portfolio; Benchmark is the efficiency-benchmarking portfolio. All
+names require trademark screening before commercial use.

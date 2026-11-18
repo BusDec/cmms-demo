@@ -321,7 +321,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow">Nirmana ERP</p>
               <h2 className="mt-2 max-w-[20ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-                One parent. Seven sibling portfolios.
+                One parent. Eight sibling portfolios.
               </h2>
             </div>
             <Link
@@ -345,15 +345,7 @@ export default function HomePage() {
                 </>
               );
 
-              if (item.planned) {
-                return (
-                  <div key={item.name} className="card p-4">
-                    {body}
-                  </div>
-                );
-              }
-
-              return item.external ? (
+              return (
                 <a
                   key={item.name}
                   href={item.href}
@@ -361,14 +353,6 @@ export default function HomePage() {
                 >
                   {body}
                 </a>
-              ) : (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="card p-4 transition-colors hover:bg-[var(--panel)]"
-                >
-                  {body}
-                </Link>
               );
             })}
           </div>

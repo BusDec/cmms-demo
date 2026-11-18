@@ -711,8 +711,7 @@ export function EnterpriseDashboard() {
             <p className="mt-1 text-[15px] font-semibold">Separate business domains.</p>
             <p className="mt-1 max-w-[62ch] text-[12px] leading-relaxed text-white/65">
               Sibling portfolios are separate Nirmana ERP business domains with their
-              own users. Pramaan currently opens its audit pack inside Gearbox; Kavach
-              is planned. The rest leave this dashboard.
+              own users. Each one opens on its own subdomain.
             </p>
             <Link
               href="/portfolio"
@@ -735,23 +734,11 @@ export function EnterpriseDashboard() {
                   </span>
                   <span className="mt-0.5 block text-[10px] font-normal text-white/45">
                     {item.domain}
-                    {item.external && !item.planned ? "" : " · planned"}
                   </span>
                 </>
               );
 
-              if (item.planned) {
-                return (
-                  <div
-                    key={item.name}
-                    className="rounded-md border border-white/10 px-3 py-2 text-[11px] font-semibold text-white/55"
-                  >
-                    {body}
-                  </div>
-                );
-              }
-
-              return item.external ? (
+              return (
                 <a
                   key={item.name}
                   href={item.href}
@@ -759,14 +746,6 @@ export function EnterpriseDashboard() {
                 >
                   {body}
                 </a>
-              ) : (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="rounded-md border border-white/15 px-3 py-2 text-[11px] font-semibold text-white/85 transition-colors hover:bg-white/5"
-                >
-                  {body}
-                </Link>
               );
             })}
           </div>

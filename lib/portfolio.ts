@@ -70,24 +70,33 @@ export const PORTFOLIO: PortfolioItem[] = [
     external: true,
   },
   {
+    name: "Benchmark",
+    role: "Efficiency benchmarking",
+    description:
+      "Data envelopment analysis for plants and operating units: efficiency scores, peer benchmarks, scale efficiency and the input/output targets that close the gap.",
+    status: "Live",
+    href: "https://benchmark.nirmanaerp.com",
+    domain: "benchmark.nirmanaerp.com",
+    external: true,
+  },
+  {
     name: "Kavach",
     role: "Cybersecurity",
     description:
       "SAP security and controls, OT/IT convergence, cloud identity and incident readiness for asset-intensive enterprises.",
-    status: "Planned",
+    status: "Live",
     href: "https://kavach.nirmanaerp.com",
     domain: "kavach.nirmanaerp.com",
     external: true,
-    planned: true,
   },
   {
     name: "Pramaan",
     role: "SAP audit and implementation",
     description:
-      "The SAP audit and implementation portfolio: SAP PM audit pack live, finance and HR packs next, and partner-light S/4HANA delivery. The audit pack currently runs as a preview inside Gearbox while the subdomain is prepared.",
-    status: "Audit live",
-    href: "/audit",
+      "The SAP audit and implementation portfolio: a 20-check SAP PM audit pack, finance and HR packs next, and partner-light S/4HANA delivery from mobilisation to hypercare.",
+    status: "Live",
+    href: "https://pramaan.nirmanaerp.com",
     domain: "pramaan.nirmanaerp.com",
-    external: false,
+    external: true,
   },
 ];
