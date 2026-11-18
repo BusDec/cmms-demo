@@ -6,7 +6,7 @@ import { PARENT, PORTFOLIO_MEMBERS } from "@/lib/portfolio";
 export const metadata = {
   title: "Portfolio · Nirmana ERP",
   description:
-    "The Nirmana ERP portfolio: Promonitor, LedgeFlow, Xirra, CoreSight, Yamuna, Benchmark, Gearbox, Pramaan and Kavach. The parent is a next-generation industrial ERP powered by Gen AI and agentic AI, with reliability and Weibull analysis at its core.",
+    "Nirmana Industrial Intelligence Private Limited and its nine-member portfolio: Promonitor, LedgeFlow, Xirra, CoreSight, Yamuna, Benchmark, Gearbox, Pramaan and Kavach. The flagship, Nirmana ERP, is a reliability-first, AI-native ERP for industrial enterprises.",
 };
 
 export default function PortfolioPage() {
@@ -17,29 +17,50 @@ export default function PortfolioPage() {
       <div className="mx-auto max-w-[1180px] px-5 pb-16 pt-10 sm:px-8 lg:pt-14">
         <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
-            <p className="eyebrow">Nirmana ERP portfolio</p>
+            <p className="eyebrow">Nirmana Industrial Intelligence Private Limited</p>
             <h1 className="mt-2 max-w-[18ch] text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
               One parent. Nine portfolios.
             </h1>
             <p className="measure mt-4 text-[14px] leading-relaxed text-muted">
-              Nirmana ERP is the parent. Eight sibling portfolios and Gearbox, the
-              integrated dashboard layer, make nine. Each runs on its own subdomain;
-              this is the common portfolio page for the group. Gearbox commands
-              Meridian Energy&rsquo;s enterprise; Benchmark measures operating
-              efficiency; Kavach covers cybersecurity; Pramaan covers SAP audit and
-              implementation.
+              <strong className="font-semibold text-ink">The problem.</strong> Industrial
+              enterprises run critical assets across ERP, EAM, OT and spreadsheets.
+              Conventional ERP adds modules, consultants add reports and dashboards add
+              another screen &mdash; yet reliability, maintenance, cost and risk still do
+              not meet in one decision. The result is reactive maintenance, late risk and
+              capital spent on the wrong asset.
+            </p>
+            <p className="measure mt-3 text-[14px] leading-relaxed text-muted">
+              <strong className="font-semibold text-ink">The fit.</strong> Nirmana
+              Industrial Intelligence Private Limited builds the missing operating layer.
+              Its flagship, Nirmana ERP, is a reliability-first, AI-native ERP for
+              industrial enterprises: Gen AI and agentic workflows on top of Weibull life
+              analysis, failure modes, asset health and maintenance strategy. The
+              portfolio takes that core into nine focused jobs.
             </p>
           </div>
           <div className="rounded-xl border border-line bg-[var(--panel-strong)] p-5 text-white">
             <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/55">
-              Parent
+              Flagship · Nirmana ERP
             </p>
-            <p className="mt-2 text-[26px] font-semibold tracking-[-0.03em]">
-              {PARENT.wordmark}
+            <h2 className="mt-2 max-w-[16ch] text-[24px] font-semibold leading-[1.04] tracking-[-0.035em]">
+              The industrial operating system, not another module.
+            </h2>
+            <p className="mt-3 text-[12px] leading-relaxed text-white/65">
+              One live picture of assets, work, cost and risk. Gen AI and agents do
+              the follow-up; engineers keep the judgement.
             </p>
-            <p className="mt-1 text-[12px] text-white/65">
-              {PARENT.name} · {PARENT.tagline}
-            </p>
+            <div className="mt-4 space-y-2.5 border-t border-white/10 pt-3">
+              {[
+                ["Reliability-first", "Weibull life analysis, failure modes, asset health"],
+                ["AI-native", "Gen AI copilots, agentic workflows"],
+                ["Industrial", "Assets, work, cost and risk in one model"],
+              ].map(([label, body]) => (
+                <div key={label}>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-white/80">{label}</p>
+                  <p className="mt-0.5 text-[10px] leading-relaxed text-white/50">{body}</p>
+                </div>
+              ))}
+            </div>
             <a
               href={PARENT.url}
               className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-semibold text-[var(--warn)] hover:text-[#f0b95f]"
@@ -105,16 +126,17 @@ export default function PortfolioPage() {
           <div className="grid gap-7 px-5 py-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-6 lg:py-7">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/55">
-                Nirmana ERP · the parent
+                Nirmana Industrial Intelligence Private Limited · the parent
               </p>
               <h2 className="mt-2 max-w-[20ch] text-[clamp(1.6rem,2.8vw,2.2rem)] font-semibold tracking-[-0.03em]">
-                The next-generation ERP for industrial enterprises.
+                The flagship: a next-generation ERP for industrial enterprises.
               </h2>
               <p className="mt-3 max-w-[62ch] text-[12px] leading-relaxed text-white/65">
-                Nirmana ERP is the parent platform behind every portfolio on this
-                page. It combines Gen AI and agentic AI across the operating model
-                with reliability engineering at the core: Weibull life analysis,
-                failure modes, asset health and maintenance strategy.
+                Nirmana Industrial Intelligence Private Limited is the parent
+                company. Its flagship, Nirmana ERP, combines Gen AI and agentic AI
+                across the operating model with reliability engineering at the core:
+                Weibull life analysis, failure modes, asset health and maintenance
+                strategy. The portfolio takes that core into nine focused jobs.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {["Gen AI", "Agentic AI", "Reliability engineering", "Weibull analysis", "Asset performance"].map((capability) => (

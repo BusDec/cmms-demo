@@ -8,6 +8,8 @@ A top-down command view across Generation, Grid, Services and Retail, with the S
 
 **Parent:** [Nirmana ERP](https://nirmanaerp.com)
 
+**Operating company:** Nirmana Industrial Intelligence Private Limited
+
 **Sibling portfolios:** Promonitor, LedgeFlow, Xirra, CoreSight, Yamuna, Benchmark, Pramaan and Kavach — separate business domains, each live on its own subdomain. The common portfolio page adds **Gearbox** as the ninth member and closes with the **Nirmana ERP** parent platform.
 
 **Demo repository:** `cmms-demo`

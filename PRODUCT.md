@@ -81,7 +81,8 @@ It is used in sales conversations and on mobile.
 
 ## Brand Commitments
 
-- Parent brand: **Nirmana ERP** at [nirmanaerp.com](https://nirmanaerp.com).
+- Operating company: **Nirmana Industrial Intelligence Private Limited**.
+- Parent brand: **Nirmana ERP** at [nirmanaerp.com](https://nirmanaerp.com). The flagship is a reliability-first, AI-native ERP for industrial enterprises, positioned around Gen AI, agentic AI and Weibull life analysis.
 - SAP enterprise dashboard: **Gearbox**, for Meridian Energy.
 - Sibling portfolios: **Promonitor**, **LedgeFlow**, **Xirra**, **CoreSight**,
   **Yamuna**, **Benchmark**, **Pramaan** and **Kavach** — separate Nirmana ERP
