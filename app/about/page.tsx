@@ -34,7 +34,7 @@ export default function AboutPage() {
             },
             {
               title: "No client branding",
-              body: "No client logos, names, records or screenshots are used. Gearbox is the integrated dashboard portfolio for Meridian Energy. Nirmana ERP's sibling portfolios — Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Benchmark, Kavach and Pramaan — are separate business domains, each live on its own subdomain and linked only for navigation.",
+              body: "No client logos, names, records or screenshots are used. Gearbox is the integrated dashboard portfolio for Meridian Energy. Nirmana ERP's sibling portfolios — Promonitor, LedgeFlow, Xirra, CoreSight, Yamuna, Benchmark, Pramaan and Kavach — are separate business domains, each live on its own subdomain and linked only for navigation. The common portfolio page adds Gearbox as the ninth member and the Nirmana ERP parent platform underneath.",
             },
             {
               title: "What is implemented",

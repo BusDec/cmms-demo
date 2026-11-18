@@ -83,10 +83,14 @@ It is used in sales conversations and on mobile.
 
 - Parent brand: **Nirmana ERP** at [nirmanaerp.com](https://nirmanaerp.com).
 - SAP enterprise dashboard: **Gearbox**, for Meridian Energy.
-- Sibling portfolios: **Promonitor**, **Yamuna**, **Xirra**, **LedgeFlow**,
-  **CoreSight**, **Benchmark**, **Kavach** and **Pramaan** — separate Nirmana ERP
+- Sibling portfolios: **Promonitor**, **LedgeFlow**, **Xirra**, **CoreSight**,
+  **Yamuna**, **Benchmark**, **Pramaan** and **Kavach** — separate Nirmana ERP
   business domains with their own users. They are linked for navigation only and
   are not part of the Meridian SAP landscape.
+- The common portfolio page presents the eight sibling portfolios plus **Gearbox**
+  as the ninth member, in three rows, and closes with the **Nirmana ERP** parent
+  platform: a next-generation ERP for industrial enterprises, positioned around
+  Gen AI, agentic AI, reliability engineering and Weibull analysis.
 - **Pramaan** is the separate SAP audit and implementation portfolio at
   `pramaan.nirmanaerp.com`; repository `BusDec/pramaan`.
 - **Kavach** is the cybersecurity portfolio at `kavach.nirmanaerp.com`;

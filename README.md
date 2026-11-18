@@ -8,7 +8,7 @@ A top-down command view across Generation, Grid, Services and Retail, with the S
 
 **Parent:** [Nirmana ERP](https://nirmanaerp.com)
 
-**Sibling portfolios:** Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Benchmark, Kavach and Pramaan — separate business domains, each live on its own subdomain and linked from the portfolio page.
+**Sibling portfolios:** Promonitor, LedgeFlow, Xirra, CoreSight, Yamuna, Benchmark, Pramaan and Kavach — separate business domains, each live on its own subdomain. The common portfolio page adds **Gearbox** as the ninth member and closes with the **Nirmana ERP** parent platform.
 
 **Demo repository:** `cmms-demo`
 
@@ -71,7 +71,7 @@ The static site is written to `out/`.
 - `/data-model` — canonical entities, star schema, field ownership
 - `/erp-integration` — adapters, SAP API inventory, what is real vs synthetic
 - `/audit` — handoff to the live Pramaan SAP audit and implementation portfolio
-- `/portfolio` — Nirmana ERP sibling portfolios: Promonitor, Yamuna, Xirra, LedgeFlow, CoreSight, Benchmark, Kavach and Pramaan
+- `/portfolio` — the common Nirmana ERP portfolio page: eight sibling portfolios plus Gearbox, and the parent next-generation ERP platform
 - `/about` — scope and disclaimers
 
 Plants: `coal`, `thermal`, `wind`, `gas`.
@@ -112,13 +112,14 @@ records behind the score: severity, owner, status, due date and remedy. The
 closed-loop view tracks detection, correction, review and certification.
 
 The sibling portfolios are not part of this landscape. They are linked from the
-dashboard footer and the `/portfolio` page as separate Nirmana ERP business
-domains. Each runs on its own subdomain; Pramaan keeps only a handoff at
-`/audit`.
+dashboard footer and the common `/portfolio` page as separate Nirmana ERP
+business domains. Each runs on its own subdomain; Pramaan keeps only a handoff at
+`/audit`. The portfolio page also presents Gearbox as the ninth member and the
+Nirmana ERP parent platform underneath.
 
 ## Portfolio separation
 
-- **Gearbox** — integrated dashboards across ERP practices and business processes.
+- **Gearbox** — integrated dashboards across ERP practices and business processes; presented as the ninth member on the common portfolio page, not as a sibling portfolio.
 - **Pramaan** — SAP audit and implementation. Repository `BusDec/pramaan`; live at `pramaan.nirmanaerp.com`.
 - **Kavach** — cybersecurity. Repository `BusDec/kavach`; live at `kavach.nirmanaerp.com`.
 - **Benchmark** — efficiency benchmarking. Live at `benchmark.nirmanaerp.com`.
