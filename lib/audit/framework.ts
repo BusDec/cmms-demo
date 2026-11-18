@@ -16,7 +16,7 @@ export const AUDIT_CONTEXT = {
   plant: "1000",
   plantName: "Combined Cycle Power Plant",
   lead: "Demo assessment",
-  framework: "SAP PM audit framework",
+  framework: "Pramaan ERP audit framework · SAP PM pack",
 } as const;
 
 export const DOMAINS: AuditDomain[] = [
@@ -661,6 +661,7 @@ const plannedChecks: AuditCheck[] = [
 export const AUDIT_CHECKS: AuditCheck[] = [...v1, ...plannedChecks];
 
 export const FRAMEWORK_NOTES = [
+  "Pramaan ERP audit · SAP PM pack v1. Finance and HR packs follow the same scoring and evidence model.",
   "Primary source: SAP_PM_Complete_Audit_Workbook.xlsx (50 checks, master and transactional).",
   "Variant source: SAP_PM_Master_Data_Audit_Checklist.xlsx. Its WC-04 planner-group check and its sampling version of CT-03 are recorded here rather than replacing the primary definitions.",
   "Rule definitions for active, open, released and overdue live in definitions.ts and are shown in the Method section.",

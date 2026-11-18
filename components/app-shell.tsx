@@ -9,6 +9,8 @@ import {
   Database,
   Gauge,
   Info,
+  Layers,
+  Network,
   Plug,
   ShieldCheck,
   Wallet,
@@ -52,10 +54,15 @@ export function AppShell({
       <aside className="hidden w-[248px] shrink-0 border-r border-line bg-[var(--panel-strong)] text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto">
         <Link
           href="/"
-          className="flex items-center gap-2 px-5 pt-5 text-[15px] font-semibold tracking-[-0.01em] text-white"
+          className="flex items-center gap-2.5 px-5 pt-5 text-[15px] font-semibold tracking-[-0.01em] text-white"
         >
           <span className="h-2 w-2 bg-[var(--warn)]" />
-          Gearbox
+          <span className="flex flex-col leading-none">
+            <span className="text-[10px] font-semibold tracking-[0.08em] text-white/50">
+              nirmNa
+            </span>
+            <span className="mt-1">Gearbox</span>
+          </span>
         </Link>
         <Link
           href="/"
@@ -124,6 +131,20 @@ export function AppShell({
         </div>
         <div className="space-y-0.5 border-t border-white/10 px-2 py-4">
           <Link
+            href="/landscape"
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
+          >
+            <Network className="h-4 w-4" />
+            SAP landscape
+          </Link>
+          <Link
+            href="/portfolio"
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
+          >
+            <Layers className="h-4 w-4" />
+            nirmNa portfolio
+          </Link>
+          <Link
             href="/data-model"
             className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
           >
@@ -136,6 +157,13 @@ export function AppShell({
           >
             <Plug className="h-4 w-4" />
             ERP integration
+          </Link>
+          <Link
+            href="/audit"
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] font-medium text-white/60 hover:bg-white/5 hover:text-white"
+          >
+            <ClipboardCheck className="h-4 w-4" />
+            Pramaan ERP audit
           </Link>
           <Link
             href="/about"
@@ -217,6 +245,14 @@ export function AppShell({
                 </Link>
               );
             })}
+            <Link
+              href="/landscape"
+              className="flex items-center gap-1.5 rounded-md px-2 py-2 text-[11px] font-semibold text-muted hover:bg-white/5 sm:text-[12px]"
+            >
+              <Network className="h-3.5 w-3.5" />
+              <span className="sm:hidden">Landscape</span>
+              <span className="hidden sm:inline">SAP landscape</span>
+            </Link>
             <Link
               href="/"
               className="flex items-center gap-1.5 rounded-md px-2 py-2 text-[11px] font-semibold text-muted hover:bg-white/5 sm:text-[12px]"

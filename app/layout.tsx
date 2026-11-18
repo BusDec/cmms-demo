@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gearbox — Four plants. Four ERPs. One maintenance intelligence layer.",
+  title: "Gearbox · nirmNa SAP landscape intelligence",
   description:
-    "A synthetic four-plant CMMS demo showing one canonical maintenance model over SAP S/4HANA, SAP ECC, IBM Maximo and Oracle EAM.",
+    "Gearbox reads the SAP enterprise structure across S/4HANA and ECC R/3 — company codes, plants, business areas and controlling areas — with a four-plant maintenance command centre on top.",
 };
 
 export const viewport: Viewport = {

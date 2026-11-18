@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { SimpleHeader } from "@/components/simple-header";
 import { TableScroller } from "@/components/table-scroller";
+import { ENTERPRISE_OBJECTS } from "@/lib/landscape";
 
 export const metadata = {
-  title: "Data model · Gearbox demo",
+  title: "Data model · Gearbox by nirmNa",
   description:
-    "The canonical maintenance entities, reporting star schema and medallion flow behind the four-plant demo.",
+    "The SAP enterprise structure and canonical maintenance model behind the Gearbox landscape and four-plant demo.",
 };
 
 const entities = [
@@ -33,12 +34,14 @@ export default function DataModelPage() {
       <div className="mx-auto max-w-[1080px] px-5 py-10 sm:px-8 lg:py-14">
         <p className="eyebrow">Data model</p>
         <h1 className="mt-2 max-w-[20ch] text-[clamp(2rem,4vw,3rem)] font-semibold tracking-[-0.035em]">
-          One canonical model behind four ERPs.
+          One structure. One canonical model. Four ERPs.
         </h1>
         <p className="measure mt-4 text-[14px] leading-relaxed text-muted">
-          The dashboards never read SAP AUFK, Oracle WIP_ENTITIES or Maximo WORKORDER
-          directly. Adapters map each source into the same canonical entities, and the
-          reporting layer reads those entities or the pre-aggregated KPI snapshots.
+          The landscape dashboard reads the SAP enterprise structure from S/4HANA and
+          ECC R/3. The maintenance dashboards never read SAP AUFK, Oracle WIP_ENTITIES
+          or Maximo WORKORDER directly. Adapters map each source into the same
+          canonical entities, and the reporting layer reads those entities or the
+          pre-aggregated KPI snapshots.
         </p>
 
         <section className="mt-10">
@@ -64,6 +67,57 @@ export default function DataModelPage() {
                     <td className="px-4 py-3 font-semibold">{name}</td>
                     <td className="px-4 py-3 text-muted">{purpose}</td>
                     <td className="px-4 py-3 text-muted">{fields}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </TableScroller>
+        </section>
+
+        <section className="mt-12">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-[20px] font-semibold tracking-[-0.02em]">
+                SAP enterprise structure
+              </h2>
+              <p className="mt-2 max-w-[70ch] text-[13px] leading-relaxed text-muted">
+                Before a work order is counted, the landscape dashboard resolves the
+                company code, plant and business area behind it. The same eight
+                structure objects are read from S/4HANA and ECC R/3, with separate
+                configurations for each system.
+              </p>
+            </div>
+            <Link
+              href="/landscape"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-info"
+            >
+              Open SAP landscape <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <TableScroller
+            label="SAP enterprise structure objects"
+            className="mt-4 rounded-xl border border-line bg-surface"
+          >
+            <table className="w-full min-w-[720px] text-left text-[12px]">
+              <thead>
+                <tr className="border-b border-line text-[11px] text-muted">
+                  <th className="px-4 py-3 font-semibold">Object</th>
+                  <th className="px-4 py-3 font-semibold">Table</th>
+                  <th className="px-4 py-3 font-semibold">Key</th>
+                  <th className="px-4 py-3 font-semibold">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ENTERPRISE_OBJECTS.map((object) => (
+                  <tr key={object.object} className="border-b border-line/70 last:border-0">
+                    <td className="px-4 py-3 font-semibold">{object.object}</td>
+                    <td className="px-4 py-3 text-muted">
+                      <code>{object.table}</code>
+                    </td>
+                    <td className="px-4 py-3 text-muted">
+                      <code>{object.key}</code>
+                    </td>
+                    <td className="px-4 py-3 text-muted">{object.purpose}</td>
                   </tr>
                 ))}
               </tbody>
@@ -155,8 +209,14 @@ export default function DataModelPage() {
 
         <div className="mt-12 flex flex-wrap gap-3">
           <Link
-            href="/erp-integration"
+            href="/landscape"
             className="rounded-md bg-[var(--warn)] px-4 py-2.5 text-[13px] font-semibold text-[var(--graphite)]"
+          >
+            Open SAP landscape
+          </Link>
+          <Link
+            href="/erp-integration"
+            className="rounded-md border border-line bg-surface px-4 py-2.5 text-[13px] font-semibold"
           >
             How the adapters work
           </Link>
@@ -164,7 +224,7 @@ export default function DataModelPage() {
             href="/demo/coal"
             className="rounded-md border border-line bg-surface px-4 py-2.5 text-[13px] font-semibold"
           >
-            Open the demo
+            Open the maintenance demo
           </Link>
         </div>
       </div>

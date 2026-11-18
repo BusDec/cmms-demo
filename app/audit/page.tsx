@@ -3,15 +3,15 @@ import { SimpleHeader } from "@/components/simple-header";
 import { AuditWorkspace } from "@/components/audit/audit-workspace";
 
 export const metadata: Metadata = {
-  title: "SAP PM audit · Gearbox demo",
+  title: "Pramaan ERP audit · SAP PM pack",
   description:
-    "A 20-check SAP PM audit across master data and transactional tables: readiness, evidence, findings and remediation.",
+    "Pramaan ERP audit: a 20-check SAP PM pack across master data and transactional tables, with readiness, evidence, findings and remediation.",
 };
 
 export default function AuditPage() {
   return (
     <main className="min-h-screen bg-canvas">
-      <SimpleHeader />
+      <SimpleHeader product="Pramaan" />
       <AuditWorkspace />
     </main>
   );

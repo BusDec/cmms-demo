@@ -14,7 +14,7 @@ export async function generateMetadata({
   const { plant: slug } = await params;
   const plant = getPlant(slug);
   return {
-    title: plant ? `${plant.name} · Gearbox demo` : "Gearbox demo",
+    title: plant ? `${plant.name} · Gearbox by nirmNa` : "Gearbox by nirmNa",
     description: plant?.story,
   };
 }

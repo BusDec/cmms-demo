@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { getAllPlantData } from "@/lib/data";
+import { COMPANY_CODES, PLANTS, getSystem } from "@/lib/landscape";
+import { PORTFOLIO } from "@/lib/portfolio";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
 const adapterStatus: Record<string, "Implemented" | "Planned"> = {
@@ -18,10 +20,25 @@ export default function HomePage() {
       <section className="bg-[var(--canvas)] text-ink">
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
           <nav className="flex flex-wrap items-center justify-between gap-4 py-5">
-            <Link href="/" className="text-[15px] font-semibold tracking-[-0.01em]">
-              Gearbox
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-0.01em]"
+            >
+              <span className="h-2 w-2 bg-[var(--warn)]" />
+              <span className="flex flex-col leading-none">
+                <span className="text-[10px] font-semibold tracking-[0.08em] text-muted">
+                  nirmNa
+                </span>
+                <span className="mt-1">Gearbox</span>
+              </span>
             </Link>
             <div className="flex flex-wrap items-center gap-5 text-[13px] text-muted">
+              <Link href="/portfolio" className="hover:text-ink">
+                Portfolio
+              </Link>
+              <Link href="/landscape" className="hover:text-ink">
+                SAP landscape
+              </Link>
               <Link href="/demo/coal" className="hover:text-ink">
                 Demo
               </Link>
@@ -32,53 +49,53 @@ export default function HomePage() {
                 ERP integration
               </Link>
               <Link href="/audit" className="hover:text-ink">
-                PM audit
+                ERP audit
               </Link>
               <Link href="/about" className="hover:text-ink">
                 About
               </Link>
               <Link
-                href="/demo/coal"
+                href="/landscape"
                 className="hidden items-center gap-1.5 rounded-md bg-[var(--warn)] px-3.5 py-2 text-[12px] font-semibold text-[var(--graphite)] sm:inline-flex"
               >
-                Open the demo <ArrowUpRight className="h-3.5 w-3.5" />
+                Open SAP landscape <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </nav>
 
           <div className="atlas-hero">
             <div>
-              <p className="atlas-kicker">Four sources · one operating picture</p>
+              <p className="atlas-kicker">Nirmana portfolio · Gearbox</p>
               <h1 className="display atlas-title">
-                Four plants. <br />
-                Four ERPs. <br />
-                One view.
+                One SAP landscape. <br />
+                Every company. <br />
+                Every plant.
               </h1>
               <p className="atlas-lede">
-                One canonical maintenance model over SAP S/4HANA, SAP ECC, IBM
-                Maximo and Oracle EAM. The same KPIs, the same drill-through, the
-                same executive view — without replacing the system of record.
+                Gearbox reads the enterprise structure across S/4HANA and ECC R/3,
+                then runs the maintenance command centre over SAP, Maximo and Oracle
+                EAM — one model, one operating picture.
               </p>
               <div className="atlas-actions">
-                <Link href="/demo/coal" className="atlas-primary">
-                  Explore the command centre <ArrowRight className="h-4 w-4" />
+                <Link href="/landscape" className="atlas-primary">
+                  Open SAP landscape <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/data-model" className="atlas-secondary">
-                  See the canonical model
+                <Link href="/demo/coal" className="atlas-secondary">
+                  Explore the maintenance demo
                 </Link>
               </div>
               <p className="atlas-note">
-                Synthetic data · no client data or logos · built for demonstration
+                Synthetic configuration · Client 100 · no client data or logos
               </p>
             </div>
 
             <div
               className="atlas-map"
-              aria-label="Four ERP sources converging into one canonical operating picture"
+              aria-label="Four company codes across SAP S/4HANA and ECC R/3 converging into one enterprise structure"
             >
               <div className="atlas-map-head">
-                <span>Source systems</span>
-                <span>Canonical layer</span>
+                <span>SAP landscape</span>
+                <span>Structure model</span>
                 <span>Nov 2026</span>
               </div>
               <div className="atlas-map-body">
@@ -89,27 +106,34 @@ export default function HomePage() {
                   <line x1="255" y1="265" x2="200" y2="160" stroke="rgba(234,242,246,.25)" />
                   <circle cx="200" cy="160" r="34" fill="rgba(232,163,61,.08)" stroke="rgba(232,163,61,.4)" />
                 </svg>
-                {data.map((plant, index) => (
-                  <div
-                    key={plant.plant.slug}
-                    className={"atlas-source atlas-source-" + (index + 1)}
-                  >
-                    <span className="atlas-source-erp">{plant.plant.sourceErpShort}</span>
-                    <span className="atlas-source-plant">{plant.plant.shortName}</span>
-                    <span className="atlas-source-metric">
-                      {formatNumber(plant.kpis[0].value, 1)}%
-                    </span>
-                  </div>
-                ))}
+                {COMPANY_CODES.map((company, index) => {
+                  const system = getSystem(company.system);
+                  const plantCount = PLANTS.filter(
+                    (plant) =>
+                      plant.system === company.system && plant.companyCode === company.code,
+                  ).length;
+                  return (
+                    <div
+                      key={`${company.system}-${company.code}`}
+                      className={"atlas-source atlas-source-" + (index + 1)}
+                    >
+                      <span className="atlas-source-erp">
+                        {system?.shortName} · {company.code}
+                      </span>
+                      <span className="atlas-source-plant">{company.shortName}</span>
+                      <span className="atlas-source-metric">{plantCount} plants</span>
+                    </div>
+                  );
+                })}
                 <div className="atlas-core">
-                  <span className="atlas-core-kicker">Canonical model</span>
-                  <span className="atlas-core-title">One operating picture</span>
-                  <span className="atlas-core-meta">4 plants · 4 ERPs · one language</span>
+                  <span className="atlas-core-kicker">Structure model</span>
+                  <span className="atlas-core-title">One enterprise structure</span>
+                  <span className="atlas-core-meta">4 company codes · 7 plants</span>
                 </div>
               </div>
               <div className="atlas-map-foot">
-                <span>ERP stays the system of record.</span>
-                <span>S/4 implemented · three planned</span>
+                <span>Two SAP systems. One client view.</span>
+                <span>S/4HANA strategic · ECC R/3 legacy</span>
               </div>
             </div>
           </div>
@@ -119,10 +143,15 @@ export default function HomePage() {
       <section className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">The four scenarios</p>
-            <h2 className="mt-2 max-w-[18ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-              Different systems. One operating language.
+            <p className="eyebrow">The maintenance module</p>
+            <h2 className="mt-2 max-w-[28ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
+              Four plants. Four source systems. One operating language.
             </h2>
+            <p className="mt-3 max-w-[64ch] text-[13px] leading-relaxed text-muted">
+              The command centre is the maintenance workspace on top of the landscape.
+              Each plant exercises a different source system; the same KPIs,
+              drill-through and executive view run over all four.
+            </p>
           </div>
           <Link
             href="/demo/coal"
@@ -205,20 +234,22 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-[1280px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:py-16">
           <div>
             <p className="eyebrow">What is shared</p>
-            <h2 className="mt-2 max-w-[16ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
-              The connector is the moat.
+            <h2 className="mt-2 max-w-[18ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
+              The structure is the spine.
             </h2>
             <p className="mt-4 max-w-[52ch] text-[14px] leading-relaxed text-muted">
-              Every source system has its own tables, statuses and APIs. The wrapper
-              maps them into one canonical model, then builds the same KPIs and
-              drill-through on top. The ERP stays the system of record.
+              Every company code, plant and business area is resolved before a work
+              order is counted. Gearbox reads the SAP enterprise structure, then maps
+              the maintenance entities into one canonical layer. The ERP stays the
+              system of record.
             </p>
             <div className="mt-6 space-y-3 text-[13px]">
               {[
+                ["Enterprise structure", "Company codes, plants, business areas, controlling areas, sales and purchasing organisations across S/4HANA and ECC R/3."],
                 ["Canonical model", "Functional locations, equipment, notifications, orders, confirmations, meters and failure codes."],
                 ["ERP adapters", "SAP S/4HANA OData is implemented; ECC RFC/BAPI, Oracle EAM REST and Maximo REST sit behind the same interface next."],
                 ["Scope-based access", "Group, region, plant and work-centre roles; financial fields masked where the role requires it."],
-                ["Operational dashboards", "Command centre, maintenance, reliability, permits, cost, quality and corporate views."],
+                ["Operational dashboards", "SAP landscape, command centre, maintenance, reliability, permits, cost, quality and corporate views."],
               ].map(([title, body]) => (
                 <div key={title} className="grid grid-cols-[0.8fr_1.2fr] gap-4 border-t border-line pt-3">
                   <p className="font-semibold">{title}</p>
@@ -232,7 +263,7 @@ export default function HomePage() {
             <div className="border-b border-line px-5 py-4">
               <p className="text-[12px] font-semibold">Canonical flow</p>
               <p className="mt-1 text-[11px] text-muted">
-                Source → canonical → workspace
+                Source → structure → canonical → workspace
               </p>
             </div>
             <div className="space-y-4 p-5">
@@ -250,6 +281,12 @@ export default function HomePage() {
                 OData · RFC/BAPI · REST · IDoc
               </div>
               <div className="rounded-md border border-[var(--warn)] bg-[var(--panel-strong)] px-4 py-4 text-center text-[12px] font-semibold text-ink">
+                SAP enterprise structure
+              </div>
+              <div className="text-center text-[11px] text-muted">
+                company · plant · business area
+              </div>
+              <div className="rounded-md border border-line bg-[var(--panel)] px-4 py-4 text-center text-[12px] font-semibold">
                 Canonical maintenance model
               </div>
               <div className="grid gap-2 sm:grid-cols-3">
@@ -277,24 +314,82 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-t border-line bg-[var(--canvas)]">
+        <div className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:py-16">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">The Nirmana portfolio</p>
+              <h2 className="mt-2 max-w-[20ch] text-[clamp(1.8rem,3.4vw,2.6rem)] font-semibold tracking-[-0.03em]">
+                One parent. Four specialist practices.
+              </h2>
+            </div>
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-info"
+            >
+              See the portfolio <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {PORTFOLIO.map((item) => {
+              const body = (
+                <>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">
+                    {item.status}
+                  </p>
+                  <h3 className="mt-1.5 text-[16px] font-semibold tracking-[-0.01em]">
+                    {item.name}
+                  </h3>
+                  <p className="mt-1 text-[11px] leading-snug text-muted">{item.role}</p>
+                </>
+              );
+
+              return item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="card p-4 transition-colors hover:bg-[var(--panel)]"
+                >
+                  {body}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="card p-4 transition-colors hover:bg-[var(--panel)]"
+                >
+                  {body}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <footer className="border-t border-line bg-surface">
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 px-5 py-6 text-[11px] text-muted sm:px-8">
-          <p>Gearbox demo · synthetic data · no client logos or records</p>
+          <p>Gearbox · a nirmNa product · synthetic data · no client records</p>
           <nav className="flex flex-wrap items-center gap-4" aria-label="Supporting pages">
+            <Link href="/landscape" className="hover:text-ink">
+              SAP landscape
+            </Link>
             <Link href="/data-model" className="hover:text-ink">
               Data model
             </Link>
             <Link href="/erp-integration" className="hover:text-ink">
               ERP integration
             </Link>
+            <Link href="/portfolio" className="hover:text-ink">
+              Portfolio
+            </Link>
             <Link href="/audit" className="hover:text-ink">
-              PM audit
+              ERP audit
             </Link>
             <Link href="/about" className="hover:text-ink">
               About
             </Link>
           </nav>
-          <p>Four plants · four ERPs · one canonical maintenance model</p>
+          <p>Two SAP systems · four company codes · seven plants · one structure model</p>
         </div>
       </footer>
     </main>

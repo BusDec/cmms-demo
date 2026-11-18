@@ -4,9 +4,9 @@ import { SimpleHeader } from "@/components/simple-header";
 import { TableScroller } from "@/components/table-scroller";
 
 export const metadata = {
-  title: "ERP integration · Gearbox demo",
+  title: "ERP integration · Gearbox by nirmNa",
   description:
-    "How SAP S/4HANA, SAP ECC, IBM Maximo and Oracle EAM adapters map into one canonical maintenance model.",
+    "How SAP S/4HANA, SAP ECC, IBM Maximo and Oracle EAM adapters map enterprise structure and maintenance data into one canonical model.",
 };
 
 const adapters = [
@@ -14,7 +14,7 @@ const adapters = [
     erp: "SAP S/4HANA Cloud",
     transport: "OData V2/V4",
     auth: "OAuth2 client credentials",
-    entities: "Equipment, functional locations, notifications, orders, confirmations, measuring points",
+    entities: "Company codes, plants, business areas, equipment, functional locations, notifications, orders, confirmations",
     status: "Reference adapter",
     tone: "good" as const,
   },
@@ -22,7 +22,7 @@ const adapters = [
     erp: "SAP ECC 6.0",
     transport: "RFC/BAPI or OData via Gateway",
     auth: "SAP NW RFC SDK or OAuth2",
-    entities: "Same canonical entities, ECC field names",
+    entities: "Same enterprise structure and canonical entities, ECC field names",
     status: "Planned",
     tone: "warn" as const,
   },
@@ -66,8 +66,16 @@ export default function ErpIntegrationPage() {
         <p className="measure mt-4 text-[14px] leading-relaxed text-muted">
           Each adapter owns authentication, pagination, field mapping and retries.
           The product owns the canonical model and the workspace. The connector is a
-          standalone library, not a copy of any one CMMS.
+          standalone library, not a copy of any one CMMS. The same layer reads the SAP
+          enterprise structure — company codes, plants, business areas and controlling
+          areas — for the landscape dashboard.
         </p>
+        <Link
+          href="/landscape"
+          className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-info"
+        >
+          Open SAP landscape <span aria-hidden="true">→</span>
+        </Link>
 
         <section className="mt-10">
           <h2 className="text-[20px] font-semibold tracking-[-0.02em]">Adapters</h2>

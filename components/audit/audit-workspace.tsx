@@ -35,10 +35,14 @@ import type {
   EvidenceRow,
   Finding,
   Opinion,
+  Section,
   Severity,
 } from "@/lib/audit/types";
 
 type Tab = "checks" | "findings";
+type SectionFilter = "all" | Section;
+type ResultFilter = "all" | CheckStatus;
+type SeverityFilter = "all" | Severity;
 
 const opinionTone: Record<Opinion, "good" | "warn" | "bad"> = {
   Green: "good",
@@ -103,6 +107,9 @@ export function AuditWorkspace() {
   const run = useMemo(() => runAudit(buildSyntheticDataset()), []);
   const [tab, setTab] = useState<Tab>("checks");
   const [domainFilter, setDomainFilter] = useState<DomainId | "all">("all");
+  const [sectionFilter, setSectionFilter] = useState<SectionFilter>("all");
+  const [resultFilter, setResultFilter] = useState<ResultFilter>("all");
+  const [severityFilter, setSeverityFilter] = useState<SeverityFilter>("all");
   const [selected, setSelected] = useState<CheckResult | null>(null);
 
   const resultByCheck = useMemo(
@@ -110,20 +117,35 @@ export function AuditWorkspace() {
     [run.results],
   );
 
+  const domainById = useMemo(
+    () => new Map(DOMAINS.map((domain) => [domain.id, domain])),
+    [],
+  );
+
   const visibleResults = useMemo(
     () =>
-      run.results.filter(
-        (result) => domainFilter === "all" || result.check.domain === domainFilter,
-      ),
-    [run.results, domainFilter],
+      run.results.filter((result) => {
+        const domain = domainById.get(result.check.domain);
+        return (
+          (domainFilter === "all" || result.check.domain === domainFilter) &&
+          (sectionFilter === "all" || domain?.section === sectionFilter) &&
+          (resultFilter === "all" || result.status === resultFilter)
+        );
+      }),
+    [run.results, domainFilter, sectionFilter, resultFilter, domainById],
   );
 
   const visibleFindings = useMemo(
     () =>
-      run.findings.filter(
-        (finding) => domainFilter === "all" || finding.domain === domainFilter,
-      ),
-    [run.findings, domainFilter],
+      run.findings.filter((finding) => {
+        const domain = domainById.get(finding.domain);
+        return (
+          (domainFilter === "all" || finding.domain === domainFilter) &&
+          (sectionFilter === "all" || domain?.section === sectionFilter) &&
+          (severityFilter === "all" || finding.severity === severityFilter)
+        );
+      }),
+    [run.findings, domainFilter, sectionFilter, severityFilter, domainById],
   );
 
   const severityCounts = useMemo(() => {
@@ -219,11 +241,18 @@ export function AuditWorkspace() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `sap-pm-audit-${AUDIT_DATE}.csv`;
+    link.download = `pramaan-sap-pm-audit-${AUDIT_DATE}.csv`;
     document.body.appendChild(link);
     link.click();
     link.remove();
     URL.revokeObjectURL(url);
+  }
+
+  function resetFilters() {
+    setDomainFilter("all");
+    setSectionFilter("all");
+    setResultFilter("all");
+    setSeverityFilter("all");
   }
 
   const overall = run.overall;
@@ -239,16 +268,16 @@ export function AuditWorkspace() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <p className="eyebrow">SAP PM audit</p>
-            <Badge tone="neutral">Synthetic dataset</Badge>
+            <p className="eyebrow">Pramaan · ERP audit</p>
+            <Badge tone="neutral">SAP PM pack · v1</Badge>
           </div>
           <h1 className="mt-2 max-w-[20ch] text-[clamp(2rem,4.4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-            Audit the PM module, not the dashboard.
+            Audit the ERP, not the dashboard.
           </h1>
           <p className="measure mt-3 text-[14px] leading-relaxed text-muted">
-            Twenty checks across thirteen SAP PM domains, computed from the rows a
-            planner would inspect. Every score opens to the records behind it, the
-            benchmark it breached and the transaction that fixes it.
+            Twenty checks across thirteen SAP PM domains — the first Pramaan ERP
+            audit pack. Every score opens to the records behind it, the benchmark it
+            breached and the transaction that fixes it. Finance and HR packs follow.
           </p>
         </div>
         <div className="flex shrink-0 flex-wrap items-center gap-2">
@@ -486,21 +515,85 @@ export function AuditWorkspace() {
             </button>
           ))}
         </div>
-        <label className="flex items-center gap-2 text-[11px] text-muted">
-          Domain
-          <select
-            value={domainFilter}
-            onChange={(event) => setDomainFilter(event.target.value as DomainId | "all")}
-            className="rounded-md border border-line bg-surface px-2 py-1.5 text-[12px] font-medium text-ink outline-none"
+        <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-muted">
+            Filters
+          </span>
+          <label className="flex items-center gap-1.5">
+            Domain
+            <select
+              value={domainFilter}
+              onChange={(event) => {
+                setDomainFilter(event.target.value as DomainId | "all");
+                setSectionFilter("all");
+              }}
+              className="rounded-md border border-line bg-surface px-2 py-1.5 text-[12px] font-medium text-ink outline-none"
+            >
+              <option value="all">All</option>
+              {DOMAINS.map((domain) => (
+                <option key={domain.id} value={domain.id}>
+                  {domain.id} · {domain.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex items-center gap-1.5">
+            Section
+            <select
+              value={sectionFilter}
+              onChange={(event) => {
+                setSectionFilter(event.target.value as SectionFilter);
+                setDomainFilter("all");
+              }}
+              className="rounded-md border border-line bg-surface px-2 py-1.5 text-[12px] font-medium text-ink outline-none"
+            >
+              <option value="all">All</option>
+              <option value="Master data">Master data</option>
+              <option value="Transactional">Transactional</option>
+            </select>
+          </label>
+          {tab === "checks" ? (
+            <label className="flex items-center gap-1.5">
+              Result
+              <select
+                value={resultFilter}
+                onChange={(event) => setResultFilter(event.target.value as ResultFilter)}
+                className="rounded-md border border-line bg-surface px-2 py-1.5 text-[12px] font-medium text-ink outline-none"
+              >
+                <option value="all">All</option>
+                <option value="fail">Failing</option>
+                <option value="pass">Passing</option>
+                <option value="na">N/A</option>
+              </select>
+            </label>
+          ) : (
+            <label className="flex items-center gap-1.5">
+              Severity
+              <select
+                value={severityFilter}
+                onChange={(event) => setSeverityFilter(event.target.value as SeverityFilter)}
+                className="rounded-md border border-line bg-surface px-2 py-1.5 text-[12px] font-medium text-ink outline-none"
+              >
+                <option value="all">All</option>
+                <option value="Critical">Critical</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+              </select>
+            </label>
+          )}
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="rounded-md border border-line px-2 py-1.5 text-[11px] font-semibold text-muted hover:bg-white/5 hover:text-ink"
           >
-            <option value="all">All domains</option>
-            {DOMAINS.map((domain) => (
-              <option key={domain.id} value={domain.id}>
-                {domain.id} · {domain.name}
-              </option>
-            ))}
-          </select>
-        </label>
+            Reset
+          </button>
+          <span className="ml-auto text-[10px] text-muted">
+            {tab === "checks"
+              ? `${visibleResults.length} of ${run.results.length} checks`
+              : `${visibleFindings.length} of ${run.findings.length} findings`}
+          </span>
+        </div>
       </div>
 
       {tab === "checks" ? (
@@ -519,6 +612,13 @@ export function AuditWorkspace() {
                 </tr>
               </thead>
               <tbody>
+                {visibleResults.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="px-4 py-6 text-center text-[11px] text-muted">
+                      No checks match these filters.
+                    </td>
+                  </tr>
+                ) : null}
                 {visibleResults.map((result) => (
                   <tr key={result.check.id} className="border-b border-line/70 last:border-0">
                     <td className="px-4 py-2.5">
@@ -580,7 +680,7 @@ export function AuditWorkspace() {
                 {visibleFindings.length === 0 ? (
                   <tr>
                     <td colSpan={8} className="px-4 py-6 text-center text-[11px] text-muted">
-                      No findings for this domain.
+                      No findings match these filters.
                     </td>
                   </tr>
                 ) : null}
@@ -732,8 +832,9 @@ export function AuditWorkspace() {
               <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
                 The rule engine, the scoring and the evidence drill are real. The
                 rows are a deterministic demonstration dataset for a combined-cycle
-                plant. No SAP system is called, and this is not an SAP-certified
-                audit.
+                plant. This is the SAP PM pack of the Pramaan ERP audit; finance and
+                HR packs are next. No SAP system is called, and this is not an
+                SAP-certified audit.
               </p>
             </div>
             <p className="mt-3 text-[10px] leading-relaxed text-muted">
