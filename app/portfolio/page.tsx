@@ -136,7 +136,7 @@ export default function PortfolioPage() {
                 company. Its flagship, Nirmana ERP, combines Gen AI and agentic AI
                 across the operating model with reliability engineering at the core:
                 Weibull life analysis, failure modes, asset health and maintenance
-                strategy. The portfolio takes that core into nine focused jobs.
+                strategy. The portfolio takes that core into nine focused portfolios.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {["Gen AI", "Agentic AI", "Reliability engineering", "Weibull analysis", "Asset performance"].map((capability) => (
