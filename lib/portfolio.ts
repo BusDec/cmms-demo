@@ -98,7 +98,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     name: "Kavach",
     role: "Cybersecurity",
     description:
-      "SAP security and controls, OT/IT convergence, cloud identity and incident readiness for asset-intensive enterprises.",
+      "SAP security and controls, OT/IT convergence, network watch, cloud identity and incident readiness for asset-intensive enterprises.",
     status: "Live",
     href: "https://kavach.nirmanaerp.com",
     domain: "kavach.nirmanaerp.com",
